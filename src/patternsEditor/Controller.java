@@ -1,4 +1,4 @@
-package sample;
+package patternsEditor;
 
 public class Controller {
 }
