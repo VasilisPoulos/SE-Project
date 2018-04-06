@@ -21,7 +21,6 @@ public class Main extends Application {
 //        Parent root = FXMLLoader.load(getClass().getResource("start.fxml"));
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("start.fxml"));
-        loader.setController(new Controller());
         Parent root = loader.load();
 
         window.setTitle("Rocking Machines - Patterns Editor");

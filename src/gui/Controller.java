@@ -10,15 +10,17 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
+
 public class Controller {
 
     /**
      * Spawns a modal in order to title the new pattern language
      * @param event The button click
+     * @throws Exception if not able to show the dialog
      */
     @FXML
     void createPLTitle(ActionEvent event) throws Exception {
-        final Stage dialog = new Stage();
+        Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         dialog.initOwner(window);
@@ -29,4 +31,24 @@ public class Controller {
         dialog.setScene(dialogScene);
         dialog.show();
     }
+
+    /**
+     * Closes the modal used to title the new pattern language, on pressing the Cancel button
+     * @param event the click on the Cancel button
+     */
+    @FXML
+    void cancelCreatePL(ActionEvent event) {
+        Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        currentStage.close();
+    }
+
+    /**
+     * Sends the title given by user to the back end, when the Create button is pressed
+     * @param event the click on the Create button
+     */
+    @FXML
+    void createPL(ActionEvent event) {
+
+    }
+
 }
