@@ -1,17 +1,20 @@
 package gui;
-import PatternsEditor.CreatePatternLanguage;
+import PatternsEditor.PatternLanguage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
-
 public class Controller {
+
+
+    @FXML private TextField titleInput;
 
     /**
      * Spawns a modal in order to title the new pattern language
@@ -48,7 +51,15 @@ public class Controller {
      */
     @FXML
     void createPL(ActionEvent event) {
+        String title = this.titleInput.getText();
+        PatternLanguage newPL = new PatternLanguage(title);
 
+        /*
+         * TODO:
+         * Create new scene (PatternLanguageView)
+         * Move to new scene
+         * Use the newPL object
+         */
     }
 
 }

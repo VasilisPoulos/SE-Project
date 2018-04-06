@@ -134,7 +134,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Region prefHeight="200.0" prefWidth="200.0" />
+                        <Region prefWidth="200.0" />
                      </children>
                   </HBox>
                   <Region />
