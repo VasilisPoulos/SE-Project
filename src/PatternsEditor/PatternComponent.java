@@ -1,4 +1,4 @@
-package PatternsEditor;
+package datamodel;
 
 /**
  * @author      Vasilis Poulos <address @ cse42805@cs.uoi.gr>
