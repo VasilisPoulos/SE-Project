@@ -31,6 +31,7 @@ public class Controller {
         Parent modal = FXMLLoader.load(getClass().getResource("createPLTitle.fxml"));
 
         Scene dialogScene = new Scene(modal, 600, 400);
+        dialog.setTitle("Title Your Pattern Language");
         dialog.setScene(dialogScene);
         dialog.show();
     }
@@ -50,7 +51,7 @@ public class Controller {
      * @param event the click on the Create button
      */
     @FXML
-    void createPL(ActionEvent event) {
+    void createPL(ActionEvent event) throws Exception {
         String title = this.titleInput.getText();
         PatternLanguage newPL = new PatternLanguage(title);
 
@@ -58,8 +59,20 @@ public class Controller {
          * TODO:
          * Create new scene (PatternLanguageView)
          * Move to new scene
-         * Use the newPL object
+         * Use the newPL object (Return it somewhere?)
          */
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.close();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("patternLanguageView.fxml"));
+        Parent patternLanguageView = loader.load();
+
+        // TODO: get primaryStage into window var
+        window.setTitle(title);
+        Scene plView = new Scene(patternLanguageView, 800, 600);
+        window.setScene(plView);
+        window.show();
+
     }
 
 }
