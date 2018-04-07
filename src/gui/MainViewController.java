@@ -26,7 +26,7 @@ public class MainViewController {
      * @throws Exception if not able to show the dialog
      */
     @FXML
-    void createPLTitle(ActionEvent event) throws Exception {
+    void handleCreatePLTitle(ActionEvent event) throws Exception {
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -45,16 +45,16 @@ public class MainViewController {
      * @param event the click on the Cancel button
      */
     @FXML
-    void cancelCreatePL(ActionEvent event) {
+    void handleCancelCreatePL(ActionEvent event) {
         Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         currentStage.close();
     }
 
     /**
-     *
-     * @param newPL
-     * @param window
-     * @throws Exception
+     * Switches to the view Pattern Language scene
+     * @param newPL the new PatternLanguage object
+     * @param window  the window this function was called from
+     * @throws Exception when not able to create and show the new scene
      */
     void viewNewPL(PatternLanguage newPL, Stage window) throws Exception {
 
@@ -79,7 +79,7 @@ public class MainViewController {
      * @throws Exception on failure of viewNewPL, called within
      */
     @FXML
-    void createPL(ActionEvent event) throws Exception {
+    void handleCreatePL(ActionEvent event) throws Exception {
 
         /* Get the current window into a variable */
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();

@@ -23,12 +23,12 @@
                         <Font name="Droid Sans" size="18.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                        <Insets bottom="10.0" />
                      </VBox.margin>
                   </Text>
                   <TextField fx:id="titleInput" promptText="defaultPatternLanguageTitle">
                      <VBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                        <Insets bottom="20.0" top="10.0" />
                      </VBox.margin>
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -37,13 +37,13 @@
                   <HBox>
                      <children>
                         <Region layoutX="74.0" layoutY="10.0" HBox.hgrow="ALWAYS" />
-                        <Button defaultButton="true" minWidth="-Infinity" mnemonicParsing="false" onAction="#createPL" text="Create" textAlignment="CENTER" textFill="#179017">
+                        <Button defaultButton="true" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleCreatePL" text="Create" textAlignment="CENTER" textFill="#179017">
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
                         </Button>
                         <Region HBox.hgrow="ALWAYS" />
-                        <Button cancelButton="true" layoutX="10.0" layoutY="10.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelCreatePL" text="Cancel" textFill="RED">
+                        <Button cancelButton="true" layoutX="10.0" layoutY="10.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleCancelCreatePL" text="Cancel" textFill="RED">
                            <font>
                               <Font name="Droid Sans" size="13.0" />
                            </font>
