@@ -6,9 +6,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.util.Optional;
 
 
 public class MainViewController {
@@ -47,20 +51,12 @@ public class MainViewController {
     }
 
     /**
-     * Sends the title given by user to the back end, when the Create button is pressed
-     * @param event the click on the Create button
+     *
+     * @param newPL
+     * @param window
+     * @throws Exception
      */
-    @FXML
-    void createPL(ActionEvent event) throws Exception {
-
-        /* Read the new pattern language title from the text field provided
-         * to the user, and create a new PatternLanguage object
-         */
-        String title = this.titleInput.getText();
-        PatternLanguage newPL = new PatternLanguage(title);
-
-        /* Get the current window into a variable */
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+    void viewNewPL(PatternLanguage newPL, Stage window) throws Exception {
 
         /* Load the new scene into a variable */
         FXMLLoader loader = new FXMLLoader(getClass().getResource("plView.fxml"));
@@ -72,9 +68,47 @@ public class MainViewController {
         window = Main.getWindow();
 
         /* Render the new scene into primaryStage */
-        window.setTitle(title);
+        window.setTitle(newPL.getTitle());
         window.setScene(plView);
         window.show();
+    }
+
+    /**
+     * Handles the Create button click when creating a new pattern language
+     * @param event the click on the Create button
+     * @throws Exception on failure of viewNewPL, called within
+     */
+    @FXML
+    void createPL(ActionEvent event) throws Exception {
+
+        /* Get the current window into a variable */
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+
+        /* Read the new pattern language title from the text field provided
+         * to the user, and create a new PatternLanguage object
+         */
+        String title = this.titleInput.getText();
+        if (title == null || title == "" || title.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText("You did not enter a name for the new pattern language.");
+            alert.setContentText("Are you sure you want to use a default title?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                alert.close();
+                PatternLanguage newPL = new PatternLanguage(title);
+                this.viewNewPL(newPL, window);
+            }
+            else {
+                alert.close();
+            }
+        }
+        else {
+            PatternLanguage newPL = new PatternLanguage(title);
+            this.viewNewPL(newPL, window);
+        }
+
 
     }
 
