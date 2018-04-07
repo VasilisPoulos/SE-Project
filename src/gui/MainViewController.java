@@ -11,7 +11,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
-public class Controller {
+public class MainViewController {
 
 
     @FXML private TextField titleInput;
@@ -61,15 +61,20 @@ public class Controller {
          * Move to new scene
          * Use the newPL object (Return it somewhere?)
          */
+        /* Get the current window into a variable */
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.close();
 
+        /* Load the new scene into a variable */
         FXMLLoader loader = new FXMLLoader(getClass().getResource("patternLanguageView.fxml"));
         Parent patternLanguageView = loader.load();
-
-        // TODO: get primaryStage into window var
-        window.setTitle(title);
         Scene plView = new Scene(patternLanguageView, 800, 600);
+
+        /* Close pop-up window and change the window variable to the primaryStage */
+        window.close();
+        window = Main.getWindow();
+
+        /* Render the new scene into primaryStage */
+        window.setTitle(title);
         window.setScene(plView);
         window.show();
 
