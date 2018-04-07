@@ -9,6 +9,18 @@ public class PatternLanguage {
         return title;
     }
 
+    /**
+     * @constructor
+     * Overloaded constructor with default parameters
+     */
+    public PatternLanguage() {
+        this("");
+    }
+
+    /**
+     * @constructor 
+     * @param title the title of the new pattern language
+     */
     public PatternLanguage(String title) {
         plCount = 1;
 
@@ -18,9 +30,15 @@ public class PatternLanguage {
         this.title = title;
     }
 
+    /**
+     * Generates a default pattern language title, based on a global counter of pattern languages
+     * @return default title for the new pattern language
+     */
     public String generateDefaultTitle() {
-        plCount++;
         String title = "Pattern Language #" + Integer.toString(plCount);
+
+        plCount++;
+
         return title;
     }
 }
