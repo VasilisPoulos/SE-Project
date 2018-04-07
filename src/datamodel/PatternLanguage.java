@@ -1,9 +1,9 @@
 package datamodel;
+import gui.MainViewController;
 
 public class PatternLanguage {
 
     private String title;
-    private Integer plCount; /* TODO: Should move this to an interface class!!! */
 
     public String getTitle() {
         return title;
@@ -22,7 +22,6 @@ public class PatternLanguage {
      * @param title the title of the new pattern language
      */
     public PatternLanguage(String title) {
-        plCount = 1;
 
         if (title == null || title == "" || title.isEmpty()) {
           title = this.generateDefaultTitle(); // Should generate using a counter (e.g. PatternLanguage1, PatternLanguage2, ...
@@ -35,9 +34,10 @@ public class PatternLanguage {
      * @return default title for the new pattern language
      */
     public String generateDefaultTitle() {
+        Integer plCount = MainViewController.getPlCount();
         String title = "Pattern Language #" + Integer.toString(plCount);
 
-        plCount++;
+        MainViewController.setPlCount(plCount++);
 
         return title;
     }
