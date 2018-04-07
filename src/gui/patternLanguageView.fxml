@@ -28,7 +28,15 @@
                         </ImageView>
                      </graphic>
                   </MenuItem>
-                  <MenuItem mnemonicParsing="false" text="Load" />
+                  <MenuItem mnemonicParsing="false" text="Load">
+                     <graphic>
+                        <ImageView fitHeight="10.0" fitWidth="10.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/img/arrow-thick-top.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
                   <MenuItem mnemonicParsing="false" text="Save">
                      <graphic>
                         <ImageView fitHeight="10.0" fitWidth="10.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
@@ -60,7 +68,15 @@
                         </ImageView>
                      </graphic>
                   </MenuItem>
-                  <MenuItem mnemonicParsing="false" text="Update" />
+                  <MenuItem mnemonicParsing="false" text="Update">
+                     <graphic>
+                        <ImageView fitHeight="10.0" fitWidth="10.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/img/reload.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
                   <MenuItem mnemonicParsing="false" text="Delete">
                      <graphic>
                         <ImageView fitHeight="10.0" fitWidth="10.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
