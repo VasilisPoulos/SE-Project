@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PatternComponentTest {
 
-    @Test
+    @org.junit.jupiter.api.Test
     void shouldClonePattern()
     {
         PatternComponent component = new PatternComponent();
@@ -14,7 +14,7 @@ class PatternComponentTest {
         assertNotSame(component,copy);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     void add() {
     }
 

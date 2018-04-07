@@ -62,7 +62,6 @@ public class PatternComponent implements Cloneable
 	public void saveName(String name)
 	{
 		this.name = name;
-		return;
 	}
 	
 	/**
