@@ -19,16 +19,6 @@ public class MainViewController {
 
 
     @FXML private TextField titleInput;
-    private static Integer plCount = 1;
-
-    public static void setPlCount(Integer newPlCount) {
-        plCount = newPlCount;
-    }
-
-    public static Integer getPlCount() {
-
-        return plCount;
-    }
 
     /**
      * Spawns a modal in order to title the new pattern language
