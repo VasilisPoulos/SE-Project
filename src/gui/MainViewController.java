@@ -1,5 +1,5 @@
 package gui;
-import PatternsEditor.PatternLanguage;
+import datamodel.PatternLanguage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,21 +52,19 @@ public class MainViewController {
      */
     @FXML
     void createPL(ActionEvent event) throws Exception {
+
+        /* Read the new pattern language title from the text field provided
+         * to the user, and create a new PatternLanguage object
+         */
         String title = this.titleInput.getText();
         PatternLanguage newPL = new PatternLanguage(title);
 
-        /*
-         * TODO:
-         * Create new scene (PatternLanguageView)
-         * Move to new scene
-         * Use the newPL object (Return it somewhere?)
-         */
         /* Get the current window into a variable */
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 
         /* Load the new scene into a variable */
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("patternLanguageView.fxml"));
-        Parent patternLanguageView = loader.load();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("plView.fxml"));
+        Parent patternLanguageView = (Parent) loader.load();
         Scene plView = new Scene(patternLanguageView, 800, 600);
 
         /* Close pop-up window and change the window variable to the primaryStage */

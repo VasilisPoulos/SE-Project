@@ -1,4 +1,4 @@
-package PatternsEditor;
+package datamodel;
 
 public class PatternLanguage {
 
