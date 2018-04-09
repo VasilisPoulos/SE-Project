@@ -19,7 +19,8 @@ public class TemplateViewController {
     @FXML
     public void populateTemplates() {
 
-        /* TODO: Make buttonList into a list of Hboxes, so that they are center-aligned */
+        /* TODO: Make buttonList into a list of Hboxes, so that they are center-aligned
+         * TODO: Style buttons, add paddings etc. */
         List<Button> buttonList = new ArrayList<>(); //our Collection to hold newly created Buttons
 
 //            ArrayList<Template> templatesList = getTemplatesList();

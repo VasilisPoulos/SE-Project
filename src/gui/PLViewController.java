@@ -2,13 +2,20 @@ package gui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
 public class PLViewController {
+
+    @FXML private Text plTitle;
+
+    @FXML
+    public void setTitle(String title) {
+        plTitle.setText(title);
+    }
 
     /**
      * Switch to template selection scene

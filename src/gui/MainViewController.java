@@ -20,6 +20,7 @@ public class MainViewController {
 
     @FXML private TextField titleInput;
 
+
     /**
      * Spawns a modal in order to title the new pattern language
      * @param event The button click
@@ -69,7 +70,9 @@ public class MainViewController {
         window = Main.getWindow();
 
         /* Render the new scene into primaryStage */
-        window.setTitle(newPL.getTitle());
+        PLViewController c = loader.getController();
+        c.setTitle(newPL.getTitle());
+        window.setTitle("Rocking Machines - Patterns Editor");
         window.setScene(plView);
         window.show();
     }

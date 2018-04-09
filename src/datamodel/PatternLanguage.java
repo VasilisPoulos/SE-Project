@@ -6,7 +6,7 @@ public class PatternLanguage {
     private static Integer plCount = 0;
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     /**
@@ -23,7 +23,7 @@ public class PatternLanguage {
      */
     public PatternLanguage(String title) {
 
-        if (title == null || title == "" || title.isEmpty()) {
+        if (title == null || title.equals("") || title.isEmpty()) {
           title = this.generateDefaultTitle(); // Should generate using a counter (e.g. PatternLanguage1, PatternLanguage2, ...
         }
         this.title = title;

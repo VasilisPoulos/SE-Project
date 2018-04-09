@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <BorderPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.PLViewController">
    <top>
@@ -115,6 +116,18 @@
             <Region HBox.hgrow="ALWAYS" />
             <VBox>
                <children>
+                  <Region layoutX="10.0" layoutY="73.0" VBox.vgrow="ALWAYS" />
+                  <HBox layoutX="10.0" layoutY="311.0">
+                     <children>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Text fx:id="plTitle" strokeType="OUTSIDE" strokeWidth="0.0">
+                           <font>
+                              <Font name="DejaVu Sans Bold" size="22.0" />
+                           </font>
+                        </Text>
+                        <Region layoutX="10.0" layoutY="10.0" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
                   <Region VBox.vgrow="ALWAYS" />
                   <HBox>
                      <children>
