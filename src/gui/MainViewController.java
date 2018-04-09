@@ -35,7 +35,7 @@ public class MainViewController {
         Parent modal = FXMLLoader.load(getClass().getResource("createPLTitle.fxml"));
 
         Scene dialogScene = new Scene(modal, 600, 400);
-        dialog.setTitle("Title Your Pattern Language");
+        dialog.setTitle("Rocking Machines - Patterns Editor");
         dialog.setScene(dialogScene);
         dialog.show();
     }
