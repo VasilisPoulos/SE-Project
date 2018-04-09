@@ -9,11 +9,9 @@ class PatternComponentTest {
 
     /**
      * Check if clone makes a deep copy
-     * <p>
      *      Make sure that cloning makes a new object.
      *      If original components name changes, copy's name should stay
-     *      the same.
-     * </p>
+     *      the same
      */
     @org.junit.jupiter.api.Test
     void shouldClonePattern()
