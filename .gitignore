@@ -2,3 +2,7 @@
 \.idea/workspace\.xml
 
 *.class
+
+src/META-INF/
+
+\.idea/artifacts/
