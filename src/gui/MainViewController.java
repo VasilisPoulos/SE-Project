@@ -56,11 +56,12 @@ public class MainViewController {
      * @param window  the window this function was called from
      * @throws Exception when not able to create and show the new scene
      */
-    void viewNewPL(PatternLanguage newPL, Stage window) throws Exception {
+    private void viewNewPL(PatternLanguage newPL, Stage window) throws Exception {
 
         /* Load the new scene into a variable */
         FXMLLoader loader = new FXMLLoader(getClass().getResource("plView.fxml"));
-        Parent patternLanguageView = (Parent) loader.load();
+
+        Parent patternLanguageView = loader.load();
         Scene plView = new Scene(patternLanguageView, 800, 600);
 
         /* Close pop-up window and change the window variable to the primaryStage */
@@ -88,7 +89,7 @@ public class MainViewController {
          * to the user, and create a new PatternLanguage object
          */
         String title = this.titleInput.getText();
-        if (title == null || title == "" || title.isEmpty()) {
+        if (title == null || title.equals("") || title.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation Dialog");
             alert.setHeaderText("You did not enter a name for the new pattern language.");
