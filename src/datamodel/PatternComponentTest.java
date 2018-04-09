@@ -1,7 +1,8 @@
 package datamodel;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
+import org.junit.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class PatternComponentTest {
 
@@ -28,8 +29,7 @@ class PatternComponentTest {
     }
 
     @org.junit.jupiter.api.Test
-    void add() {
-    }
+    void add() {}
 
     @org.junit.jupiter.api.Test
     void remove() {

@@ -34,12 +34,12 @@ public class PatternComponent implements Cloneable
 	/**
 	 *
 	 */
-	public void add(){};
+	public void add(PatternComponent component){}
 
 	/**
 	 *
 	 */
-	public void remove() {}
+	public void remove(){}
 	
 	/**
 	 * Creates a clone of a PatternComponent object.
