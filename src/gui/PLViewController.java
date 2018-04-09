@@ -12,9 +12,9 @@ public class PLViewController {
 
     @FXML private Text plTitle;
 
-    
+
     @FXML
-    public void setTitle(String title) {
+    protected void setTitle(String title) {
         plTitle.setText(title);
     }
 

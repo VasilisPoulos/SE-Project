@@ -99,7 +99,8 @@ public class MainViewController {
             alert.setContentText("Are you sure you want to use a default title?");
 
             Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK){
+
+            if (result.isPresent() && result.get() == ButtonType.OK){
                 alert.close();
                 PatternLanguage newPL = new PatternLanguage(title);
                 this.viewNewPL(newPL, window);
