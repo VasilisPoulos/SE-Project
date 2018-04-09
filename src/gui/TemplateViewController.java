@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Control;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -32,11 +33,18 @@ public class TemplateViewController {
             templatesList.add("asdf");
             templatesList.add("qwerty");
 
+            /*
+             * Iterate through list of templates and create a button for each one
+             * using its index as id and set the event handler
+             */
             for (int i = 0; i < templatesList.size(); i++) { //iterate over every row returned
-                String title = templatesList.get(i).toString(); //extract button text, adapt the String to the column name that you are interested in
-                buttonList.add(new Button(title));
-
+                String title = templatesList.get(i).toString(); // get title of template i
+                Button btn = new Button(title);
+                btn.setId(Integer.toString(i));
+                btn.setOnAction((e) -> this.handlePickPattern(e));
+                buttonList.add(btn);
             }
+
             templateContainer.getChildren().clear(); //remove all Buttons that are currently in the container
             templateContainer.getChildren().addAll(buttonList); // add new Buttons from the list
 
@@ -52,6 +60,15 @@ public class TemplateViewController {
         Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         MainViewController c = new MainViewController();
         c.viewNewPL(this.newPL, currentStage);
+    }
+
+    @FXML
+    public void handlePickPattern(ActionEvent event) {
+        Control src = (Control)event.getSource();
+        Integer buttonId = Integer.parseInt(src.getId());
+        System.out.println("Button with id " + Integer.toString(buttonId) + " clicked.");
+//        Pattern newPattern = TemplateFactory.getTemplatesList(buttonId).clone();
+
     }
 
     public void setNewPL(PatternLanguage newPL) {
