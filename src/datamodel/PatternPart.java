@@ -2,6 +2,10 @@ package datamodel;
 
 public class PatternPart extends PatternComponent
 {
+	public PatternPart(String name) {
+		super(name);
+	}
+
 	/*
 	*	This is an override
 	*/
