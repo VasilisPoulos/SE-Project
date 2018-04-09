@@ -43,10 +43,9 @@ public class PatternComponent implements Cloneable
 	
 	/**
 	 * Creates a clone of a PatternComponent object.
-     * <p>
      *     This is a Deep copy of this object because name is of type
      *     String which is immutable.
-     * </p>
+     *
      * I think it is best to use copy constructors or factory methods
      * instead of overriding clone().
      *

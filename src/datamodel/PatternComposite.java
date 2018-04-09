@@ -25,9 +25,7 @@ public class PatternComposite extends PatternComponent
 
     /**
      * Removes a PatternComponent item from the ArrayList
-     *<p>
      *     if component List contains the item requested, remove it.
-     *</p>
      *
      * @param patternComponentTitle pattern components name
      */
