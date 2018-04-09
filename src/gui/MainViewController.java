@@ -71,7 +71,7 @@ public class MainViewController {
 
         /* Render the new scene into primaryStage */
         PLViewController c = loader.getController();
-        c.setTitle(newPL.getTitle());
+        c.setTitle(newPL);
         window.setTitle("Rocking Machines - Patterns Editor");
         window.setScene(plView);
         window.show();

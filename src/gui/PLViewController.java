@@ -1,5 +1,6 @@
 package gui;
 
+import datamodel.PatternLanguage;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,11 +12,13 @@ import javafx.event.ActionEvent;
 public class PLViewController {
 
     @FXML private Text plTitle;
+    private PatternLanguage newPL;
 
 
     @FXML
-    protected void setTitle(String title) {
-        plTitle.setText(title);
+    protected void setTitle(PatternLanguage newPL) {
+        this.newPL = newPL;
+        plTitle.setText(newPL.getTitle());
     }
 
     /**
