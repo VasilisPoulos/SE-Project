@@ -14,7 +14,10 @@ public class PLViewController {
     @FXML private Text plTitle;
     private PatternLanguage newPL;
 
-
+    /**
+     * Sets the Text field as the title of the Pattern Language
+     * @param newPL the PatternLanguage object
+     */
     @FXML
     protected void setTitle(PatternLanguage newPL) {
         this.newPL = newPL;
@@ -35,6 +38,7 @@ public class PLViewController {
         Parent root = loader.load();
         TemplateViewController c = loader.getController();
         c.populateTemplates();
+        c.setNewPL(newPL);
 
         window.close();
 
@@ -44,10 +48,10 @@ public class PLViewController {
         window.show();
     }
 
-    @FXML
-    void handleLoadPattern() {
-        //TODO: Decide if we're going to implement this (no reason imo)
-    }
+//    @FXML
+//    void handleLoadPattern() {
+//        //TODO: Decide if we're going to implement this (no reason imo)
+//    }
 
     /**
      * Returns to the starting scene, so we can change the pattern language

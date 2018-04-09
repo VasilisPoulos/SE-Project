@@ -57,7 +57,7 @@ public class MainViewController {
      * @param window  the window this function was called from
      * @throws Exception when not able to create and show the new scene
      */
-    private void viewNewPL(PatternLanguage newPL, Stage window) throws Exception {
+    protected void viewNewPL(PatternLanguage newPL, Stage window) throws Exception {
 
         /* Load the new scene into a variable */
         FXMLLoader loader = new FXMLLoader(getClass().getResource("plView.fxml"));

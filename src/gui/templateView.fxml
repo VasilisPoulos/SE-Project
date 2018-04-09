@@ -154,7 +154,7 @@
                </padding>
             </Button>
             <Region maxWidth="-Infinity" prefHeight="36.0" prefWidth="60.0" HBox.hgrow="ALWAYS" />
-            <Button cancelButton="true" layoutX="10.0" layoutY="10.0" minWidth="-Infinity" mnemonicParsing="false" text="Cancel" textFill="RED">
+            <Button cancelButton="true" layoutX="10.0" layoutY="10.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" textFill="RED">
                <font>
                   <Font name="Droid Sans" size="13.0" />
                </font>

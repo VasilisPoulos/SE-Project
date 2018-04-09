@@ -1,9 +1,12 @@
 package gui;
 
+import datamodel.PatternLanguage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +14,7 @@ import java.util.List;
 public class TemplateViewController {
 
     @FXML private VBox templateContainer;
-
+    private PatternLanguage newPL;
 
     /**
      * Populate the template selection scene with buttons corresponding to pattern templates
@@ -38,4 +41,21 @@ public class TemplateViewController {
             templateContainer.getChildren().addAll(buttonList); // add new Buttons from the list
 
     }
+
+    /**
+     * Returns to the new Pattern Language scene view on clicking Cancel
+     * @param event the button click
+     * @throws Exception on failure to load fxml file
+     */
+    @FXML
+    public void handleCancel(ActionEvent event) throws Exception {
+        Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        MainViewController c = new MainViewController();
+        c.viewNewPL(this.newPL, currentStage);
+    }
+
+    public void setNewPL(PatternLanguage newPL) {
+        this.newPL = newPL;
+    }
+
 }
