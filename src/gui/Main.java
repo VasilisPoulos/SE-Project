@@ -23,7 +23,7 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("start.fxml"));
         Parent root = loader.load();
 
-//        window.getIcons().add(new Image("../assets/img/icon.png"));
+        window.getIcons().add(new Image("/assets/img/icon.png"));
         window.setTitle("Rocking Machines - Patterns Editor");
         start = new Scene(root, 800, 600);
         window.setScene(start);
