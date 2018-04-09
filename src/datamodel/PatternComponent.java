@@ -92,22 +92,4 @@ public class PatternComponent implements Cloneable
 	{
 		return this.name;
 	}
-
-	/*
-	 * Main class for testing
-	 */
-	public static void main(String[] args)
-	{
-		/*
-		String name;
-		//PatternComponent component = new PatternComponent();
-
-		Scanner reader = new Scanner(System.in);
-		System.out.println("Component Name:");
-		name = reader.nextLine();
-		component.saveName(name);
-		System.out.println(component.getName());
-		reader.close();
-		*/
-	}
 }
