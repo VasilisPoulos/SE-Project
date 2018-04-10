@@ -96,12 +96,17 @@ public class TemplateViewController {
         c.viewNewPL(this.newPL, currentStage);
     }
 
+    /**
+     * TODO
+     * @param event the button click
+     */
     @FXML
     public void handlePickPattern(ActionEvent event) {
         Control src = (Control)event.getSource();
         Integer buttonId = Integer.parseInt(src.getId());
         System.out.println("Button with id " + Integer.toString(buttonId) + " clicked.");
 //        Pattern newPattern = TemplateFactory.getTemplatesList(buttonId).clone();
+//        PatternViewController.setPattern(newPattern);
 
     }
 
