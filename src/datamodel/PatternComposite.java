@@ -29,7 +29,6 @@ public class PatternComposite extends PatternComponent
      *
      * @param patternComponentTitle pattern components name
      */
-
     //TODO: Find a better way to do this.
     public void remove(String patternComponentTitle)
     {
@@ -42,4 +41,14 @@ public class PatternComposite extends PatternComponent
         }
 
     }
+
+    //TODO: needs deep copy, iterate through all the items and clone them with
+    //TODO: super.clone() method.
+    @Override
+    public PatternComponent clone()
+    {
+        return super.clone();
+    }
+
+
 }
