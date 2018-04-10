@@ -132,7 +132,7 @@
                   <HBox>
                      <children>
                         <Region HBox.hgrow="ALWAYS" />
-                      <Button mnemonicParsing="false" onAction="#handleAddPattern" text="ADD PATTERN">
+                      <Button mnemonicParsing="false" onAction="#handleAddPattern" text="Add Pattern">
                            <graphic>
                               <ImageView fitHeight="10.0" fitWidth="10.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -156,7 +156,7 @@
                   <HBox layoutX="10.0" layoutY="314.0">
                      <children>
                         <Region HBox.hgrow="ALWAYS" />
-                        <Button mnemonicParsing="false" text="LOAD PATTERN">
+                        <Button mnemonicParsing="false" text="Load Pattern">
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
@@ -180,7 +180,7 @@
                   <HBox layoutX="10.0" layoutY="364.0">
                      <children>
                         <Region HBox.hgrow="ALWAYS" />
-                        <Button mnemonicParsing="false" onAction="#handleChangePL" text="CHANGE PATTERN LANGUAGE">
+                        <Button mnemonicParsing="false" onAction="#handleChangePL" text="Change Pattern Language">
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
