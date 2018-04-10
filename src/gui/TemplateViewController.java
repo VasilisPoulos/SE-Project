@@ -5,7 +5,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Control;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -15,11 +17,13 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class TemplateViewController {
 
     @FXML private VBox templateContainer;
     private PatternLanguage newPL;
+    private Integer templateId = -1;
 
     /**
      * Populate the template selection scene with buttons corresponding to pattern templates
@@ -103,15 +107,48 @@ public class TemplateViewController {
     @FXML
     public void handlePickPattern(ActionEvent event) {
         Control src = (Control)event.getSource();
-        Integer buttonId = Integer.parseInt(src.getId());
-        System.out.println("Button with id " + Integer.toString(buttonId) + " clicked.");
-//        Pattern newPattern = TemplateFactory.getTemplatesList(buttonId).clone();
-//        PatternViewController.setPattern(newPattern);
+        this.templateId = Integer.parseInt(src.getId());
+        System.out.println("Button with id " + Integer.toString(templateId) + " clicked.");
 
     }
 
     public void setNewPL(PatternLanguage newPL) {
         this.newPL = newPL;
+    }
+
+    public void handleCreate(ActionEvent event) {
+        /* Get the current window into a variable */
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+
+        if (this.templateId == -1) {
+            this.notifyDefault(window);
+        }
+        else {
+            this.switchToPatternView(window);
+        }
+    }
+
+    public void switchToPatternView(Stage window) {
+        //Pattern newPattern = TemplateFactory.getTemplatesList(templateId).clone()
+        //PatternViewController.setPattern(newPattern);
+        System.out.println("Template with id " +  templateId + " selected.");
+    }
+
+    public void notifyDefault(Stage window) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText("You did not select a template for the new pattern.");
+        alert.setContentText("Are you sure you want to use the default template \"MicroPattern?\"");
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK){
+            alert.close();
+            switchToPatternView(window);
+        }
+        else {
+            alert.close();
+        }
     }
 
 }
