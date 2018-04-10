@@ -2,10 +2,17 @@ package datamodel;
 
 import java.util.ArrayList;
 
-public class PatternComposite extends PatternComponent
+public abstract class PatternComposite extends PatternComponent
 {
+    /**
+     * ArrayList of components.
+     */
     protected ArrayList<PatternComponent> componentList;
 
+    /**
+     * Calling parent constructor.
+     * @param name Name of the composite
+     */
     public PatternComposite(String name)
     {
         super(name);
@@ -50,5 +57,12 @@ public class PatternComposite extends PatternComponent
         return super.clone();
     }
 
+    //TODO: not sure what this is supposed to do.
+    @Override
+    public void saveContents() {
+        super.saveContents();
+    }
 
+    //TODO: will be implemented in Release 2.0
+    //public abstract void decorateComponents(DecoratorAbstractFactory decoratorFactory);
 }

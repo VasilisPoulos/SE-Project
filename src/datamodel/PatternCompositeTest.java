@@ -12,7 +12,7 @@ class PatternCompositeTest {
     @org.junit.jupiter.api.Test
     void add()
     {
-        PatternComposite composite = new PatternComposite("TestComposite");
+        dtm_PatternLanguage composite = new dtm_PatternLanguage("TestComposite");
         PatternComponent component = new PatternComponent("Component");
         composite.add(component);
         assertEquals(composite.componentList.get(0).getName(),"Component");
@@ -24,10 +24,12 @@ class PatternCompositeTest {
     @org.junit.jupiter.api.Test
     void remove()
     {
-        PatternComposite composite = new PatternComposite("TestComposite");
+
+        dtm_PatternLanguage composite = new dtm_PatternLanguage("TestComposite");
         PatternComponent component = new PatternComponent("Component");
         composite.add(component);
         composite.remove("Component");
         assertEquals(true,composite.componentList.isEmpty());
+
     }
 }
