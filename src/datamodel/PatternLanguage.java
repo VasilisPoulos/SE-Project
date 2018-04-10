@@ -1,37 +1,25 @@
 package datamodel;
 
-public class PatternLanguage
+public class PatternLanguage extends PatternComposite
 {
-
-    private String title;
     private static Integer plCount = 0;
-
-    public String getTitle() {
-        return this.title;
-    }
-
 
     /**
      * @constructor
      * Overloaded constructor with default parameters
      */
-    public PatternLanguage()
-    {
-        this("");
+    public String getTitle() {
+        return super.getName();
     }
 
-    /**
-     * @constructor 
-     * @param title the title of the new pattern language
-     */
-    public PatternLanguage(String title)
+    public PatternLanguage(String name)
     {
-
-        if (title == null || title.equals("") || title.isEmpty())
+        super(name);
+        if (name == null || name.equals("") || name.isEmpty())
         {
-          title = this.generateDefaultTitle(); // Should generate using a counter (e.g. PatternLanguage1, PatternLanguage2, ...
+            name = this.generateDefaultTitle(); // Should generate using a counter (e.g. PatternLanguage1, PatternLanguage2, ...
         }
-        this.title = title;
+        this.name = name;
     }
 
     /**
@@ -44,4 +32,7 @@ public class PatternLanguage
         String title = "Pattern Language #" + Integer.toString(plCount);
         return title;
     }
+
+    //TODO: Release 2.0
+    //public void decorateComponents()
 }
