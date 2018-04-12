@@ -10,7 +10,7 @@ public abstract class PatternComposite extends PatternComponent
     protected ArrayList<PatternComponent> componentList;
 
     /**
-     * Calling parent constructor.
+     * Calling parent constructor, initializing array.
      * @param name Name of the composite
      */
     public PatternComposite(String name)
@@ -50,7 +50,7 @@ public abstract class PatternComposite extends PatternComponent
     }
 
     //TODO: needs deep copy, iterate through all the items and clone them with
-    //TODO: super.clone() method.
+    //TODO: super.clone() method. (Clone name , array and its objects).
     @Override
     public PatternComponent clone()
     {
