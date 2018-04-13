@@ -1,6 +1,8 @@
 package gui;
 
+import datamodel.PatternComposite;
 import datamodel.PatternLanguage;
+import datamodel.TemplateFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -15,9 +17,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class TemplateViewController {
 
@@ -33,58 +33,62 @@ public class TemplateViewController {
 
         List<HBox> buttonList = new ArrayList<>(); //our Collection to hold created Button objects (HBox for styling)
 
-//            ArrayList<Template> templatesList = getTemplatesList();
+        //TODO: get a hashmap from templateFactory and iterate
+//        Set templatesNames = templates.keySet(); //to get all names so we can put them on buttons
+//        for (String title: templatesNames) {
+//            // TODO: Add all the code from below
+//        }
 
-            ArrayList templatesList = new ArrayList(); // For now
-            templatesList.add("asdf");
-            templatesList.add("qwerty");
+        ArrayList templatesList = new ArrayList(); // For now
+        templatesList.add("asdf");
+        templatesList.add("qwerty");
 
-            /*
-             * Iterate through list of templates and create a button for each one
-             * using its index as id and set the event handler
+        /*
+         * Iterate through list of templates and create a button for each one
+         * using its index as id and set the event handler
+         */
+        for (int i = 0; i < templatesList.size(); i++) { //iterate over every row returned
+
+            String title = templatesList.get(i).toString();     // get title of template i
+            HBox hbox = new HBox();                             // Create the HBox container for the button
+            Button btn = new Button(title);                     // Create the Button
+            btn.setId(Integer.toString(i));                     // Set button id to its index
+            btn.setOnAction((e) -> this.handlePickPattern(e));  // Set button handler to handlePickPattern
+
+            /* Create left and right regions to center-align the button
+             * and set their attributes so that they are dynamically set
              */
-            for (int i = 0; i < templatesList.size(); i++) { //iterate over every row returned
+            Region regionLeft = new Region();
+            Region regionRight = new Region();
 
-                String title = templatesList.get(i).toString();     // get title of template i
-                HBox hbox = new HBox();                             // Create the HBox container for the button
-                Button btn = new Button(title);                     // Create the Button
-                btn.setId(Integer.toString(i));                     // Set button id to its index
-                btn.setOnAction((e) -> this.handlePickPattern(e));  // Set button handler to handlePickPattern
+            HBox.setHgrow(hbox, Priority.ALWAYS);
+            HBox.setHgrow(regionLeft, Priority.ALWAYS);
+            HBox.setHgrow(regionRight, Priority.ALWAYS);
 
-                /* Create left and right regions to center-align the button
-                 * and set their attributes so that they are dynamically set
-                 */
-                Region regionLeft = new Region();
-                Region regionRight = new Region();
+            regionLeft.setMinSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
+            regionRight.setMinSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
+            regionLeft.setMaxSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
+            regionRight.setMaxSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
 
-                HBox.setHgrow(hbox, Priority.ALWAYS);
-                HBox.setHgrow(regionLeft, Priority.ALWAYS);
-                HBox.setHgrow(regionRight, Priority.ALWAYS);
+            regionLeft.setPrefSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
+            regionRight.setPrefSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
+            hbox.setMaxSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
 
-                regionLeft.setMinSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
-                regionRight.setMinSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
-                regionLeft.setMaxSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
-                regionRight.setMaxSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
+            btn.setPadding(new Insets(10));
 
-                regionLeft.setPrefSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
-                regionRight.setPrefSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
-                hbox.setMaxSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
+            /* Add the button and regions to the HBox */
+            hbox.getChildren().add(regionLeft);
+            hbox.getChildren().add(btn);
+            hbox.getChildren().add(regionRight);
 
-                btn.setPadding(new Insets(10));
+            /* Finally, add the hbox containing the button to the list */
+            buttonList.add(hbox);
+        }
 
-                /* Add the button and regions to the HBox */
-                hbox.getChildren().add(regionLeft);
-                hbox.getChildren().add(btn);
-                hbox.getChildren().add(regionRight);
-
-                /* Finally, add the hbox containing the button to the list */
-                buttonList.add(hbox);
-            }
-
-            /* Add buttons to gui */
-            templateContainer.setSpacing(20);
-            templateContainer.getChildren().clear(); //remove all Buttons that are currently in the container
-            templateContainer.getChildren().addAll(buttonList); // add new Buttons from the list
+        /* Add buttons to gui */
+        templateContainer.setSpacing(20);
+        templateContainer.getChildren().clear(); //remove all Buttons that are currently in the container
+        templateContainer.getChildren().addAll(buttonList); // add new Buttons from the list
 
     }
 
