@@ -21,7 +21,7 @@ class PatternComponentTest {
         assertNotSame(component,copy); //not the Same Object
         assertEquals("Pattern",component.getName());
         assertEquals("Pattern",copy.getName());
-        component.saveName("New name");
+        component.setName("New name");
         assertEquals("New name",component.getName());
         assertEquals("Pattern",copy.getName());
     }

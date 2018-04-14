@@ -8,7 +8,7 @@ public abstract class PatternComposite extends PatternComponent
     /**
      * ArrayList of components.
      */
-    protected ArrayList<PatternComponent> componentList;
+    protected ArrayList<PatternComponent> componentsList;
 
     /**
      * Calling parent constructor, initializing array.
@@ -17,7 +17,7 @@ public abstract class PatternComposite extends PatternComponent
     public PatternComposite(String name)
     {
         super(name);
-        componentList = new ArrayList<>();
+        componentsList = new ArrayList<>();
     }
 
     /**
@@ -28,7 +28,7 @@ public abstract class PatternComposite extends PatternComponent
     @Override
     public void add(PatternComponent component)
     {
-        componentList.add(component);
+        componentsList.add(component);
     }
 
     /**
@@ -40,18 +40,18 @@ public abstract class PatternComposite extends PatternComponent
     //TODO: Find a better way to do this.
     public void remove(String patternComponentTitle)
     {
-        for (int i = 0; i < componentList.size(); i++)
+        for (int i = 0; i < componentsList.size(); i++)
         {
-            if (componentList.get(i).getName().equals(patternComponentTitle))
+            if (componentsList.get(i).getName().equals(patternComponentTitle))
             {
-                componentList.remove(i);
+                componentsList.remove(i);
             }
         }
 
     }
 
-    public ArrayList<PatternComponent> getComponentList() {
-        return componentList;
+    public ArrayList<PatternComponent> getComponentsList() {
+        return componentsList;
     }
 
     //TODO: needs deep copy, iterate through all the items and clone them with
