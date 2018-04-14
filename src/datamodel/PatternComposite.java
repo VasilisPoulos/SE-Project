@@ -43,6 +43,13 @@ public abstract class PatternComposite extends PatternComponent
         this.componentsList.removeIf((PatternComponent p) -> p.getName().equals(patternComponentTitle));
 
     }
+    //for testing..logika kanei return ta pedia tou arraylist
+    @Override
+    public String toString() {
+        return "PatternComposite{}";
+    }
+
+    @Override
 
     public ArrayList<PatternComponent> getComponentsList() {
         return componentsList;
@@ -62,6 +69,19 @@ public abstract class PatternComposite extends PatternComponent
         super.saveContents();
     }
 
+    public void setComponentsList(ArrayList<PatternComponent> componentsList) {
+        this.componentsList = componentsList;
+    }
+
+    @Override
+    public PatternComponent getChild() {
+        return super.getChild();
+    }
+
+    @Override
+    public String setContents() {
+        return super.setContents();
+    }
     //TODO: will be implemented in Release 2.0
     //public abstract void decorateComponents(DecoratorAbstractFactory decoratorFactory);
 }

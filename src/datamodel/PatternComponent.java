@@ -59,8 +59,23 @@ public class PatternComponent implements Cloneable
 	//TODO: Should write contents to file
 	public void saveContents() {}
 
+<<<<<<< HEAD
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 *	Only for testing
+
+	 *	@return	components name
+	 */
+	public String getName()
+	{
+		return this.name;
+=======
 	public String getName() {
 		return name;
+>>>>>>> 898669595f7f287e49142437938be52baeb29c9f
 	}
 
 	public void setName(String name) {
