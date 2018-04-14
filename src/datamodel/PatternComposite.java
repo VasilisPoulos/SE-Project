@@ -49,7 +49,7 @@ public abstract class PatternComposite extends PatternComponent
         }
 
     }
-    //for testing
+    //for testing..logika kanei return ta pedia tou arraylist
     @Override
     public String toString() {
         return "PatternComposite{}";
