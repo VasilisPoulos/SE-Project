@@ -51,18 +51,12 @@ public class PatternComponent implements Cloneable
 		}
 	}
 
-	/**
-	 *	Saves a new name
-     *
-	 *	@param	name	the new name.
-	 */
-	//TODO: Doesn't follow UML 's definition.
-	public void saveName(String name)
+	//TODO: Should write this.name to file
+	public void saveName()
 	{
-		this.name = name;
 	}
 
-	//TODO: don't know what this is supposed to do.
+	//TODO: Should write contents to file
 	public void saveContents() {}
 
 	/**

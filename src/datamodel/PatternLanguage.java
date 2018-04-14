@@ -8,10 +8,6 @@ public class PatternLanguage extends PatternComposite
      * @constructor
      * Overloaded constructor with default parameters
      */
-    public String getTitle() {
-        return super.getName();
-    }
-
     public PatternLanguage(String name)
     {
         super(name);

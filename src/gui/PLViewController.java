@@ -21,7 +21,7 @@ public class PLViewController {
     @FXML
     protected void setTitle(PatternLanguage newPL) {
         this.newPL = newPL;
-        plTitle.setText(newPL.getTitle());
+        plTitle.setText(newPL.getName());
     }
 
     /**
