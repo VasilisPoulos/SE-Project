@@ -40,15 +40,8 @@ public abstract class PatternComposite extends PatternComponent
      */
     public void remove(String patternComponentTitle)
     {
-        for (Iterator<PatternComponent> iter = this.componentsList.iterator(); iter.hasNext(); )
-        {
-            PatternComponent i = iter.next();
-            if (i.getName().equals(patternComponentTitle))
-            {
-                iter.remove();
-            }
-        }
-
+        this.componentsList.removeIf((PatternComponent p) -> p.getName().equals(patternComponentTitle));
+        
     }
 
     public ArrayList<PatternComponent> getComponentsList() {
