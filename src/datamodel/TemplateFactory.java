@@ -48,6 +48,10 @@ public class TemplateFactory
         return templatesList;
     }
 
+    public void setTemplatesList(HashMap<String, Pattern> templatesList) {
+        this.templatesList = templatesList;
+    }
+
 // TODO: Check if this is obsolete (we have a Map now)
 //    /*
 //     * USED FOR TESTING.
