@@ -1,6 +1,7 @@
 package datamodel;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public abstract class PatternComposite extends PatternComponent
 {
@@ -28,7 +29,7 @@ public abstract class PatternComposite extends PatternComponent
     @Override
     public void add(PatternComponent component)
     {
-        componentsList.add(component);
+        this.componentsList.add(component);
     }
 
     /**
@@ -37,17 +38,10 @@ public abstract class PatternComposite extends PatternComponent
      *
      * @param patternComponentTitle pattern components name
      */
-    //TODO: Find a better way to do this.
     public void remove(String patternComponentTitle)
     {
-        for (int i = 0; i < componentsList.size(); i++)
-        {
-            if (componentsList.get(i).getName().equals(patternComponentTitle))
-            {
-                componentsList.remove(i);
-            }
-        }
-
+        this.componentsList.removeIf((PatternComponent p) -> p.getName().equals(patternComponentTitle));
+        
     }
     //for testing..logika kanei return ta pedia tou arraylist
     @Override

@@ -36,6 +36,7 @@ public class MainViewController {
         Parent modal = FXMLLoader.load(getClass().getResource("createPLTitle.fxml"));
 
         Scene dialogScene = new Scene(modal, 600, 400);
+        Main.setCreatePltitle(dialogScene);
         dialog.setTitle("Rocking Machines - Patterns Editor");
         dialog.setScene(dialogScene);
         dialog.show();
@@ -64,6 +65,7 @@ public class MainViewController {
 
         Parent patternLanguageView = loader.load();
         Scene plView = new Scene(patternLanguageView, 800, 600);
+        Main.setPlView(plView);
 
         /* Close pop-up window and change the window variable to the primaryStage */
         window.close();
@@ -72,6 +74,8 @@ public class MainViewController {
         /* Render the new scene into primaryStage */
         PLViewController c = loader.getController();
         c.setTitle(newPL);
+        c.populatePatterns();
+
         window.setTitle("Rocking Machines - Patterns Editor");
         window.setScene(plView);
         window.show();

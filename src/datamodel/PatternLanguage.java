@@ -29,6 +29,8 @@ public class PatternLanguage extends PatternComposite
         return title;
     }
 
+
+
     //TODO: Release 2.0
     //public void decorateComponents()
 }

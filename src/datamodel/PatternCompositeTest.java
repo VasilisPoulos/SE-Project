@@ -24,7 +24,6 @@ class PatternCompositeTest {
     @org.junit.jupiter.api.Test
     void remove()
     {
-
         PatternLanguage composite = new PatternLanguage("TestComposite");
         PatternComponent component = new PatternComponent("Component");
         composite.add(component);
