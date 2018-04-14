@@ -41,7 +41,7 @@ public abstract class PatternComposite extends PatternComponent
     public void remove(String patternComponentTitle)
     {
         this.componentsList.removeIf((PatternComponent p) -> p.getName().equals(patternComponentTitle));
-        
+
     }
     //for testing..logika kanei return ta pedia tou arraylist
     @Override

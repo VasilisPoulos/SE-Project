@@ -106,6 +106,7 @@ public class PLViewController {
 
         for (PatternComponent pattern: patternsList) {
 
+
             if (row >= gpRows) {
                 System.out.println("Patterns exceeded calculated number!");
             }
@@ -123,10 +124,11 @@ public class PLViewController {
             btn.setPadding(new Insets(10));
 
             gp.add(btn, col, row);
+            col++;
         }
 
-        patternContainer.getChildren().clear(); //remove all Buttons that are currently in the container
-        patternContainer.getChildren().add(gp); // add new Buttons from the list
+        patternContainer.getChildren().clear(); //remove previous GridPane
+        patternContainer.getChildren().add(gp); // add the GridPane
     }
 
     private void handlePickPattern(ActionEvent event) {

@@ -52,32 +52,32 @@ public class Main extends Application {
         return start;
     }
 
-    public static void setStart(Scene start) {
-        start = start;
+    public static void setStart(Scene startScene) {
+        start = startScene;
     }
 
     public static Scene getCreatePltitle() {
         return createPlTitle;
     }
 
-    public static void setCreatePltitle(Scene createPltitle) {
-        createPlTitle = createPltitle;
+    public static void setCreatePltitle(Scene createPlTitleScene) {
+        createPlTitle = createPlTitleScene;
     }
 
     public static Scene getPlView() {
         return plView;
     }
 
-    public static void setPlView(Scene plView) {
-        plView = plView;
+    public static void setPlView(Scene plViewScene) {
+        plView = plViewScene;
     }
 
     public static Scene getTemplateView() {
         return templateView;
     }
 
-    public static void setTemplateView(Scene templateView) {
-        templateView = templateView;
+    public static void setTemplateView(Scene templateViewScene) {
+        templateView = templateViewScene;
     }
 
     public static TemplateFactory getTemplateFactory() {
