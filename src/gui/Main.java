@@ -10,9 +10,12 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    private static Stage window;        // For ease of use
-    private Scene start;                // Opening scene
-    private static TemplateFactory templateFactory;
+    private static Stage window;                        // For ease of use
+    private static Scene start;                         // Opening scene
+    private static Scene createPlTitle;                 // Popup window for naming new PL
+    private static Scene plView;                        // Pattern Language view
+    private static Scene templateView;                  // Template view
+    private static TemplateFactory templateFactory;     // TemplateFactory object used for initialization
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -43,6 +46,38 @@ public class Main extends Application {
 
     public static Stage getWindow() {
         return window;
+    }
+
+    public static Scene getStart() {
+        return start;
+    }
+
+    public static void setStart(Scene start) {
+        start = start;
+    }
+
+    public static Scene getCreatePltitle() {
+        return createPlTitle;
+    }
+
+    public static void setCreatePltitle(Scene createPltitle) {
+        createPlTitle = createPltitle;
+    }
+
+    public static Scene getPlView() {
+        return plView;
+    }
+
+    public static void setPlView(Scene plView) {
+        plView = plView;
+    }
+
+    public static Scene getTemplateView() {
+        return templateView;
+    }
+
+    public static void setTemplateView(Scene templateView) {
+        templateView = templateView;
     }
 
     public static TemplateFactory getTemplateFactory() {
