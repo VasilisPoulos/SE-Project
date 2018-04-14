@@ -155,9 +155,22 @@ public class PLViewController {
             alert.showAndWait();
         }
         else {
-            this.newPL.remove(this.selectedPatternId);
-            this.selectedPatternId = null;
-            this.renderPLView((Stage) ((Node)event.getSource()).getScene().getWindow());
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setHeaderText("Are you sure you want to delete " + this.selectedPatternId + "?");
+            alert.setContentText("All patterns named " + this.selectedPatternId + " will be deleted!");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                this.newPL.remove(this.selectedPatternId);
+                this.selectedPatternId = null;
+                this.renderPLView((Stage) ((Node)event.getSource()).getScene().getWindow());
+            }
+            else {
+                alert.close();
+
+            }
+
         }
     }
 
