@@ -39,7 +39,7 @@ public class TemplateViewController {
             HBox hbox = new HBox();                             // Create the HBox container for the button
             Button btn = new Button(title);                     // Create the Button
             btn.setId(title);                                   // Set button id to its title
-            btn.setOnAction((e) -> this.handlePickPattern(e));  // Set button handler to handlePickPattern
+            btn.setOnAction((e) -> this.handlePickTemplate(e));  // Set button handler to handlePickTemplate
 
             /* Create left and right regions to center-align the button
              * and set their attributes so that they are dynamically set
@@ -96,7 +96,7 @@ public class TemplateViewController {
      * @param event the button click
      */
     @FXML
-    public void handlePickPattern(ActionEvent event) {
+    public void handlePickTemplate(ActionEvent event) {
         Control src = (Control)event.getSource();
         this.templateId = src.getId();
         System.out.println("Button with id " + templateId + " clicked.");
@@ -120,9 +120,8 @@ public class TemplateViewController {
     }
 
     public void switchToPatternView(Stage window) {
-        TemplateFactory tf = Main.getTemplateFactory();
-        PatternComponent newPattern = tf.createTemplate(templateId);
-        //PatternViewController.setPattern(newPattern);
+        this.newPL.add(Main.getTemplateFactory().createTemplate(templateId));
+        System.out.println(this.newPL.getComponentsList().size());
         System.out.println("Template with id " +  templateId + " selected.");
     }
 

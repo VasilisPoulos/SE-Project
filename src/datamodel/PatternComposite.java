@@ -37,12 +37,11 @@ public abstract class PatternComposite extends PatternComponent
      *
      * @param patternComponentTitle pattern components name
      */
-    //TODO: Find a better way to do this.
     public void remove(String patternComponentTitle)
     {
-        for (int i = 0; i < componentsList.size(); i++)
+        for (PatternComponent i: this.componentsList)
         {
-            if (componentsList.get(i).getName().equals(patternComponentTitle))
+            if (i.getName().equals(patternComponentTitle))
             {
                 componentsList.remove(i);
             }

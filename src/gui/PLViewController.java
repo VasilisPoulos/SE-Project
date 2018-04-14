@@ -1,17 +1,28 @@
 package gui;
 
+import datamodel.PatternComponent;
 import datamodel.PatternLanguage;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Control;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
+import java.util.ArrayList;
+
 public class PLViewController {
 
     @FXML private Text plTitle;
+    @FXML private Pane patternContainer;
+    private String selectedPatternId = null;
+
     private PatternLanguage newPL;
 
     /**
@@ -35,16 +46,18 @@ public class PLViewController {
         Stage window = Main.getWindow();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("templateView.fxml"));
-        Parent root = loader.load();
+        Parent templateViewRoot = loader.load();
         TemplateViewController c = loader.getController();
         c.populateTemplates();
         c.setNewPL(newPL);
 
-        window.close();
 
+        Scene templateView = new Scene(templateViewRoot, 800, 600);
+        Main.setTemplateView(templateView);
+
+        window.close();
         window.setTitle("Rocking Machines - Patterns Editor");
-        Scene start = new Scene(root, 800, 600);
-        window.setScene(start);
+        window.setScene(templateView);
         window.show();
     }
 
@@ -64,15 +77,64 @@ public class PLViewController {
         /* Get the current window into a variable */
         Stage window = Main.getWindow();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("start.fxml"));
-        Parent root = loader.load();
-
         window.close();
 
-        window.setTitle("Rocking Machines - Patterns Editor");
-        Scene start = new Scene(root, 800, 600);
-        window.setScene(start);
+        window.setScene(Main.getStart());
         window.show();
+    }
+
+    /**
+     * TODO: create a GridPane of dynamic size, align items, create a button for each pattern, put it in a GridPane cell
+     */
+    public void populatePatterns() {
+        ArrayList<PatternComponent> patternsList = newPL.getComponentsList();
+        int size = patternsList.size();
+        int gpRows;
+        int gpCols;
+        if (size/3 == 0) {
+            gpCols = size;
+            gpRows = 1;
+        }
+        else {
+            gpRows = (size / 3);
+            gpCols = 3;
+        }
+        GridPane gp = new GridPane();
+
+        int row = 0;
+        int col = 0;
+
+        for (PatternComponent pattern: patternsList) {
+
+            if (row >= gpRows) {
+                System.out.println("Patterns exceeded calculated number!");
+            }
+
+            if (col >= gpCols) {
+                col = 0;
+                row++;
+            }
+
+            String name = pattern.getName();
+            Button btn = new Button(name);                      // Create the Button
+            btn.setId(name);                                    // Set button id to its title
+            btn.setOnAction((e) -> this.handlePickPattern(e));  // Set button handler to handlePickTemplate
+
+            btn.setPadding(new Insets(10));
+
+            gp.add(btn, col, row);
+        }
+
+        patternContainer.getChildren().clear(); //remove all Buttons that are currently in the container
+        patternContainer.getChildren().add(gp); // add new Buttons from the list
+    }
+
+    private void handlePickPattern(ActionEvent event) {
+
+        Control src = (Control)event.getSource();
+        this.selectedPatternId = src.getId();
+        System.out.println("Pattern " + selectedPatternId + " selected.");
+
     }
 
 }
