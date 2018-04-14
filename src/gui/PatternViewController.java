@@ -6,4 +6,5 @@ public class PatternViewController {
 
     private PatternComponent pattern;
 
+
 }

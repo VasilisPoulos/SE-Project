@@ -15,7 +15,7 @@ class PatternCompositeTest {
         PatternLanguage composite = new PatternLanguage("TestComposite");
         PatternComponent component = new PatternComponent("Component");
         composite.add(component);
-        assertEquals(composite.componentList.get(0).getName(),"Component");
+        assertEquals(composite.getComponentList().get(0).getName(),"Component");
     }
 
     /**
@@ -29,7 +29,7 @@ class PatternCompositeTest {
         PatternComponent component = new PatternComponent("Component");
         composite.add(component);
         composite.remove("Component");
-        assertEquals(true,composite.componentList.isEmpty());
+        assertEquals(true,composite.getComponentList().isEmpty());
 
     }
 }

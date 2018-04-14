@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public abstract class PatternComposite extends PatternComponent
 {
+
     /**
      * ArrayList of components.
      */
@@ -47,6 +48,10 @@ public abstract class PatternComposite extends PatternComponent
             }
         }
 
+    }
+
+    public ArrayList<PatternComponent> getComponentList() {
+        return componentList;
     }
 
     //TODO: needs deep copy, iterate through all the items and clone them with

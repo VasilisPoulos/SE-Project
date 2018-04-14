@@ -17,7 +17,7 @@ public class PatternLanguage extends PatternComposite
         super(name);
         if (name == null || name.equals("") || name.isEmpty())
         {
-            name = this.generateDefaultTitle(); // Should generate using a counter (e.g. PatternLanguage1, PatternLanguage2, ...
+            name = this.generateDefaultTitle(); // Should generate using a counter (e.g. Pattern Language #1, Pattern Language #2, ...)
         }
         this.name = name;
     }
