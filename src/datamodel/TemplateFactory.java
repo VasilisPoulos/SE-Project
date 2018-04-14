@@ -5,15 +5,8 @@ import java.util.Map;
 
 public class TemplateFactory
 {
-    /*
-     * List of default patterns [3] that will be supported.
-     * TODO: application should create 3 (one for each template) Pattern objects (prototypes) at the very beginning.
-     * TODO: Then we create patterns by *cloning* these prototypes
-     * TODO: Should be a Map of (templateName, prototype)
-     *
-     */
+
     private HashMap<String, Pattern> templatesList;
-//    private Pattern[] templatesList;
 
     /*
      * Keep track of how many patterns have been created.
@@ -26,10 +19,16 @@ public class TemplateFactory
     public TemplateFactory()
     {
 //        templatesList = new Pattern[3];
-        templatesList = new HashMap<String, Pattern>();
-        templatesList.put("MicroPattern", new Pattern("MicroPatternPrototype"));
-        templatesList.put("MediumPattern", new Pattern("MediumPatternPrototype"));
-        templatesList.put("MegaPattern", new Pattern("MegaPatternPrototype"));
+        templatesList = new HashMap<>();
+        Pattern micro = new Pattern("MicroPatternPrototype");
+        // TODO: fix contents
+        micro.add(new PatternPart("Name", "What shall this pattern be called by practitioners?"));
+        micro.add(new PatternPart("Template", "What shall this pattern be called by practitioners?"));
+        micro.add(new PatternPart("Problem", "What shall this pattern be called by practitioners?"));
+        micro.add(new PatternPart("Solution", "What shall this pattern be called by practitioners?"));
+
+        // TODO: Add other templates
+        templatesList.put("MicroPattern", micro);
 
     }
 
