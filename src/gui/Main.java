@@ -1,5 +1,6 @@
 package gui;
 
+import datamodel.TemplateFactory;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,10 +12,7 @@ public class Main extends Application {
 
     private static Stage window;        // For ease of use
     private Scene start;                // Opening scene
-
-    public static Stage getWindow() {
-        return window;
-    }
+    private static TemplateFactory templateFactory;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -29,11 +27,25 @@ public class Main extends Application {
         window.setScene(start);
         window.show();
 
-
+        this.initialize();
 
     }
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+
+    private void initialize() {
+
+        templateFactory = new TemplateFactory();
+    }
+
+    public static Stage getWindow() {
+        return window;
+    }
+
+    public static TemplateFactory getTemplateFactory() {
+        return templateFactory;
     }
 }

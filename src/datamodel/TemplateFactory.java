@@ -23,7 +23,7 @@ public class TemplateFactory
     /**
      *
      */
-    TemplateFactory()
+    public TemplateFactory()
     {
 //        templatesList = new Pattern[3];
         templatesList = new HashMap<String, Pattern>();

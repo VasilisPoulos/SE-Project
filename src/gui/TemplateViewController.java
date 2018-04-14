@@ -1,8 +1,6 @@
 package gui;
 
-import datamodel.PatternComposite;
-import datamodel.PatternLanguage;
-import datamodel.TemplateFactory;
+import datamodel.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -23,7 +21,7 @@ public class TemplateViewController {
 
     @FXML private VBox templateContainer;
     private PatternLanguage newPL;
-    private Integer templateId = -1;
+    private String templateId = null;
 
     /**
      * Populate the template selection scene with buttons corresponding to pattern templates
@@ -31,28 +29,16 @@ public class TemplateViewController {
     @FXML
     public void populateTemplates() {
 
-        List<HBox> buttonList = new ArrayList<>(); //our Collection to hold created Button objects (HBox for styling)
+        List<HBox> buttonList = new ArrayList<>();              // Collection to hold created Button objects (HBox for styling)
 
         //TODO: get a hashmap from templateFactory and iterate
-//        Set templatesNames = templates.keySet(); //to get all names so we can put them on buttons
-//        for (String title: templatesNames) {
-//            // TODO: Add all the code from below
-//        }
+        Set templatesSet = Main.getTemplateFactory().getTemplatesList().keySet(); // Get all names so we can put them on buttons
+        for (Object name: templatesSet) {
 
-        ArrayList templatesList = new ArrayList(); // For now
-        templatesList.add("asdf");
-        templatesList.add("qwerty");
-
-        /*
-         * Iterate through list of templates and create a button for each one
-         * using its index as id and set the event handler
-         */
-        for (int i = 0; i < templatesList.size(); i++) { //iterate over every row returned
-
-            String title = templatesList.get(i).toString();     // get title of template i
+            String title = name.toString();
             HBox hbox = new HBox();                             // Create the HBox container for the button
             Button btn = new Button(title);                     // Create the Button
-            btn.setId(Integer.toString(i));                     // Set button id to its index
+            btn.setId(title);                                   // Set button id to its title
             btn.setOnAction((e) -> this.handlePickPattern(e));  // Set button handler to handlePickPattern
 
             /* Create left and right regions to center-align the button
@@ -85,6 +71,7 @@ public class TemplateViewController {
             buttonList.add(hbox);
         }
 
+
         /* Add buttons to gui */
         templateContainer.setSpacing(20);
         templateContainer.getChildren().clear(); //remove all Buttons that are currently in the container
@@ -111,8 +98,8 @@ public class TemplateViewController {
     @FXML
     public void handlePickPattern(ActionEvent event) {
         Control src = (Control)event.getSource();
-        this.templateId = Integer.parseInt(src.getId());
-        System.out.println("Button with id " + Integer.toString(templateId) + " clicked.");
+        this.templateId = src.getId();
+        System.out.println("Button with id " + templateId + " clicked.");
 
     }
 
@@ -124,7 +111,7 @@ public class TemplateViewController {
         /* Get the current window into a variable */
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 
-        if (this.templateId == -1) {
+        if (this.templateId == null || this.templateId.isEmpty() || this.templateId == "null") {
             this.notifyDefault(window);
         }
         else {
@@ -133,7 +120,8 @@ public class TemplateViewController {
     }
 
     public void switchToPatternView(Stage window) {
-        //Pattern newPattern = TemplateFactory.getTemplatesList(templateId).clone()
+        TemplateFactory tf = Main.getTemplateFactory();
+        PatternComponent newPattern = tf.createTemplate(templateId);
         //PatternViewController.setPattern(newPattern);
         System.out.println("Template with id " +  templateId + " selected.");
     }
@@ -148,6 +136,7 @@ public class TemplateViewController {
 
         if (result.isPresent() && result.get() == ButtonType.OK){
             alert.close();
+            this.templateId = "MicroPattern";
             switchToPatternView(window);
         }
         else {
