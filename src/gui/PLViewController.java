@@ -156,6 +156,7 @@ public class PLViewController {
         }
         else {
             this.newPL.remove(this.selectedPatternId);
+            this.selectedPatternId = null;
             this.renderPLView((Stage) ((Node)event.getSource()).getScene().getWindow());
         }
     }

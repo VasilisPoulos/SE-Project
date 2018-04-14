@@ -49,7 +49,6 @@ public abstract class PatternComposite extends PatternComponent
         return "PatternComposite{}";
     }
 
-    @Override
 
     public ArrayList<PatternComponent> getComponentsList() {
         return componentsList;
@@ -78,10 +77,6 @@ public abstract class PatternComposite extends PatternComponent
         return super.getChild();
     }
 
-    @Override
-    public String setContents() {
-        return super.setContents();
-    }
     //TODO: will be implemented in Release 2.0
     //public abstract void decorateComponents(DecoratorAbstractFactory decoratorFactory);
 }
