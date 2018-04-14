@@ -6,3 +6,5 @@
 src/META-INF/
 
 \.idea/artifacts/
+
+\.idea/misc\.xml
