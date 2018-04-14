@@ -51,7 +51,7 @@ public class PatternComponent implements Cloneable
 		}
 	}
 
-	//TODO: Should write this.name to file
+
 	public void saveName()
 	{
 	}
@@ -67,4 +67,16 @@ public class PatternComponent implements Cloneable
 	{
 		return this.name;
 	}
+
+
+	//TODO: Should write this.name to file
+	public String setName(){}
+
+	public String getContents(){}
+
+	public String setContents(){}
+
+	public String setContents(int x){}
+
+	public PatternComponent getChild(){}
 }
