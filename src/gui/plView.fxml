@@ -228,4 +228,31 @@
          </children>
       </VBox>
    </center>
+   <bottom>
+      <HBox BorderPane.alignment="CENTER">
+         <children>
+            <Region layoutX="74.0" layoutY="10.0" HBox.hgrow="ALWAYS" />
+            <Button defaultButton="true" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleEditPattern" text="Edit" textAlignment="CENTER">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <font>
+                  <Font name="DejaVu Sans Bold" size="13.0" />
+               </font>
+            </Button>
+            <Region maxWidth="-Infinity" prefHeight="36.0" prefWidth="60.0" HBox.hgrow="ALWAYS" />
+            <Button cancelButton="true" layoutX="10.0" layoutY="10.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDeletePattern" text="Delete" textFill="RED">
+               <font>
+                  <Font name="Droid Sans" size="13.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Button>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </BorderPane.margin>
+      </HBox>
+   </bottom>
 </BorderPane>

@@ -5,9 +5,12 @@ import datamodel.PatternLanguage;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Control;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -16,6 +19,7 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class PLViewController {
 
@@ -27,12 +31,16 @@ public class PLViewController {
 
     /**
      * Sets the Text field as the title of the Pattern Language
-     * @param newPL the PatternLanguage object
+     * @param title the name of the Pattern Language
      */
     @FXML
-    protected void setTitle(PatternLanguage newPL) {
+    protected void setTitle(String title) {
+        plTitle.setText(title);
+    }
+
+    /** Set the new PatternLanguage object */
+    public void setNewPL(PatternLanguage newPL) {
         this.newPL = newPL;
-        plTitle.setText(newPL.getName());
     }
 
     /**
@@ -83,9 +91,7 @@ public class PLViewController {
         window.show();
     }
 
-    /**
-     * TODO: create a GridPane of dynamic size, align items, create a button for each pattern, put it in a GridPane cell
-     */
+
     public void populatePatterns() {
         ArrayList<PatternComponent> patternsList = newPL.getComponentsList();
         int size = patternsList.size();
@@ -137,6 +143,39 @@ public class PLViewController {
         this.selectedPatternId = src.getId();
         System.out.println("Pattern " + selectedPatternId + " selected.");
 
+    }
+
+    public void handleDeletePattern(ActionEvent event) {
+        if (this.selectedPatternId == null || this.selectedPatternId.isEmpty() || this.selectedPatternId == "null") {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("You did not select a pattern.");
+            alert.setContentText("Please select a pattern to remove.");
+            alert.showAndWait();
+        }
+        else {
+            this.newPL.remove(this.selectedPatternId);
+            this.renderPLView((Stage) ((Node)event.getSource()).getScene().getWindow());
+        }
+    }
+
+    // TODO
+    public void handleEditPattern(ActionEvent event) {
+        return;
+    }
+
+    public void renderPLView(Stage window) {
+        this.setTitle(this.newPL.getName());
+        this.populatePatterns();
+
+        /* Close pop-up window and change the window variable to the primaryStage */
+        window.close();
+        window = Main.getWindow();
+
+        /* Render the new scene into primaryStage */
+        window.setScene(Main.getPlView());
+        window.show();
     }
 
 }

@@ -67,20 +67,12 @@ public class MainViewController {
         Scene plView = new Scene(patternLanguageView, 800, 600);
 
         PLViewController c = loader.getController();
-        c.setTitle(newPL);
-        c.populatePatterns();
-
+        c.setNewPL(newPL);
         plView.setUserData(c);
         Main.setPlView(plView);
 
-        /* Close pop-up window and change the window variable to the primaryStage */
-        window.close();
-        window = Main.getWindow();
+        c.renderPLView(window);
 
-        /* Render the new scene into primaryStage */
-        window.setTitle("Rocking Machines - Patterns Editor");
-        window.setScene(plView);
-        window.show();
     }
 
     /**

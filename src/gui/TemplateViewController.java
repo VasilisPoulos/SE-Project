@@ -121,16 +121,18 @@ public class TemplateViewController {
     public void switchToPatternView(Stage window) {
         this.newPL.add(Main.getTemplateFactory().createTemplate(templateId));
         PLViewController c = (PLViewController) Main.getPlView().getUserData();
-        c.setTitle(newPL);
-        c.populatePatterns();
-
-        /* Close pop-up window and change the window variable to the primaryStage */
-        window.close();
-        window = Main.getWindow();
-
-        /* Render the new scene into primaryStage */
-        window.setScene(Main.getPlView());
-        window.show();
+        c.renderPLView(window);
+//
+//        c.setTitle(newPL);
+//        c.populatePatterns();
+//
+//        /* Close pop-up window and change the window variable to the primaryStage */
+//        window.close();
+//        window = Main.getWindow();
+//
+//        /* Render the new scene into primaryStage */
+//        window.setScene(Main.getPlView());
+//        window.show();
     }
 
     public void notifyDefault(Stage window) {
