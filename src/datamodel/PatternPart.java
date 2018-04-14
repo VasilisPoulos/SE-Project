@@ -1,21 +1,48 @@
 package datamodel;
 
 public class PatternPart extends PatternComponent
+
 {
-	public PatternPart(String name) {
+    private String contents;
+
+    /**
+     * Constructor.
+     *
+     * @param name - name of the pattern part
+     * @param contents - contents/description of the pattern part
+     */
+    public PatternPart(String name, String contents) {
+        super(name);
+        this.contents = contents;
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param name - name of the pattern part
+     */
+    public PatternPart(String name) {
 		super(name);
 	}
 
-	/*
-	*	This is an override
-	*/
-	public PatternComponent clone()
-	{
-		return null;
-	}
+    /** Return contents, passed to the constructor.  */
+    public String getContents() {
+        return contents;
+    }
 
-	public void saveComtents()
+    /** Set the contents field. */
+    public void setContents(String contents) {
+        this.contents = contents;
+    }
+
+    // TODO: Write contents to output file
+	public void saveContents()
 	{
 		return;
 	}
+
+    /** Return string representation of the pattern part. */
+	public String toString() {
+        return this.name + ":\n" + this.contents;
+    }
 }
