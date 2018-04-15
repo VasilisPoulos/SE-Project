@@ -54,11 +54,10 @@ public class MainViewController {
 
     /**
      * Switches to the view Pattern Language scene
-     * @param newPL the new PatternLanguage object
      * @param window  the window this function was called from
      * @throws Exception when not able to create and show the new scene
      */
-    protected void viewNewPL(PatternLanguage newPL, Stage window) throws Exception {
+    protected void viewNewPL(Stage window) throws Exception {
 
         /* Load the new scene into a variable */
         FXMLLoader loader = new FXMLLoader(getClass().getResource("plView.fxml"));
@@ -67,7 +66,6 @@ public class MainViewController {
         Scene plView = new Scene(patternLanguageView, 800, 600);
 
         PLViewController c = loader.getController();
-        c.setNewPL(newPL);
         plView.setUserData(c);
         Main.setPlView(plView);
 
@@ -101,7 +99,8 @@ public class MainViewController {
             if (result.isPresent() && result.get() == ButtonType.OK){
                 alert.close();
                 PatternLanguage newPL = new PatternLanguage(title);
-                this.viewNewPL(newPL, window);
+                Main.setPl(newPL);
+                this.viewNewPL(window);
             }
             else {
                 alert.close();
@@ -109,7 +108,8 @@ public class MainViewController {
         }
         else {
             PatternLanguage newPL = new PatternLanguage(title);
-            this.viewNewPL(newPL, window);
+            Main.setPl(newPL);
+            this.viewNewPL(window);
         }
 
 

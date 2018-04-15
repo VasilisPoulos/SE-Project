@@ -20,7 +20,6 @@ import java.util.*;
 public class TemplateViewController {
 
     @FXML private VBox templateContainer;
-    private PatternLanguage newPL;
     private String templateId = null;
 
     /**
@@ -89,8 +88,8 @@ public class TemplateViewController {
     @FXML
     public void handleCancel(ActionEvent event) throws Exception {
         Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        MainViewController c = new MainViewController();
-        c.viewNewPL(this.newPL, currentStage);
+        PLViewController c = new PLViewController();
+        c.renderPLView(currentStage);
     }
 
     /**
@@ -102,10 +101,6 @@ public class TemplateViewController {
         Control src = (Control)event.getSource();
         this.templateId = src.getId();
 
-    }
-
-    public void setNewPL(PatternLanguage newPL) {
-        this.newPL = newPL;
     }
 
     public void handleCreate(ActionEvent event) {
@@ -122,7 +117,7 @@ public class TemplateViewController {
 
     public void switchToPatternView(Stage window) {
 
-        this.newPL.add(Main.getTemplateFactory().createTemplate(templateId));
+        Main.getPl().add(Main.getTemplateFactory().createTemplate(templateId));
         PLViewController c = (PLViewController) Main.getPlView().getUserData();
         c.renderPLView(window);
     }

@@ -21,9 +21,6 @@ public class TemplateFactory
         micro.add(new PatternPart("Template", "Which template is followed for the pattern specification ?"));
         micro.add(new PatternPart("Problem", "What is motivating us to apply this pattern? "));
         micro.add(new PatternPart("Solution", " How do we solve the problem?"));
-        micro.add(new PatternPart("Template", "What shall this pattern be called by practitioners?"));
-        micro.add(new PatternPart("Problem", "What shall this pattern be called by practitioners?"));
-        micro.add(new PatternPart("Solution", "What shall this pattern be called by practitioners?"));
 
         Pattern inductive = new Pattern( "Inductive Mini-Pattern");
         inductive.add(new PatternPart("Name", "What shall this pattern be called by practitioners?"));

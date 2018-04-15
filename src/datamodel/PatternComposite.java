@@ -43,7 +43,8 @@ public abstract class PatternComposite extends PatternComponent
         this.componentsList.removeIf((PatternComponent p) -> p.getName().equals(patternComponentTitle));
 
     }
-    //for testing..logika kanei return ta pedia tou arraylist
+
+    //TODO
     @Override
     public String toString() {
         return "PatternComposite{}";
@@ -62,7 +63,7 @@ public abstract class PatternComposite extends PatternComponent
         return super.clone();
     }
 
-    //TODO: not sure what this is supposed to do.
+    //TODO: save to file
     @Override
     public void saveContents() {
         super.saveContents();

@@ -1,5 +1,6 @@
 package gui;
 
+import datamodel.Pattern;
 import datamodel.PatternComponent;
 import datamodel.PatternLanguage;
 import javafx.fxml.FXML;
@@ -27,7 +28,6 @@ public class PLViewController {
     @FXML private Pane patternContainer;
     private String selectedPatternId = null;
 
-    private PatternLanguage newPL;
 
     /**
      * Sets the Text field as the title of the Pattern Language
@@ -36,11 +36,6 @@ public class PLViewController {
     @FXML
     protected void setTitle(String title) {
         plTitle.setText(title);
-    }
-
-    /** Set the new PatternLanguage object */
-    public void setNewPL(PatternLanguage newPL) {
-        this.newPL = newPL;
     }
 
     /**
@@ -57,8 +52,6 @@ public class PLViewController {
         Parent templateViewRoot = loader.load();
         TemplateViewController c = loader.getController();
         c.populateTemplates();
-        c.setNewPL(newPL);
-
 
         Scene templateView = new Scene(templateViewRoot, 800, 600);
         Main.setTemplateView(templateView);
@@ -68,11 +61,6 @@ public class PLViewController {
         window.setScene(templateView);
         window.show();
     }
-
-//    @FXML
-//    void handleLoadPattern() {
-//        //TODO: Decide if we're going to implement this (no reason imo)
-//    }
 
     /**
      * Returns to the starting scene, so we can change the pattern language
@@ -93,7 +81,7 @@ public class PLViewController {
 
 
     public void populatePatterns() {
-        ArrayList<PatternComponent> patternsList = newPL.getComponentsList();
+        ArrayList<PatternComponent> patternsList = Main.getPl().getComponentsList();
         int size = patternsList.size();
         int gpRows;
         int gpCols;
@@ -102,7 +90,7 @@ public class PLViewController {
             gpRows = 1;
         }
         else {
-            gpRows = (size / 3);
+            gpRows = (size / 3) + 1;
             gpCols = 3;
         }
         GridPane gp = new GridPane();
@@ -111,11 +99,6 @@ public class PLViewController {
         int col = 0;
 
         for (PatternComponent pattern: patternsList) {
-
-
-            if (row >= gpRows) {
-                System.out.println("Patterns exceeded calculated number!");
-            }
 
             if (col >= gpCols) {
                 col = 0;
@@ -141,7 +124,6 @@ public class PLViewController {
 
         Control src = (Control)event.getSource();
         this.selectedPatternId = src.getId();
-        System.out.println("Pattern " + selectedPatternId + " selected.");
 
     }
 
@@ -162,7 +144,7 @@ public class PLViewController {
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
-                this.newPL.remove(this.selectedPatternId);
+                Main.getPl().remove(this.selectedPatternId);
                 this.selectedPatternId = null;
                 this.renderPLView((Stage) ((Node)event.getSource()).getScene().getWindow());
             }
@@ -175,12 +157,35 @@ public class PLViewController {
     }
 
     // TODO
-    public void handleEditPattern(ActionEvent event) {
-        return;
+    public void handleEditPattern(ActionEvent event) throws Exception {
+
+        Pattern pattern = Main.getTemplateFactory().getTemplatesList().get(selectedPatternId);
+        System.out.println("ID: " + selectedPatternId + "\n" + pattern.toString());
+        Main.setCurrentPattern(pattern);
+
+        /* Get the current window into a variable */
+        Stage window = Main.getWindow();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("patternView.fxml"));
+        Parent patternViewRoot = loader.load();
+        PatternViewController c = loader.getController();
+        c.populatePatternParts();
+
+
+        Scene patternView = new Scene(patternViewRoot, 800, 600);
+        patternView.setUserData(this);
+        Main.setPatternView(patternView);
+
+
+        window.close();
+        window.setTitle("Rocking Machines - Patterns Editor");
+        window.setScene(patternView);
+        window.show();
     }
 
     public void renderPLView(Stage window) {
-        this.setTitle(this.newPL.getName());
+
+        this.setTitle(Main.getPl().getName());
         this.populatePatterns();
 
         /* Close pop-up window and change the window variable to the primaryStage */

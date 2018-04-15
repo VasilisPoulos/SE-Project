@@ -26,11 +26,13 @@ public class PatternPart extends PatternComponent
 	}
 
     /** Return contents, passed to the constructor.  */
+    @Override
     public String getContents() {
         return contents;
     }
 
     /** Set the contents field. */
+    @Override
     public void setContents(String contents) {
         this.contents = contents;
     }
@@ -42,6 +44,7 @@ public class PatternPart extends PatternComponent
 	}
 
     /** Return string representation of the pattern part. */
+    @Override
 	public String toString() {
         return this.name + ":\n" + this.contents;
     }

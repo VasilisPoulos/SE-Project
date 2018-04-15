@@ -1,5 +1,7 @@
 package gui;
 
+import datamodel.Pattern;
+import datamodel.PatternLanguage;
 import datamodel.TemplateFactory;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +17,11 @@ public class Main extends Application {
     private static Scene createPlTitle;                 // Popup window for naming new PL
     private static Scene plView;                        // Pattern Language view
     private static Scene templateView;                  // Template view
+    private static Scene patternView;                   // Pattern Edit view
     private static TemplateFactory templateFactory;     // TemplateFactory object used for initialization
+    private static PatternLanguage pl;                  // The Pattern Language we're working on
+    private static Pattern currentPattern;              // The Pattern we're currently editing
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -40,8 +46,7 @@ public class Main extends Application {
 
 
     private void initialize() {
-
-        templateFactory = new TemplateFactory();
+        Main.templateFactory = new TemplateFactory();
     }
 
     public static Stage getWindow() {
@@ -53,7 +58,7 @@ public class Main extends Application {
     }
 
     public static void setStart(Scene startScene) {
-        start = startScene;
+        Main.start = startScene;
     }
 
     public static Scene getCreatePltitle() {
@@ -61,7 +66,7 @@ public class Main extends Application {
     }
 
     public static void setCreatePltitle(Scene createPlTitleScene) {
-        createPlTitle = createPlTitleScene;
+        Main.createPlTitle = createPlTitleScene;
     }
 
     public static Scene getPlView() {
@@ -69,7 +74,7 @@ public class Main extends Application {
     }
 
     public static void setPlView(Scene plViewScene) {
-        plView = plViewScene;
+        Main.plView = plViewScene;
     }
 
     public static Scene getTemplateView() {
@@ -77,10 +82,34 @@ public class Main extends Application {
     }
 
     public static void setTemplateView(Scene templateViewScene) {
-        templateView = templateViewScene;
+        Main.templateView = templateViewScene;
+    }
+
+    public static Scene getPatternView() {
+        return patternView;
+    }
+
+    public static void setPatternView(Scene patternView) {
+        Main.patternView = patternView;
     }
 
     public static TemplateFactory getTemplateFactory() {
         return templateFactory;
+    }
+
+    public static PatternLanguage getPl() {
+        return pl;
+    }
+
+    public static void setPl(PatternLanguage pl) {
+        Main.pl = pl;
+    }
+
+    public static Pattern getCurrentPattern() {
+        return currentPattern;
+    }
+
+    public static void setCurrentPattern(Pattern currentPattern) {
+        Main.currentPattern = currentPattern;
     }
 }
