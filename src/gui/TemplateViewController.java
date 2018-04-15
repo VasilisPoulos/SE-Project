@@ -93,7 +93,7 @@ public class TemplateViewController {
     }
 
     /**
-     * TODO
+     * Handles the click on a Button representing a pattern, and sets an instance variable to that pattern
      * @param event the button click
      */
     @FXML
@@ -103,6 +103,12 @@ public class TemplateViewController {
 
     }
 
+    /**
+     * Handles the click on the create Button, calling notifyDefault() when no template was picked,
+     *  and switchToPatternView() otherwise
+     * @param event the click on the Create button
+     */
+    @FXML
     public void handleCreate(ActionEvent event) {
         /* Get the current window into a variable */
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -115,6 +121,10 @@ public class TemplateViewController {
         }
     }
 
+    /**
+     * Changes to the Pattern Language view
+     * @param window the current window
+     */
     public void switchToPatternView(Stage window) {
 
         Main.getPl().add(Main.getTemplateFactory().createTemplate(templateId));
@@ -122,6 +132,10 @@ public class TemplateViewController {
         c.renderPLView(window);
     }
 
+    /**
+     * Spawns a confirmation dialog, asking the user if they want to continue using the default template
+     * @param window the current window
+     */
     public void notifyDefault(Stage window) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation Dialog");
@@ -130,6 +144,7 @@ public class TemplateViewController {
 
         Optional<ButtonType> result = alert.showAndWait();
 
+        /* Set the template to the default one and call switchToPatternView() if user clicks on OK */
         if (result.isPresent() && result.get() == ButtonType.OK){
             alert.close();
             this.templateId = "Micro-Pattern";

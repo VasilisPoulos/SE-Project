@@ -36,7 +36,7 @@ public class PLViewController {
      * @param title the name of the Pattern Language
      */
     @FXML
-    protected void setTitle(String title) {
+    private void setTitle(String title) {
         plTitle.setText(title);
     }
 
@@ -46,7 +46,7 @@ public class PLViewController {
      * @throws Exception on failure to load the fxml file
      */
     @FXML
-    void handleAddPattern(ActionEvent event) throws Exception{
+    void handleAddPattern(ActionEvent event) throws Exception {
         /* Get the current window into a variable */
         Stage window = Main.getWindow();
 
@@ -82,24 +82,32 @@ public class PLViewController {
     }
 
 
+    /** Populates the Pane container with a GridPane holding a button for each pattern in the pattern language */
     public void populatePatterns() {
+
+        /* ArrayList holding the patterns in the pattern language */
         ArrayList<PatternComponent> patternsList = Main.getPl().getComponentsList();
+
+        /* Dictate the number of columns there should be in the GridPane */
         int size = patternsList.size();
-        int gpRows;
+        int numCols = 3;
         int gpCols;
-        if (size/3 == 0) {
+        if (size/numCols == 0) {
             gpCols = size;
-            gpRows = 1;
         }
         else {
-            gpRows = (size / 3) + 1;
-            gpCols = 3;
+            gpCols = numCols;
         }
-        GridPane gp = new GridPane();
 
+        /* Initialize row and column index to zero */
         int row = 0;
         int col = 0;
 
+        /* Create the GridPane which will hold the Buttons (patterns) */
+        GridPane gp = new GridPane();
+
+
+        /* Iterate through the list of patterns in the pattern language */
         for (PatternComponent pattern: patternsList) {
 
             if (col >= gpCols) {
@@ -107,6 +115,7 @@ public class PLViewController {
                 row++;
             }
 
+            /* Pattern name is used as the Button name & id */
             String name = pattern.getName();
             Button btn = new Button(name);                      // Create the Button
             btn.setId(name);                                    // Set button id to its title
@@ -115,25 +124,34 @@ public class PLViewController {
             btn.setPadding(new Insets(10));
 
             gp.add(btn, col, row);
-            gp.setVgap(20);
-            gp.setHgap(20);
-            gp.setHalignment(btn, HPos.CENTER);
+            GridPane.setHalignment(btn, HPos.CENTER);
             col++;
         }
+        gp.setVgap(20);
+        gp.setHgap(20);
 
         patternContainer.getChildren().clear(); //remove previous GridPane
         patternContainer.getChildren().add(gp); // add the GridPane
     }
 
+    /**
+     * Handles the click on a button representing a pattern, setting an instance variable
+     * @param event the button click
+     */
     private void handlePickPattern(ActionEvent event) {
-
         Control src = (Control)event.getSource();
         this.selectedPatternId = src.getId();
-
     }
 
+    /**
+     * Handles the click on the Delete button, tries to delete the pattern from the pattern language
+     * Shows an error if no pattern is picked
+     * Shows a warning before deleting
+     * @param event the button click
+     */
     public void handleDeletePattern(ActionEvent event) {
-        if (this.selectedPatternId == null || this.selectedPatternId.isEmpty() || this.selectedPatternId == "null") {
+        /* Show error dialog if no pattern is picked for removal */
+        if (this.selectedPatternId == null || this.selectedPatternId.isEmpty()) {
 
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
@@ -141,6 +159,7 @@ public class PLViewController {
             alert.setContentText("Please select a pattern to remove.");
             alert.showAndWait();
         }
+        /* Show a warning dialog before deleting the pattern */
         else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning Dialog");
@@ -162,13 +181,14 @@ public class PLViewController {
     }
 
     /**
-     *
-     * @param event
-     * @throws Exception
+     * Handles the click on the Edit button, tries to enter the PatternView scene
+     * @param event the button click
+     * @throws Exception on failure to load the FXML file
      */
     public void handleEditPattern(ActionEvent event) throws Exception {
 
-        if (this.selectedPatternId == null || this.selectedPatternId.isEmpty() || this.selectedPatternId == "null") {
+        /* Show an error dialog if no pattern was chosen for editing */
+        if (this.selectedPatternId == null || this.selectedPatternId.isEmpty()) {
 
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Information Dialog");
@@ -177,6 +197,7 @@ public class PLViewController {
             alert.showAndWait();
         }
         else {
+            /* hold the pattern the user wants to edit in local variable and set it in the static variable */
             Pattern pattern = Main.getTemplateFactory().getTemplatesList().get(this.selectedPatternId);
             Main.setCurrentPattern(pattern);
 
@@ -201,6 +222,10 @@ public class PLViewController {
         }
     }
 
+    /**
+     * Renders the Pattern Language scene
+     * @param window the window we want to change into the PLView scene
+     */
     public void renderPLView(Stage window) {
 
         this.setTitle(Main.getPl().getName());
