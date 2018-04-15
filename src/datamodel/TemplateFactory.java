@@ -1,21 +1,24 @@
 package datamodel;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class TemplateFactory
 {
-
+    /* Map holding Pattern prototypes and mapping them to their names */
     private HashMap<String, Pattern> templatesList;
 
     /**
+     * Constructor
      *
+     * Initializes patterns by creating their names and their individual parts,
+     * then uses them as prototypes for the templates list, mapping each pattern to its name
      */
     public TemplateFactory()
     {
-
+        /* Initialize map of templates */
         templatesList = new HashMap<>();
 
+        /* Create the prototype Patterns and add to them each part/section */
         Pattern micro = new Pattern("Micro-Pattern");
         micro.add(new PatternPart("Name", "What shall this pattern be called by practitioners?"));
         micro.add(new PatternPart("Template", "Which template is followed for the pattern specification ?"));
@@ -70,6 +73,7 @@ public class TemplateFactory
         sop.add(new PatternPart("Known Uses", "What are real−world systems using this pattern? "));
         sop.add(new PatternPart("Consequences", " What are the benefits and liabilities of using this pattern? "));
 
+        /* Add the prototypes to the list */
         templatesList.put(micro.getName(), micro);
         templatesList.put(inductive.getName(), inductive);
         templatesList.put(deductive.getName(), deductive);
@@ -79,7 +83,7 @@ public class TemplateFactory
     }
 
     /**
-     *
+     * Clones a pattern prototype (a template) and returns the copy
      *
      * @param templateName name of the template
      * @return Pattern based on template prototype
@@ -89,6 +93,7 @@ public class TemplateFactory
         return templatesList.get(templateName).clone();
     }
 
+    /** Getter for the map of templates */
     public HashMap<String, Pattern> getTemplatesList() {
         return templatesList;
     }

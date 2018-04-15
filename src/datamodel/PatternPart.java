@@ -37,11 +37,11 @@ public class PatternPart extends PatternComponent
         this.contents = contents;
     }
 
-    // TODO: Write contents to output file
-	public void saveContents()
-	{
-		return;
-	}
+//  TODO: Write contents to output file (V2)
+//	public void saveContents()
+//	{
+//		return;
+//	}
 
     /** Return string representation of the pattern part. */
     @Override
