@@ -4,13 +4,18 @@ import datamodel.PatternComponent;
 import javafx.fxml.FXML;
 
 import javafx.event.ActionEvent;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Control;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.transform.Scale;
+import javafx.scene.transform.Transform;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -86,9 +91,10 @@ public class PatternViewController {
 
             /* Format textArea size so it's nice and big */
             contents.setWrapText(true);
-            contents.setMaxSize(300, 200);
+            contents.setMaxSize(300, 100);
             int temp = (contents.getText().length() / contents.getPrefColumnCount()) + 1;
-            contents.setPrefRowCount(temp>4?temp+1:4);
+            contents.setPrefRowCount(
+                    temp>4 ? temp+1 : 4);
 
             HBox.setHgrow(name, Priority.ALWAYS);
 
@@ -100,16 +106,25 @@ public class PatternViewController {
             vbox.getChildren().clear();
             vbox.getChildren().add(name);
             vbox.getChildren().add(contents);
-            vbox.setSpacing(10);
+            vbox.setSpacing(5);
 
             gp.add(vbox, col, row);
+            gp.setHalignment(vbox, HPos.CENTER);
             gp.setHgap(20);
             gp.setVgap(20);
+
             col++;
         }
 
+        gp.setMinSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
+        gp.setMaxSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
+        gp.setPrefSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
+
         pane.getChildren().clear(); //remove previous GridPane
         pane.getChildren().add(gp); // add the GridPane
+//        pane.setMaxHeight(Main.getWindow().getMaxHeight());
+
+
     }
 
 

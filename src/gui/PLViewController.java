@@ -5,7 +5,9 @@ import datamodel.PatternComponent;
 import datamodel.PatternLanguage;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -113,6 +115,9 @@ public class PLViewController {
             btn.setPadding(new Insets(10));
 
             gp.add(btn, col, row);
+            gp.setVgap(20);
+            gp.setHgap(20);
+            gp.setHalignment(btn, HPos.CENTER);
             col++;
         }
 
