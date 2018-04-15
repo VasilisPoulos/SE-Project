@@ -156,31 +156,44 @@ public class PLViewController {
         }
     }
 
-    // TODO
+    /**
+     *
+     * @param event
+     * @throws Exception
+     */
     public void handleEditPattern(ActionEvent event) throws Exception {
 
-        Pattern pattern = Main.getTemplateFactory().getTemplatesList().get(selectedPatternId);
-        System.out.println("ID: " + selectedPatternId + "\n" + pattern.toString());
-        Main.setCurrentPattern(pattern);
+        if (this.selectedPatternId == null || this.selectedPatternId.isEmpty() || this.selectedPatternId == "null") {
 
-        /* Get the current window into a variable */
-        Stage window = Main.getWindow();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText("You did not select a pattern.");
+            alert.setContentText("Please select a pattern to edit.");
+            alert.showAndWait();
+        }
+        else {
+            Pattern pattern = Main.getTemplateFactory().getTemplatesList().get(this.selectedPatternId);
+            Main.setCurrentPattern(pattern);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("patternView.fxml"));
-        Parent patternViewRoot = loader.load();
-        PatternViewController c = loader.getController();
-        c.populatePatternParts();
+            /* Get the current window into a variable */
+            Stage window = Main.getWindow();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("patternView.fxml"));
+            Parent patternViewRoot = loader.load();
+            PatternViewController c = loader.getController();
+            c.populatePatternParts();
 
 
-        Scene patternView = new Scene(patternViewRoot, 800, 600);
-        patternView.setUserData(this);
-        Main.setPatternView(patternView);
+            Scene patternView = new Scene(patternViewRoot, 800, 600);
+            patternView.setUserData(this);
+            Main.setPatternView(patternView);
 
 
-        window.close();
-        window.setTitle("Rocking Machines - Patterns Editor");
-        window.setScene(patternView);
-        window.show();
+            window.close();
+            window.setTitle("Rocking Machines - Patterns Editor");
+            window.setScene(patternView);
+            window.show();
+        }
     }
 
     public void renderPLView(Stage window) {
@@ -188,6 +201,7 @@ public class PLViewController {
         this.setTitle(Main.getPl().getName());
         this.populatePatterns();
 
+        this.selectedPatternId = null;
         /* Close pop-up window and change the window variable to the primaryStage */
         window.close();
         window = Main.getWindow();

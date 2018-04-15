@@ -1,14 +1,15 @@
 package gui;
 
-import datamodel.Pattern;
 import datamodel.PatternComponent;
-import datamodel.PatternPart;
 import javafx.fxml.FXML;
 
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
+import javafx.scene.control.Control;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -21,10 +22,25 @@ public class PatternViewController {
 
     /* Holds the name of each pattern part and the text inside the TextField */
     @FXML
-    HashMap<String, TextField> fields;
+    HashMap<String, TextField> names = new HashMap<>();
+    @FXML
+    HashMap<String, TextArea> contents = new HashMap<>();
 
     public void handleSavePattern(ActionEvent event) {
-        return;
+
+        ArrayList<PatternComponent> partsList = Main.getCurrentPattern().getComponentsList();
+        for (PatternComponent part: partsList) {
+            part.setContents(contents.get(part.getName()).getText());
+            part.setName(names.get(part.getName()).getText());
+        }
+
+        /* Get the current window into a variable */
+        Stage window = Main.getWindow();
+
+        PLViewController c = (PLViewController) Main.getPatternView().getUserData();
+        c.renderPLView(window);
+
+
     }
 
     public void handleCancelPattern(ActionEvent event) {
@@ -51,6 +67,9 @@ public class PatternViewController {
         int row = 0;
         int col = 0;
 
+        this.names.clear();
+        this.contents.clear();
+
         for (PatternComponent part: partsList) {
 
             if (col >= gpCols) {
@@ -58,17 +77,29 @@ public class PatternViewController {
                 row++;
             }
 
-            String name = part.getName();
+            String title = part.getName();
             VBox vbox = new VBox();
 
-            Text text = new Text(name);
-            TextField textField = new TextField(part.getContents());
-            HBox.setHgrow(text, Priority.ALWAYS);
-            HBox.setHgrow(textField, Priority.ALWAYS);
+            TextField name = new TextField(title);
+            TextArea contents = new TextArea(part.getContents());
+            contents.setFont(Font.font("Deja Vu Mono", 12));
+
+            /* Format textArea size so it's nice and big */
+            contents.setWrapText(true);
+            contents.setMaxSize(300, 200);
+            int temp = (contents.getText().length() / contents.getPrefColumnCount()) + 1;
+            contents.setPrefRowCount(temp>4?temp+1:4);
+
+            HBox.setHgrow(name, Priority.ALWAYS);
+
+
+            this.names.put(title, name);
+            this.contents.put(title, contents);
+
 
             vbox.getChildren().clear();
-            vbox.getChildren().add(text);
-            vbox.getChildren().add(textField);
+            vbox.getChildren().add(name);
+            vbox.getChildren().add(contents);
             vbox.setSpacing(10);
 
             gp.add(vbox, col, row);
@@ -76,7 +107,6 @@ public class PatternViewController {
             gp.setVgap(20);
             col++;
         }
-        HBox.setHgrow(gp, Priority.ALWAYS);
 
         pane.getChildren().clear(); //remove previous GridPane
         pane.getChildren().add(gp); // add the GridPane
