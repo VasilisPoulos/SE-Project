@@ -12,7 +12,7 @@ class TemplateFactoryTest {
     }
 
     @org.junit.jupiter.api.Test
-    void shouldCloneDeepCopy() {
+    void shouldMakeCopy() {
 
         TemplateFactory tf = new TemplateFactory();
         PatternComponent newPattern = tf.createTemplate("Micro-Pattern");
@@ -26,7 +26,7 @@ class TemplateFactoryTest {
     }
 
     @org.junit.jupiter.api.Test
-    void shouldCloneDeepCopyOfParts() {
+    void shouldMakeDeepCopy() {
         TemplateFactory tf = new TemplateFactory();
         Pattern newPattern = (Pattern) tf.createTemplate("Micro-Pattern");
 
