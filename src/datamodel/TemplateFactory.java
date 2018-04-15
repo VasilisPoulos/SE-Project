@@ -16,27 +16,23 @@ public class TemplateFactory
 
         templatesList = new HashMap<>();
 
-        // TODO: fix contents
-        Pattern micro = new Pattern("MicroPattern");
+        Pattern micro = new Pattern("Micro-Pattern");
         micro.add(new PatternPart("Name", "What shall this pattern be called by practitioners?"));
-<<<<<<< HEAD
         micro.add(new PatternPart("Template", "Which template is followed for the pattern specification ?"));
         micro.add(new PatternPart("Problem", "What is motivating us to apply this pattern? "));
         micro.add(new PatternPart("Solution", " How do we solve the problem?"));
-=======
         micro.add(new PatternPart("Template", "What shall this pattern be called by practitioners?"));
         micro.add(new PatternPart("Problem", "What shall this pattern be called by practitioners?"));
         micro.add(new PatternPart("Solution", "What shall this pattern be called by practitioners?"));
->>>>>>> origin/master
 
-        Pattern inductive = new Pattern( "InductiveMiniPattern");
+        Pattern inductive = new Pattern( "Inductive Mini-Pattern");
         inductive.add(new PatternPart("Name", "What shall this pattern be called by practitioners?"));
         inductive.add(new PatternPart("Template", "Which template is followed for the pattern specification ? "));
         inductive.add(new PatternPart("Context", " What are the assumed environment or a priori assumptions for applying this pattern?"));
         inductive.add(new PatternPart("Forces", "What are the different design motivations that must be balanced? ?"));
         inductive.add(new PatternPart("Solution", "How do we solve the problem? "));
 
-        Pattern deductive = new Pattern( "DeductiveMiniPattern");
+        Pattern deductive = new Pattern( "Deductive Mini-Pattern");
         deductive.add(new PatternPart("Name", "What shall this pattern be called by practitioners?"));
         deductive.add(new PatternPart("Template", "Which template is followed for the pattern specification ? "));
         deductive.add(new PatternPart("Problem", "  What is motivating us to apply this pattern? "));
@@ -44,7 +40,7 @@ public class TemplateFactory
         deductive.add(new PatternPart("Benefits", " What are the potential positive outcomes of applying this pattern?  "));
         deductive.add(new PatternPart("Consequences", "What are potential shortcomings and consequences of applying this pattern? \n"));
 
-        Pattern gof = new Pattern( "GangOfFourPattern");
+        Pattern gof = new Pattern( "Gang-Of-Four Pattern");
         gof.add(new PatternPart("Name", "What is the pattern called? "));
         gof.add(new PatternPart("Template", " Which template is followed for the pattern specification ?  "));
         gof.add(new PatternPart("Pattern Classification", " Is the pattern creational, structural, or behavioral? "));
@@ -61,7 +57,7 @@ public class TemplateFactory
         gof.add(new PatternPart("Known Uses", " What are some examples of real systems using this pattern? "));
         gof.add(new PatternPart("Related Patterns", " What other patterns from this pattern collection are related to this pattern?"));
 
-        Pattern sop = new Pattern( "System1OfPatternsTemplate");
+        Pattern sop = new Pattern( "System Of Patterns Template");
         sop.add(new PatternPart("Name", "What is the pattern called? "));
         sop.add(new PatternPart("Template", " Which template is followed for the pattern specification ? "));
         sop.add(new PatternPart("Also Known As", " What are other names for this pattern? "));
@@ -77,17 +73,11 @@ public class TemplateFactory
         sop.add(new PatternPart("Known Uses", "What are real−world systems using this pattern? "));
         sop.add(new PatternPart("Consequences", " What are the benefits and liabilities of using this pattern? "));
 
-
-
-
-
-
-        // TODO: Add other templates
-        templatesList.put("MicroPattern", micro);
-        templatesList.put("InductiveMiniPattern", inductive);
-        templatesList.put("DeductiveMiniPattern", deductive);
-        templatesList.put("GangOfFourPattern", gof);
-        templatesList.put("System1OfPatternsTemplate", sop);
+        templatesList.put(micro.getName(), micro);
+        templatesList.put(inductive.getName(), inductive);
+        templatesList.put(deductive.getName(), deductive);
+        templatesList.put(gof.getName(), gof);
+        templatesList.put(sop.getName(), sop);
 
     }
 

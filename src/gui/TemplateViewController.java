@@ -39,6 +39,8 @@ public class TemplateViewController {
             HBox hbox = new HBox();                             // Create the HBox container for the button
             Button btn = new Button(title);                     // Create the Button
             btn.setId(title);                                   // Set button id to its title
+            if (title == "Micro-Pattern")
+                btn.setDefaultButton(true);
             btn.setOnAction((e) -> this.handlePickTemplate(e));  // Set button handler to handlePickTemplate
 
             /* Create left and right regions to center-align the button
@@ -129,13 +131,13 @@ public class TemplateViewController {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation Dialog");
         alert.setHeaderText("You did not select a template for the new pattern.");
-        alert.setContentText("Are you sure you want to use the default template \"MicroPattern?\"");
+        alert.setContentText("Are you sure you want to use the default template \"Micro-Pattern\"?");
 
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK){
             alert.close();
-            this.templateId = "MicroPattern";
+            this.templateId = "Micro-Pattern";
             switchToPatternView(window);
         }
         else {
