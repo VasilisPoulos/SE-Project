@@ -56,7 +56,6 @@ public class PLViewController {
         c.populateTemplates();
 
         Scene templateView = new Scene(templateViewRoot, 800, 600);
-        Main.setTemplateView(templateView);
 
         window.close();
         window.setTitle("Rocking Machines - Patterns Editor");

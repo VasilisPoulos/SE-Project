@@ -12,17 +12,20 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    private static Stage window;                        // For ease of use
+    private static Stage window;                        // The primaryStage
     private static Scene start;                         // Opening scene
-    private static Scene createPlTitle;                 // Popup window for naming new PL
     private static Scene plView;                        // Pattern Language view
-    private static Scene templateView;                  // Template view
     private static Scene patternView;                   // Pattern Edit view
     private static TemplateFactory templateFactory;     // TemplateFactory object used for initialization
     private static PatternLanguage pl;                  // The Pattern Language we're working on
     private static Pattern currentPattern;              // The Pattern we're currently editing
 
 
+    /**
+     * Runs the application, creating a window with the Start scene and running initialize()
+     * @param primaryStage the root Stage object
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         window = primaryStage;
@@ -44,10 +47,14 @@ public class Main extends Application {
         launch(args);
     }
 
-
+    /** Creates a new TemplateFactory object */
     private void initialize() {
         Main.templateFactory = new TemplateFactory();
     }
+
+    /*************************
+     * Getters and Setters   *
+     *************************/
 
     public static Stage getWindow() {
         return window;
@@ -57,32 +64,12 @@ public class Main extends Application {
         return start;
     }
 
-    public static void setStart(Scene startScene) {
-        Main.start = startScene;
-    }
-
-    public static Scene getCreatePltitle() {
-        return createPlTitle;
-    }
-
-    public static void setCreatePltitle(Scene createPlTitleScene) {
-        Main.createPlTitle = createPlTitleScene;
-    }
-
     public static Scene getPlView() {
         return plView;
     }
 
     public static void setPlView(Scene plViewScene) {
         Main.plView = plViewScene;
-    }
-
-    public static Scene getTemplateView() {
-        return templateView;
-    }
-
-    public static void setTemplateView(Scene templateViewScene) {
-        Main.templateView = templateViewScene;
     }
 
     public static Scene getPatternView() {
