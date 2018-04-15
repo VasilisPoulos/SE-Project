@@ -2,12 +2,10 @@ package gui;
 
 import datamodel.Pattern;
 import datamodel.PatternComponent;
-import datamodel.PatternLanguage;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -66,10 +64,9 @@ public class PLViewController {
     /**
      * Returns to the starting scene, so we can change the pattern language
      * @param event the button click
-     * @throws Exception on failure to load fxml file
      */
     @FXML
-    void handleChangePL(ActionEvent event) throws Exception {
+    public void handleChangePL(ActionEvent event) {
 
         /* Get the current window into a variable */
         Stage window = Main.getWindow();
@@ -82,7 +79,7 @@ public class PLViewController {
 
 
     /** Populates the Pane container with a GridPane holding a button for each pattern in the pattern language */
-    public void populatePatterns() {
+    private void populatePatterns() {
 
         /* ArrayList holding the patterns in the pattern language */
         ArrayList<PatternComponent> patternsList = Main.getPl().getComponentsList();
@@ -166,7 +163,7 @@ public class PLViewController {
             alert.setContentText("All patterns named " + this.selectedPatternId + " will be deleted!");
 
             Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK) {
+            if (result.isPresent() && result.get() == ButtonType.OK) {
                 Main.getPl().remove(this.selectedPatternId);
                 this.selectedPatternId = null;
                 this.renderPLView((Stage) ((Node)event.getSource()).getScene().getWindow());

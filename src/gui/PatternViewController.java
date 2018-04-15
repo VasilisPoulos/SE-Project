@@ -52,7 +52,7 @@ public class PatternViewController {
 
     /**
      * Handles the click on the Cancel button, leaving the Pattern Edit scene
-     * @param event
+     * @param event the click on the cancel button
      */
     public void handleCancelPattern(ActionEvent event) {
         /* Get the current window into a variable */

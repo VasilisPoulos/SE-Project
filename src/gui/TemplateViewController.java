@@ -1,6 +1,5 @@
 package gui;
 
-import datamodel.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -38,8 +37,8 @@ public class TemplateViewController {
             HBox hbox = new HBox();                             // Create the HBox container for the button
             Button btn = new Button(title);                     // Create the Button
             btn.setId(title);                                   // Set button id to its title
-            if (title == "Micro-Pattern")
-                btn.setDefaultButton(true);
+//            if (title.equals("Micro-Pattern"))
+//                btn.setDefaultButton(true);
             btn.setOnAction((e) -> this.handlePickTemplate(e));  // Set button handler to handlePickTemplate
 
             /* Create left and right regions to center-align the button
@@ -97,7 +96,7 @@ public class TemplateViewController {
      * @param event the button click
      */
     @FXML
-    public void handlePickTemplate(ActionEvent event) {
+    private void handlePickTemplate(ActionEvent event) {
         Control src = (Control)event.getSource();
         this.templateId = src.getId();
 
@@ -125,7 +124,7 @@ public class TemplateViewController {
      * Changes to the Pattern Language view
      * @param window the current window
      */
-    public void switchToPatternView(Stage window) {
+    private void switchToPatternView(Stage window) {
 
         Main.getPl().add(Main.getTemplateFactory().createTemplate(templateId));
         PLViewController c = (PLViewController) Main.getPlView().getUserData();
@@ -136,7 +135,7 @@ public class TemplateViewController {
      * Spawns a confirmation dialog, asking the user if they want to continue using the default template
      * @param window the current window
      */
-    public void notifyDefault(Stage window) {
+    private void notifyDefault(Stage window) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation Dialog");
         alert.setHeaderText("You did not select a template for the new pattern.");
