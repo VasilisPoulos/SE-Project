@@ -22,7 +22,28 @@ public class PatternComponent implements Cloneable
         this.name = name;
     }
 
-	//TODO: Probably empty in order to be implemented in subclass.
+	/** @return	components name */
+	public String getName() {
+		return this.name;
+	}
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getContents() {return null;}
+
+    public void setContents(String contents) {}
+
+    public void setContents(String contents, int x){}
+
+    //TODO: Should write this.name to file
+    public void saveName(){}
+
+    //TODO: Should write contents to file
+    public void saveContents() {}
+
+    //TODO: Probably empty in order to be implemented in subclass.
 	public void add(PatternComponent component){}
 
     //TODO: Probably empty in order to be implemented in subclass.
@@ -50,30 +71,6 @@ public class PatternComponent implements Cloneable
 			throw new AssertionError();
 		}
 	}
-
-	 /** @return	components name */
-	public String getName() {
-        return this.name;
-    }
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getContents() {return null;}
-
-    public void setContents(String contents) {}
-    public void setContents(String contents, int x){}
-
-
-
-    //TODO: Should write this.name to file
-    public void saveName()
-    {
-    }
-
-    //TODO: Should write contents to file
-    public void saveContents() {}
 
     // TODO
     public PatternComponent getChild(){

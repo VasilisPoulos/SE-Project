@@ -10,7 +10,16 @@ public class Pattern extends PatternComposite
      * @param name Name of the composite
      */
     public Pattern(String name) {
+
         super(name);
+    }
+
+    //TODO: needs deep copy, iterate through all the items and clone them with
+    //TODO: super.clone() method. (Clone name , array and its objects).
+    @Override
+    public PatternComponent clone()
+    {
+        return super.clone();
     }
 
     /*
