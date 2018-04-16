@@ -60,9 +60,10 @@ public class PatternComponent implements Cloneable
 		this.name = name;
 	}
 
-    public String getContents() {return null;}
+	public String getContents() {return null;}
 
     public void setContents(String contents) {}
+    public void setContents(String contents, int x){}
 
 
 

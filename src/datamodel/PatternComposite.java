@@ -44,12 +44,6 @@ public abstract class PatternComposite extends PatternComponent
 
     }
 
-    //TODO
-    @Override
-    public String toString() {
-        return "PatternComposite{}";
-    }
-
 
     public ArrayList<PatternComponent> getComponentsList() {
         return componentsList;
@@ -78,6 +72,12 @@ public abstract class PatternComposite extends PatternComponent
         return super.getChild();
     }
 
-    //TODO: will be implemented in Release 2.0
+    @Override
+    public String toString() {
+        return "PatternComposite{" +
+                "componentsList=" + componentsList +
+                '}';
+    }
+//TODO: will be implemented in Release 2.0
     //public abstract void decorateComponents(DecoratorAbstractFactory decoratorFactory);
 }
