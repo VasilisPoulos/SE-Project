@@ -44,28 +44,12 @@ public abstract class PatternComposite extends PatternComponent
 
     }
 
-
     public ArrayList<PatternComponent> getComponentsList() {
         return componentsList;
     }
 
-    //TODO: needs deep copy, iterate through all the items and clone them with
-    //TODO: super.clone() method. (Clone name , array and its objects).
-    @Override
-    public PatternComponent clone()
-    {
-        return super.clone();
-    }
-
-    //TODO: save to file
-    @Override
-    public void saveContents() {
-        super.saveContents();
-    }
-
-    public void setComponentsList(ArrayList<PatternComponent> componentsList) {
-        this.componentsList = componentsList;
-    }
+    //TODO: will be implemented in Release 2.0
+    //public abstract void decorateComponents(DecoratorAbstractFactory decoratorFactory);
 
     @Override
     public PatternComponent getChild() {
@@ -80,6 +64,4 @@ public abstract class PatternComposite extends PatternComponent
         }
         return list;
     }
-//TODO: will be implemented in Release 2.0
-    //public abstract void decorateComponents(DecoratorAbstractFactory decoratorFactory);
 }
