@@ -74,9 +74,11 @@ public abstract class PatternComposite extends PatternComponent
 
     @Override
     public String toString() {
-        return "PatternComposite{" +
-                "componentsList=" + componentsList +
-                '}';
+        String list="";
+        for(int i=0;i<componentsList.size();i++){
+            list=componentsList.get(i).toString();
+        }
+        return list;
     }
 //TODO: will be implemented in Release 2.0
     //public abstract void decorateComponents(DecoratorAbstractFactory decoratorFactory);
