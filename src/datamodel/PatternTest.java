@@ -61,8 +61,14 @@ class PatternTestS{
         System.out.println("Last iteration");
 
         System.out.println("\n");
+        newPattern.componentsList.get(1).setName("try");
         System.out.println(newPattern.getName());
         for (PatternComponent p : newPattern.componentsList) {
+            System.out.println(p.getName());
+        }
+
+        System.out.println(clone.getName());
+        for (PatternComponent p : clone.componentsList) {
             System.out.println(p.getName());
         }
     }
