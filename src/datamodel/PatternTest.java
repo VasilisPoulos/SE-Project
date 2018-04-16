@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PatternTest {
+class PatternTestS{
 
     /*
     @org.junit.jupiter.api.Test
@@ -29,33 +29,40 @@ class PatternTest {
      * If original components name changes, copy's name should stay
      * the same
      */
-    @org.junit.jupiter.api.Test
+    @Test
     void shouldClone() {
-        ArrayList<PatternComponent> newPatternList;
-        ArrayList<PatternComponent> cloneList;
 
         Pattern newPattern = new Pattern("newPattern");
+
+
+        PatternPart comp1 = new PatternPart("comp1", "");
+        newPattern.add(comp1);
+        PatternPart comp2 = new PatternPart("comp2", "");
+        newPattern.add(comp2);
         Pattern clone = newPattern.clone();
         assertNotSame(newPattern, clone); //not the Same Object
 
-        newPatternList = newPattern.getComponentsList();
-        PatternComponent comp1 = new PatternComponent("comp1");
-        newPattern.add(comp1);
-        PatternComponent comp2 = new PatternComponent("comp2");
-        newPattern.add(comp2);
-        for (PatternComponent p : newPatternList) {
+        System.out.println(newPattern.getName());
+        for (PatternComponent p : newPattern.componentsList) {
             System.out.println(p.getName());
         }
 
-        PatternComponent comp3 = new PatternComponent("comp3");
+        System.out.println("\n");
+        clone.setName("Cloned");
+        PatternPart comp3 = new PatternPart("comp3", "");
         clone.add(comp3);
-        cloneList = clone.getComponentsList();
-        for (PatternComponent p : cloneList) {
+
+        System.out.println(clone.getName());
+        for (PatternComponent p : clone.componentsList) {
             System.out.println(p.getName());
         }
 
+        System.out.println("\n");
         System.out.println("Last iteration");
-        for (PatternComponent p : newPatternList) {
+
+        System.out.println("\n");
+        System.out.println(newPattern.getName());
+        for (PatternComponent p : newPattern.componentsList) {
             System.out.println(p.getName());
         }
     }

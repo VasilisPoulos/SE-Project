@@ -1,5 +1,9 @@
 package datamodel;
 
+import gui.Main;
+
+import java.util.ArrayList;
+
 public class Pattern extends PatternComposite implements Cloneable
 {
 
@@ -29,13 +33,18 @@ public class Pattern extends PatternComposite implements Cloneable
     @Override
     public Pattern clone()
     {
-        try
-        {
-            return (Pattern) super.clone();
+        Pattern newPattern = new Pattern(this.getName());
+        //newPattern.componentsList = new ArrayList<>();
+        for (PatternComponent p : this.componentsList){
+            newPattern.componentsList.add(new PatternPart(p.getName(),p.getContents()));
         }
+        return newPattern;
+
+        /*
         catch(CloneNotSupportedException e){
             throw new AssertionError();
         }
+        */
     }
 
     /*
@@ -45,3 +54,5 @@ public class Pattern extends PatternComposite implements Cloneable
     //@Override
     //public void decorateComponents(DecoratorAbstractFactory decoratorFactory){}
 }
+
+
