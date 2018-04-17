@@ -62,13 +62,15 @@ public class PatternViewController {
         }
         if (index == -1)
             throw new Exception("Error: Pattern not found in the pattern language. Please report this incident.");
-        PatternComponent pat = Main.getPl().getComponentsList().get(index);
+        PatternComponent pat = list.get(index);
 
         /* Find out if the new pattern name already exists */
         Boolean flag = true;
         for (PatternComponent i: Main.getPl().getComponentsList()) {
 
             if (i.getName().equals(newName)) {
+                if (i.equals(list.get(index)))
+                    continue;
                 flag = false;
                 break;
             }
