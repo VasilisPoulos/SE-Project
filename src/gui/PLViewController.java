@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,14 +14,15 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Control;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
 import java.util.ArrayList;
 import java.util.Optional;
+
+import static java.lang.Integer.MAX_VALUE;
 
 public class PLViewController {
 
@@ -117,6 +119,11 @@ public class PLViewController {
             btn.setId(name);                                    // Set button id to its title
             btn.setOnAction((e) -> this.handlePickPattern(e));  // Set button handler to handlePickTemplate
 
+            /* Set the buttons to be the same size */
+            btn.setMaxWidth(MAX_VALUE);
+            btn.setPrefSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
+            HBox.setHgrow(btn, Priority.ALWAYS);
+            btn.setAlignment(Pos.CENTER);
             btn.setPadding(new Insets(10));
 
             gp.add(btn, col, row);

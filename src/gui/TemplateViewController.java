@@ -16,6 +16,8 @@ import javafx.stage.Stage;
 
 import java.util.*;
 
+import static java.lang.Integer.MAX_VALUE;
+
 public class TemplateViewController {
 
     @FXML private VBox templateContainer;
@@ -27,47 +29,23 @@ public class TemplateViewController {
     @FXML
     public void populateTemplates() {
 
-        List<HBox> buttonList = new ArrayList<>();              // Collection to hold created Button objects (HBox for styling)
+        List<Button> buttonList = new ArrayList<>();              // Collection to hold created Button objects
 
         Set templatesSet = Main.getTemplateFactory().getTemplatesList().keySet(); // Get all names so we can put them on buttons
         for (Object name: templatesSet) {
 
             String title = name.toString();
-            HBox hbox = new HBox();                             // Create the HBox container for the button
             Button btn = new Button(title);                     // Create the Button
             btn.setId(title);                                   // Set button id to its title
-//            if (title.equals("Micro-Pattern"))
-//                btn.setDefaultButton(true);
-            btn.setOnAction((e) -> this.handlePickTemplate(e));  // Set button handler to handlePickTemplate
+            btn.setOnAction((e) -> this.handlePickTemplate(e)); // Set button handler to handlePickTemplate
 
-            /* Create left and right regions to center-align the button
-             * and set their attributes so that they are dynamically set
-             */
-            Region regionLeft = new Region();
-            Region regionRight = new Region();
-
-            HBox.setHgrow(hbox, Priority.ALWAYS);
-            HBox.setHgrow(regionLeft, Priority.ALWAYS);
-            HBox.setHgrow(regionRight, Priority.ALWAYS);
-
-            regionLeft.setMinSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
-            regionRight.setMinSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
-            regionLeft.setMaxSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
-            regionRight.setMaxSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
-
-            regionLeft.setPrefSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
-            regionRight.setPrefSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
-            hbox.setMaxSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
-
+            /* Make buttons the same size */
+            btn.setMaxWidth(MAX_VALUE);
+            HBox.setHgrow(btn, Priority.ALWAYS);
             btn.setPadding(new Insets(10));
 
-            /* Add the button and regions to the HBox */
-            hbox.getChildren().add(regionLeft);
-            hbox.getChildren().add(btn);
-            hbox.getChildren().add(regionRight);
-
-            /* Finally, add the hbox containing the button to the list */
-            buttonList.add(hbox);
+            /* Finally, add the button to the list */
+            buttonList.add(btn);
         }
 
 
