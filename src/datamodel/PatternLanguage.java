@@ -5,8 +5,9 @@ public class PatternLanguage extends PatternComposite
     private static Integer plCount = 0;
 
     /**
-     * @constructor
      * Overloaded constructor with default parameters
+     *
+     * @param name Pattern Language's name
      */
     public PatternLanguage(String name)
     {

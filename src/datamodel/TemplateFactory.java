@@ -51,7 +51,7 @@ public class TemplateFactory
         gof.add(new PatternPart("Structure", "Which are the classes of the objects in this pattern?"));
         gof.add(new PatternPart("Participants", " What are the objects that participate in this pattern? "));
         gof.add(new PatternPart("Collaborations", " How do these objects interoperate? "));
-        gof.add(new PatternPart("Consequences", " What are the trade−offs of using this pattern? "));
+        gof.add(new PatternPart("Consequences", " What are the trade-offs of using this pattern? "));
         gof.add(new PatternPart("Implementation", "Which techniques or issues arise in applying this pattern? "));
         gof.add(new PatternPart("Sample Code", "What is an example of the pattern in source code?"));
         gof.add(new PatternPart("Known Uses", " What are some examples of real systems using this pattern? "));
@@ -70,7 +70,7 @@ public class TemplateFactory
         sop.add(new PatternPart("Implementation", "What are some guidelines for implementing this pattern? "));
         sop.add(new PatternPart("Example Resolved", "Show how the previous example is resolved using the pattern"));
         sop.add(new PatternPart("Variants", "What are important variations of this pattern? "));
-        sop.add(new PatternPart("Known Uses", "What are real−world systems using this pattern? "));
+        sop.add(new PatternPart("Known Uses", "What are real-world systems using this pattern? "));
         sop.add(new PatternPart("Consequences", " What are the benefits and liabilities of using this pattern? "));
 
         /* Add the prototypes to the list */
@@ -93,7 +93,11 @@ public class TemplateFactory
         return templatesList.get(templateName).clone();
     }
 
-    /** Getter for the map of templates */
+    /**
+     * Getter for the map of templates
+     *
+     * @return the template list
+     */
     public HashMap<String, Pattern> getTemplatesList() {
         return templatesList;
     }

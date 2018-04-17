@@ -18,15 +18,13 @@ public class Pattern extends PatternComposite implements Cloneable
         super(name);
     }
 
-    //TODO: needs deep copy, iterate through all the items and clone them with
-    //TODO: super.clone() method. (Clone name , array and its objects).
     /**
-     * Creates a clone of a PatternComponent object.
-     *     This is a Deep copy of this object because name is of type
-     *     String which is immutable.
-     *
-     * I think it is best to use copy constructors or factory methods
-     * instead of overriding clone().
+     * Creates a clone of a PatternComponent object (deep copy).
+     * <p>
+     *      Note :  There is a secondary implementation overriding clone() method of Object class
+     *              I think it is better to use copy constructors or factory methods
+     *              instead of overriding clone().
+     * </p>
      *
      * @return PatternComponent clone.
      */
@@ -39,12 +37,6 @@ public class Pattern extends PatternComposite implements Cloneable
             newPattern.componentsList.add(new PatternPart(p.getName(),p.getContents()));
         }
         return newPattern;
-
-        /*
-        catch(CloneNotSupportedException e){
-            throw new AssertionError();
-        }
-        */
     }
 
     /*

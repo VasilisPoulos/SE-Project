@@ -24,7 +24,6 @@ public class Main extends Application {
     /**
      * Runs the application, creating a window with the Start scene and running initialize()
      * @param primaryStage the root Stage object
-     * @throws Exception
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -56,6 +55,10 @@ public class Main extends Application {
      * Getters and Setters   *
      *************************/
 
+    /**
+     *
+     * @return window
+     */
     public static Stage getWindow() {
         return window;
     }
