@@ -179,7 +179,7 @@ public class PLViewController {
     /**
      * Handles the click on the Edit button, tries to enter the PatternView scene
      * @param event the button click
-     * @throws Exception on failure to load the FXML file
+     * @throws Exception on failure to load the FXML file or failure to find the pattern in the Pattern Language
      */
     public void handleEditPattern(ActionEvent event) throws Exception {
 
@@ -193,9 +193,19 @@ public class PLViewController {
             alert.showAndWait();
         }
         else {
-            /* hold the pattern the user wants to edit in local variable and set it in the static variable */
-            Pattern pattern = Main.getTemplateFactory().getTemplatesList().get(this.selectedPatternId);
-            Main.setCurrentPattern(pattern);
+            /* hold the pattern the user wants to edit in local variable and set it in the static variable
+             * if the pattern is not found (unexpected behaviour), throw an exception
+             */
+            Boolean flag = true;
+            for (PatternComponent i: Main.getPl().getComponentsList()) {
+                if (i.getName().equals(this.selectedPatternId)) {
+                    Main.setCurrentPattern((Pattern) i);
+                    flag = false;
+                }
+            }
+            if (flag) {
+                throw new Exception("Could not find pattern. Unexpected behaviour. Please report this issue.");
+            }
 
             /* Get the current window into a variable */
             Stage window = Main.getWindow();
