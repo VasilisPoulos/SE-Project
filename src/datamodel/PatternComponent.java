@@ -7,10 +7,6 @@ package datamodel;
  *	   |
  *	   |    "Trivial" typically refers to an implementation that demonstrates
  *	   |    the relevant functionality and no more.
- *	
- *	Random notes on packages:
- * 	CreatePackage-Compile  	javac -d . demo.java
- *	Run						java mypack.demo
  */
 
 public class PatternComponent implements Cloneable
@@ -22,7 +18,9 @@ public class PatternComponent implements Cloneable
         this.name = name;
     }
 
-	/** @return	components name */
+	/**
+     * @return	components name
+     */
 	public String getName() {
 		return this.name;
 	}
@@ -35,21 +33,20 @@ public class PatternComponent implements Cloneable
 
     public void setContents(String contents) {}
 
-    public void setContents(String contents, int x){}
+    //public void setContents(String contents, int x){}
 
-    //TODO: Should write this.name to file
-    public void saveName(){}
+    //TODO: Should write this.name to file (V2)
+    //public void saveName(){}
 
-    //TODO: Should write contents to file
-    public void saveContents() {}
+    //TODO: Should write contents to file (V2)
+    //public void saveContents() {}
 
-    //TODO: Probably empty in order to be implemented in subclass.
+
 	public void add(PatternComponent component){}
 
-    //TODO: Probably empty in order to be implemented in subclass.
-	public void remove(){}
 
-    // TODO
+	//public void remove(){}
+
     public PatternComponent getChild(){
         return new PatternComponent("");
     }

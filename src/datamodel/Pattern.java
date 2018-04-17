@@ -1,16 +1,15 @@
 package datamodel;
 
-import gui.Main;
-
-import java.util.ArrayList;
-
 public class Pattern extends PatternComposite implements Cloneable
 {
 
     /**
      * Calling parent constructor.
-     * TODO: A pattern is a list of PatternPart objects with specific titles (which are dictated by the template)!
-     * TODO: and descriptions. You can find those in one of the provided pdf docs
+     * <p>
+     *      TODO: A pattern is a list of PatternPart objects with specific titles (which are dictated by the template)!
+     *      TODO: and descriptions. You can find those in one of the provided pdf docs
+     * </p>
+     * 
      * @param name Name of the composite
      */
     public Pattern(String name) {
@@ -39,10 +38,7 @@ public class Pattern extends PatternComposite implements Cloneable
         return newPattern;
     }
 
-    /*
-     * Must be implemented
-     * @param decoratorFactory
-     */
+    //TODO: (V2)
     //@Override
     //public void decorateComponents(DecoratorAbstractFactory decoratorFactory){}
 }

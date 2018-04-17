@@ -1,7 +1,6 @@
 package datamodel;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public abstract class PatternComposite extends PatternComponent
 {
@@ -15,6 +14,7 @@ public abstract class PatternComposite extends PatternComponent
 
     /**
      * Calling parent constructor, initializing array.
+     *
      * @param name Name of the composite
      */
     public PatternComposite(String name)
