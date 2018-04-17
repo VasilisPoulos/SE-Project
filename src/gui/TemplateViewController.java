@@ -29,7 +29,6 @@ public class TemplateViewController {
 
         List<HBox> buttonList = new ArrayList<>();              // Collection to hold created Button objects (HBox for styling)
 
-        //TODO: get a hashmap from templateFactory and iterate
         Set templatesSet = Main.getTemplateFactory().getTemplatesList().keySet(); // Get all names so we can put them on buttons
         for (Object name: templatesSet) {
 

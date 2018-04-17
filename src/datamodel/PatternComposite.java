@@ -6,6 +6,8 @@ import java.util.Iterator;
 public abstract class PatternComposite extends PatternComponent
 {
 
+    private Integer count;      // so no two patters are created with the same name
+
     /**
      * ArrayList of components.
      */
@@ -18,7 +20,8 @@ public abstract class PatternComposite extends PatternComponent
     public PatternComposite(String name)
     {
         super(name);
-        componentsList = new ArrayList<>();
+        this.count = 0;
+        this.componentsList = new ArrayList<>();
     }
 
     /**
@@ -29,6 +32,12 @@ public abstract class PatternComposite extends PatternComponent
     @Override
     public void add(PatternComponent component)
     {
+        for (PatternComponent i: this.componentsList) {
+            if (i.getName().equals(component.getName())) {
+                this.count++;
+                component.setName(component.getName() + "-" + Integer.toString(this.count));
+            }
+        }
         this.componentsList.add(component);
     }
 
