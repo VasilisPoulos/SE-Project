@@ -5,6 +5,9 @@ import javafx.fxml.FXML;
 
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
@@ -19,6 +22,8 @@ public class PatternViewController {
     /* The container in which we add the Pattern Fields */
     @FXML private Pane pane;
 
+    @FXML private TextField patternTitleInput;
+
     /* Maps the name of the pattern part to the TextField corresponding to it */
     @FXML private HashMap<String, TextField> names = new HashMap<>();
 
@@ -26,11 +31,13 @@ public class PatternViewController {
     @FXML private HashMap<String, TextArea> contents = new HashMap<>();
 
     /**
-     * Handles the click on the Save button, updating the name and content of each pattern part corresponding to the
-     *  pattern currently being edited
+     * Handles the click on the Save button, updating the name of the pattern, as well as
+     * the name and content of each pattern part corresponding to the pattern currently being edited
      * @param event the click on the save button
+     * @throws Exception on failure to find the pattern in the pattern language
      */
-    public void handleSavePattern(ActionEvent event) {
+    public void handleSavePattern(ActionEvent event) throws Exception {
+
 
         /* Hold each pattern part/section into an ArrayList */
         ArrayList<PatternComponent> partsList = Main.getCurrentPattern().getComponentsList();
@@ -39,6 +46,47 @@ public class PatternViewController {
             part.setContents(contents.get(part.getName()).getText());
             part.setName(names.get(part.getName()).getText());
         }
+
+        String newName = this.patternTitleInput.getText();
+
+        /*
+         * Update pattern name according to its corresponding user input field
+         * Search for the pattern in the pattern language and tag it's index
+         * Then check if the new name already exists in the pattern language
+         */
+        int index = -1;
+        ArrayList<PatternComponent> list = Main.getPl().getComponentsList();
+        for (int i=0; i<list.size(); i++) {
+            if (list.get(i).getName().equals(Main.getCurrentPattern().getName()))
+                index = i;
+        }
+        if (index == -1)
+            throw new Exception("Error: Pattern not found in the pattern language. Please report this incident.");
+        PatternComponent pat = Main.getPl().getComponentsList().get(index);
+
+        /* Find out if the new pattern name already exists */
+        Boolean flag = true;
+        for (PatternComponent i: Main.getPl().getComponentsList()) {
+
+            if (i.getName().equals(newName)) {
+                flag = false;
+                break;
+            }
+
+        }
+
+        /* Handle the new pattern name */
+        if (flag)
+            pat.setName(newName);
+        else {
+            /* Show error dialog if pattern name already exists */
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("There is already a pattern named \"" + newName + "\"");
+            alert.setContentText("Please select a different name.");
+            alert.showAndWait();
+        }
+
 
         /* Get the current window into a variable */
         Stage window = Main.getWindow();
@@ -89,12 +137,37 @@ public class PatternViewController {
         int row = 0;
         int col = 0;
 
-        /* Create the GridPane which will hold the parts/sections of the pattern */
+        /* Create the GridPanes which will hold the pattern rename and the parts/sections of the pattern */
         GridPane gp = new GridPane();
 
         /* Clear instance HashMaps, we need to start fresh */
         this.names.clear();
         this.contents.clear();
+
+        /*
+         * Pattern name input field
+         */
+        String patternTitle = Main.getCurrentPattern().getName();
+
+        VBox renameVbox = new VBox();
+        Label rename = new Label("Rename Pattern: ");
+        rename.setPadding(new Insets(10));
+        rename.setFont(Font.font("DejaVu Sans Mono", 18));
+
+        TextField renameInput = new TextField(patternTitle);
+        renameInput.setPadding(new Insets(10));
+        this.patternTitleInput = renameInput;
+
+        GridPane.setHalignment(rename, HPos.CENTER);
+        GridPane.setHalignment(renameInput, HPos.CENTER);
+
+        renameVbox.getChildren().clear();
+        renameVbox.getChildren().addAll(rename, renameInput);
+
+        gp.add(renameVbox, 0, 0, 2, 1);
+
+        row++;
+
 
         /* Iterate through the list of pattern parts/sections */
         for (PatternComponent part: partsList) {
@@ -111,7 +184,7 @@ public class PatternViewController {
             VBox vbox = new VBox();
             TextField name = new TextField(title);
             TextArea contents = new TextArea(part.getContents());
-            contents.setFont(Font.font("Deja Vu Mono", 12));
+            contents.setFont(Font.font("DejaVu Sans Mono", 12));
 
             /* Format textArea size so it's nice and big */
             contents.setWrapText(true);
@@ -134,11 +207,11 @@ public class PatternViewController {
 
             gp.add(vbox, col, row);
             GridPane.setHalignment(vbox, HPos.CENTER);
-            gp.setHgap(20);
-            gp.setVgap(20);
 
             col++;
         }
+        gp.setHgap(20);
+        gp.setVgap(20);
 
         gp.setMinSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
         gp.setMaxSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
@@ -146,7 +219,6 @@ public class PatternViewController {
 
         pane.getChildren().clear(); //remove previous GridPane
         pane.getChildren().add(gp); // add the GridPane
-//        pane.setMaxHeight(Main.getWindow().getMaxHeight());
 
 
     }
