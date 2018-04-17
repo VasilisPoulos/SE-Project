@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PatternTestS{
+class PatternTest{
 
     /*
     @org.junit.jupiter.api.Test
@@ -32,44 +32,36 @@ class PatternTestS{
     @Test
     void shouldClone() {
 
-        Pattern newPattern = new Pattern("newPattern");
+        Pattern oldPattern = new Pattern("newPattern");
+        PatternPart part = new PatternPart("Lorem ipsum");
+        oldPattern.add(part);
+
+        /* Test that clone works correctly */
+        Pattern newPattern = oldPattern.clone();
+        assertEquals(oldPattern.getComponentsList().get(0).getName(), newPattern.getComponentsList().get(0).getName());
+        assertNotEquals(oldPattern.getComponentsList().get(0), newPattern.getComponentsList().get(0));
 
 
-        PatternPart comp1 = new PatternPart("comp1", "");
-        newPattern.add(comp1);
-        PatternPart comp2 = new PatternPart("comp2", "");
-        newPattern.add(comp2);
-        Pattern clone = newPattern.clone();
-        assertNotSame(newPattern, clone); //not the Same Object
+    }
 
-        System.out.println(newPattern.getName());
-        for (PatternComponent p : newPattern.componentsList) {
-            System.out.println(p.getName());
-        }
+    @Test
+    void shouldMakeDeepCopy() {
 
-        System.out.println("\n");
-        clone.setName("Cloned");
-        PatternPart comp3 = new PatternPart("comp3", "");
-        clone.add(comp3);
+        Pattern oldPattern = new Pattern("newPattern");
+        PatternPart part = new PatternPart("Lorem ipsum");
+        oldPattern.add(part);
 
-        System.out.println(clone.getName());
-        for (PatternComponent p : clone.componentsList) {
-            System.out.println(p.getName());
-        }
+        Pattern newPattern = oldPattern.clone();
 
-        System.out.println("\n");
-        System.out.println("Last iteration");
+        /* Test that clone has different components after changing */
+        newPattern.getComponentsList().get(0).setName("dolor sit");
+        assertNotEquals(oldPattern.getComponentsList().get(0), newPattern.getComponentsList().get(0));
 
-        System.out.println("\n");
-        newPattern.componentsList.get(1).setName("try");
-        System.out.println(newPattern.getName());
-        for (PatternComponent p : newPattern.componentsList) {
-            System.out.println(p.getName());
-        }
+        /* Test that clone has same size components before adding */
+        assertEquals(oldPattern.getComponentsList().size(), newPattern.getComponentsList().size());
 
-        System.out.println(clone.getName());
-        for (PatternComponent p : clone.componentsList) {
-            System.out.println(p.getName());
-        }
+        /* Test that clone has different size after adding components */
+        newPattern.add(new PatternPart("amet"));
+        assertNotEquals(oldPattern.getComponentsList().size(), newPattern.getComponentsList().size());
     }
 }

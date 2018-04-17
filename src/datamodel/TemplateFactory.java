@@ -88,7 +88,7 @@ public class TemplateFactory
      * @param templateName name of the template
      * @return Pattern based on template prototype
      */
-    public PatternComponent createTemplate(String templateName)
+    public Pattern createTemplate(String templateName)
     {
         return templatesList.get(templateName).clone();
     }
