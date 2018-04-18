@@ -6,16 +6,15 @@ import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Optional;
 
 public class PatternViewController {
 
@@ -90,11 +89,25 @@ public class PatternViewController {
         }
         else {
             /* Show error dialog if pattern name already exists */
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("There is already a pattern named \"" + newName + "\"");
-            alert.setContentText("Please select a different name.");
-            alert.showAndWait();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText("Name not saved: There is already a pattern named \"" + newName + "\"");
+            alert.setContentText("Would you like to save the rest of the changes?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                /* Hold each pattern part/section into an ArrayList */
+                ArrayList<PatternComponent> partsList = Main.getCurrentPattern().getComponentsList();
+                /* Iterate through the parts/sections and update their fields by using the user input */
+                for (PatternComponent part : partsList) {
+                    part.setContents(contents.get(part.getName()).getText());
+                    part.setName(names.get(part.getName()).getText());
+                }
+            }
+            else {
+                alert.close();
+
+            }
             PLViewController c = (PLViewController) Main.getPatternView().getUserData();
             c.handleEditPattern(event);
         }
