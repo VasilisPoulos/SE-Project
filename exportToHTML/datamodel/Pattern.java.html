@@ -1,0 +1,69 @@
+<html>
+<head>
+<title>Pattern.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #606366; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(204,120,50); }
+.s1 { color: rgb(169,183,198); }
+.s2 { color: rgb(98,151,85); font-style: italic; }
+.s3 { color: rgb(119,183,103); font-style: italic; }
+.s4 { color: rgb(98,151,85); font-weight: bold; font-style: italic; }
+.s5 { color: rgb(128,128,128); }
+</style>
+</head>
+<BODY BGCOLOR="#2b2b2b">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+Pattern.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<a name="l1"><span class="ln">1    </span></a><span class="s0">package </span><span class="s1">datamodel</span><span class="s0">;</span><span class="s1"> 
+<a name="l2"><span class="ln">2    </span></a> 
+<a name="l3"><span class="ln">3    </span></a></span><span class="s0">public class </span><span class="s1">Pattern </span><span class="s0">extends <a href="PatternComposite.java.html">PatternComposite</a> implements </span><span class="s1">Cloneable 
+<a name="l4"><span class="ln">4    </span></a>{ 
+<a name="l5"><span class="ln">5    </span></a> 
+<a name="l6"><span class="ln">6    </span></a>    </span><span class="s2">/** 
+<a name="l7"><span class="ln">7    </span></a>     * Calling parent constructor. 
+<a name="l8"><span class="ln">8    </span></a>     * </span><span class="s3">&lt;p&gt;</span><span class="s2"> 
+<a name="l9"><span class="ln">9    </span></a>     *      TODO: A pattern is a list of PatternPart objects with specific titles (which are dictated by the template)! 
+<a name="l10"><span class="ln">10   </span></a>     *      TODO: and descriptions. You can find those in one of the provided pdf docs 
+<a name="l11"><span class="ln">11   </span></a>     * </span><span class="s3">&lt;/p&gt;</span><span class="s2"> 
+<a name="l12"><span class="ln">12   </span></a>     *  
+<a name="l13"><span class="ln">13   </span></a>     * </span><span class="s4">@param </span><span class="s2">name Name of the composite 
+<a name="l14"><span class="ln">14   </span></a>     */</span><span class="s1"> 
+<a name="l15"><span class="ln">15   </span></a>    </span><span class="s0">public </span><span class="s1">Pattern(String name) { 
+<a name="l16"><span class="ln">16   </span></a> 
+<a name="l17"><span class="ln">17   </span></a>        </span><span class="s0">super</span><span class="s1">(name)</span><span class="s0">;</span><span class="s1"> 
+<a name="l18"><span class="ln">18   </span></a>    } 
+<a name="l19"><span class="ln">19   </span></a> 
+<a name="l20"><span class="ln">20   </span></a>    </span><span class="s2">/** 
+<a name="l21"><span class="ln">21   </span></a>     * Creates a clone of a PatternComponent object (deep copy). 
+<a name="l22"><span class="ln">22   </span></a>     * </span><span class="s3">&lt;p&gt;</span><span class="s2"> 
+<a name="l23"><span class="ln">23   </span></a>     *      Note :  There is a secondary implementation overriding clone() method of Object class 
+<a name="l24"><span class="ln">24   </span></a>     *              I think it is better to use copy constructors or factory methods 
+<a name="l25"><span class="ln">25   </span></a>     *              instead of overriding clone(). 
+<a name="l26"><span class="ln">26   </span></a>     * </span><span class="s3">&lt;/p&gt;</span><span class="s2"> 
+<a name="l27"><span class="ln">27   </span></a>     * 
+<a name="l28"><span class="ln">28   </span></a>     * </span><span class="s4">@return </span><span class="s2">PatternComponent clone. 
+<a name="l29"><span class="ln">29   </span></a>     */</span><span class="s1"> 
+<a name="l30"><span class="ln">30   </span></a>    @Override 
+<a name="l31"><span class="ln">31   </span></a>    </span><span class="s0">public </span><span class="s1">Pattern clone() 
+<a name="l32"><span class="ln">32   </span></a>    { 
+<a name="l33"><span class="ln">33   </span></a>        Pattern newPattern = </span><span class="s0">new </span><span class="s1">Pattern(</span><span class="s0">this</span><span class="s1">.getName())</span><span class="s0">;</span><span class="s1"> 
+<a name="l34"><span class="ln">34   </span></a>        </span><span class="s0">for </span><span class="s1">(<a href="PatternComponent.java.html">PatternComponent</a> p : </span><span class="s0">this</span><span class="s1">.componentsList){ 
+<a name="l35"><span class="ln">35   </span></a>            newPattern.componentsList.add(</span><span class="s0">new <a href="PatternPart.java.html">PatternPart</a></span><span class="s1">(p.getName()</span><span class="s0">,</span><span class="s1">p.getContents()))</span><span class="s0">;</span><span class="s1"> 
+<a name="l36"><span class="ln">36   </span></a>        } 
+<a name="l37"><span class="ln">37   </span></a>        </span><span class="s0">return </span><span class="s1">newPattern</span><span class="s0">;</span><span class="s1"> 
+<a name="l38"><span class="ln">38   </span></a>    } 
+<a name="l39"><span class="ln">39   </span></a> 
+<a name="l40"><span class="ln">40   </span></a>    </span><span class="s5">//TODO: (V2)</span><span class="s1"> 
+<a name="l41"><span class="ln">41   </span></a>    </span><span class="s5">//@Override</span><span class="s1"> 
+<a name="l42"><span class="ln">42   </span></a>    </span><span class="s5">//public void decorateComponents(DecoratorAbstractFactory decoratorFactory){}</span><span class="s1"> 
+<a name="l43"><span class="ln">43   </span></a>} 
+<a name="l44"><span class="ln">44   </span></a> 
+<a name="l45"><span class="ln">45   </span></a> 
+<a name="l46"><span class="ln">46   </span></a></span></pre>
+</body>
+</html>
