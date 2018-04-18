@@ -1,4 +1,5 @@
 package datamodel;
+
 /*
  * 	PatternComponent class that defines the basic methods of the composite
  *	structure, along with default TRIVIAL IMPLEMENTATIONS.
@@ -41,9 +42,7 @@ public class PatternComponent implements Cloneable
     //TODO: Should write contents to file (V2)
     //public void saveContents() {}
 
-
 	public void add(PatternComponent component){}
-
 
 	//public void remove(){}
 

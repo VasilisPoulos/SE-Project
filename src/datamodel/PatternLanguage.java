@@ -4,6 +4,10 @@ public class PatternLanguage extends PatternComposite
 {
     private static Integer plCount = 0;
 
+    public PatternLanguage()
+    {
+        super("Default");
+    }
     /**
      * Overloaded constructor with default parameters
      *

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class PatternCompositeTest {
 
     /**
+     * Acceptance Test [US2]
      * Check if item was added in componentList.
      */
     @org.junit.jupiter.api.Test
@@ -17,6 +18,7 @@ class PatternCompositeTest {
     }
 
     /**
+     * Acceptance Test [US3]
      * Check if item was removed from componentList.
      */
     @org.junit.jupiter.api.Test
