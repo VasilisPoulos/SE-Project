@@ -38,15 +38,6 @@ public class PatternViewController {
      */
     public void handleSavePattern(ActionEvent event) throws Exception {
 
-
-        /* Hold each pattern part/section into an ArrayList */
-        ArrayList<PatternComponent> partsList = Main.getCurrentPattern().getComponentsList();
-        /* Iterate through the parts/sections and update their fields by using the user input */
-        for (PatternComponent part: partsList) {
-            part.setContents(contents.get(part.getName()).getText());
-            part.setName(names.get(part.getName()).getText());
-        }
-
         String newName = this.patternTitleInput.getText();
 
         /*
@@ -78,8 +69,25 @@ public class PatternViewController {
         }
 
         /* Handle the new pattern name */
-        if (flag)
+        if (flag) {
             pat.setName(newName);
+
+
+            /* Hold each pattern part/section into an ArrayList */
+            ArrayList<PatternComponent> partsList = Main.getCurrentPattern().getComponentsList();
+            /* Iterate through the parts/sections and update their fields by using the user input */
+            for (PatternComponent part : partsList) {
+                part.setContents(contents.get(part.getName()).getText());
+                part.setName(names.get(part.getName()).getText());
+            }
+
+            /* Get the current window into a variable */
+            Stage window = Main.getWindow();
+
+            /* Go back to Pattern Language View scene */
+            PLViewController c = (PLViewController) Main.getPatternView().getUserData();
+            c.renderPLView(window);
+        }
         else {
             /* Show error dialog if pattern name already exists */
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -87,16 +95,9 @@ public class PatternViewController {
             alert.setHeaderText("There is already a pattern named \"" + newName + "\"");
             alert.setContentText("Please select a different name.");
             alert.showAndWait();
+            PLViewController c = (PLViewController) Main.getPatternView().getUserData();
+            c.handleEditPattern(event);
         }
-
-
-        /* Get the current window into a variable */
-        Stage window = Main.getWindow();
-
-        /* Go back to Pattern Language View scene */
-        PLViewController c = (PLViewController) Main.getPatternView().getUserData();
-        c.renderPLView(window);
-
 
     }
 

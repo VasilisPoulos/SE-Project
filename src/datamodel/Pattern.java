@@ -31,7 +31,6 @@ public class Pattern extends PatternComposite implements Cloneable
     public Pattern clone()
     {
         Pattern newPattern = new Pattern(this.getName());
-        //newPattern.componentsList = new ArrayList<>();
         for (PatternComponent p : this.componentsList){
             newPattern.componentsList.add(new PatternPart(p.getName(),p.getContents()));
         }
