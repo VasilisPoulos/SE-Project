@@ -34,17 +34,17 @@ public class PatternComponent implements Cloneable
 
     public void setContents(String contents) {}
 
-    //public void setContents(String contents, int x){}
+    public void setContents(String contents, int x){}
 
     //TODO: Should write this.name to file (V2)
-    //public void saveName(){}
+    public void saveName(){}
 
     //TODO: Should write contents to file (V2)
-    //public void saveContents() {}
+    public void saveContents() {}
 
 	public void add(PatternComponent component){}
 
-	//public void remove(){}
+	public void remove(){}
 
     public PatternComponent getChild(){
         return new PatternComponent("");

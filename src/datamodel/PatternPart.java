@@ -37,6 +37,11 @@ public class PatternPart extends PatternComponent
         this.contents = contents;
     }
 
+    @java.lang.Override
+    public void saveContents() {
+        super.saveContents();
+    }
+
     //TODO: Write contents to output file (V2)
     /*
     public void saveContents(){

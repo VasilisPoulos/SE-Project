@@ -24,6 +24,16 @@ public abstract class PatternComposite extends PatternComponent
         this.componentsList = new ArrayList<>();
     }
 
+    @java.lang.Override
+    public void setContents(String contents) {
+        super.setContents(contents);
+    }
+
+    @java.lang.Override
+    public void saveContents() {
+        super.saveContents();
+    }
+
     /**
      * Adds a PatternComponent item in ArrayList
      *
@@ -57,8 +67,8 @@ public abstract class PatternComposite extends PatternComponent
         return componentsList;
     }
 
-    //TODO: will be implemented in Release 2.0
-    //public abstract void decorateComponents(DecoratorAbstractFactory decoratorFactory);
+
+    public  void decorateComponents(DecoratorAbstractFactory decoratorFactory){}
 
     @Override
     public PatternComponent getChild() {
@@ -73,4 +83,7 @@ public abstract class PatternComposite extends PatternComponent
         }
         return list;
     }
+
+
+
 }

@@ -17,6 +17,11 @@ public class Pattern extends PatternComposite implements Cloneable
         super(name);
     }
 
+    @java.lang.Override
+    public void decorateComponents(DecoratorAbstractFactory decoratorFactory) {
+        super.decorateComponents(decoratorFactory);
+    }
+
     /**
      * Creates a clone of a PatternComponent object (deep copy).
      * <p>
@@ -37,9 +42,7 @@ public class Pattern extends PatternComposite implements Cloneable
         return newPattern;
     }
 
-    //TODO: (V2)
-    //@Override
-    //public void decorateComponents(DecoratorAbstractFactory decoratorFactory){}
+
 }
 
 
