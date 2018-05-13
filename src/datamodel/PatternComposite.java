@@ -2,8 +2,7 @@ package datamodel;
 
 import java.util.ArrayList;
 
-public abstract class PatternComposite extends PatternComponent
-{
+public abstract class PatternComposite extends PatternComponent {
 
     private Integer count;      // so no two patters are created with the same name
 
@@ -29,10 +28,12 @@ public abstract class PatternComposite extends PatternComponent
         super.setContents(contents);
     }
 
+    /*
     @java.lang.Override
     public void saveContents() {
         super.saveContents();
     }
+    */
 
     /**
      * Adds a PatternComponent item in ArrayList
@@ -67,8 +68,10 @@ public abstract class PatternComposite extends PatternComponent
         return componentsList;
     }
 
-
-    public  void decorateComponents(DecoratorAbstractFactory decoratorFactory){}
+    /*
+     *  Inherited by every subclass
+     */
+    public abstract void decorateComponents(DecoratorAbstractFactory decoratorFactory);
 
     @Override
     public PatternComponent getChild() {

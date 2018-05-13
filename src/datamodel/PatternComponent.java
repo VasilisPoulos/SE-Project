@@ -10,6 +10,10 @@ package datamodel;
  *	   |    the relevant functionality and no more.
  */
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 public class PatternComponent implements Cloneable
 {
 	protected String name;
@@ -36,11 +40,19 @@ public class PatternComponent implements Cloneable
 
     public void setContents(String contents, int x){}
 
-    //TODO: Should write this.name to file (V2)
-    public void saveName(){}
+
+    /*
+     * Saves PatternComponents name to a txt file
+     *
+     * Assumes file's path -> TODO: Make this work even if a folder is missing ?
+     *
+     */
+    public void saveName() throws IOException {
+        Files.write(Paths.get("./out/savedFiles/PatternComponent.txt"), getName().getBytes());
+    }
 
     //TODO: Should write contents to file (V2)
-    public void saveContents() {}
+    public void saveContents() throws IOException {}
 
 	public void add(PatternComponent component){}
 

@@ -9,21 +9,11 @@ public class Decorator extends PatternComposite {
         super(name);
     }
 
-    @java.lang.Override
-    public void saveName() {
-        super.saveName();
-    }
-
-    @java.lang.Override
-    public void saveContents() {
-        super.saveContents();
-    }
 
     @java.lang.Override
     public void decorateComponents(DecoratorAbstractFactory decoratorFactory) {
-        super.decorateComponents(decoratorFactory);
+        //TODO
     }
-
 
     public String getBeginTag() {
         return beginTag;

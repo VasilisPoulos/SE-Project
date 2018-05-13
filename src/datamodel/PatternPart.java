@@ -1,5 +1,9 @@
 package datamodel;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 public class PatternPart extends PatternComponent
 
 {
@@ -36,18 +40,14 @@ public class PatternPart extends PatternComponent
     public void setContents(String contents) {
         this.contents = contents;
     }
-
-    @java.lang.Override
-    public void saveContents() {
-        super.saveContents();
-    }
-
-    //TODO: Write contents to output file (V2)
+    
     /*
-    public void saveContents(){
-        return;
+     * TODO: Each object should have its own folder ??
+     */
+    public void saveContents() throws IOException {
+        Files.write(Paths.get("./out/savedFiles/PatternPart.txt"), getContents().getBytes());
     }
-    */
+
 
     /** Return string representation of the pattern part. */
     @Override

@@ -23,10 +23,13 @@ public class PatternLanguage extends PatternComposite
         this.name = name;
     }
 
+
     @java.lang.Override
-    public void decorateComponents(DecoratorAbstractFactory decoratorFactory) {
-        super.decorateComponents(decoratorFactory);
+    public void decorateComponents(DecoratorAbstractFactory decoratorFactory)
+    {
+        //TODO
     }
+
 
     /**
      * Generates a default pattern language title, based on a global counter of pattern languages
@@ -38,8 +41,4 @@ public class PatternLanguage extends PatternComposite
         String title = "Pattern Language #" + Integer.toString(plCount);
         return title;
     }
-
-
-
-
 }

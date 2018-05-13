@@ -1,6 +1,6 @@
 package datamodel;
 
-public class Pattern extends PatternComposite implements Cloneable
+public class Pattern extends PatternComposite
 {
 
     /**
@@ -17,10 +17,12 @@ public class Pattern extends PatternComposite implements Cloneable
         super(name);
     }
 
-    @java.lang.Override
-    public void decorateComponents(DecoratorAbstractFactory decoratorFactory) {
-        super.decorateComponents(decoratorFactory);
+    @Override
+    public void decorateComponents(DecoratorAbstractFactory decoratorFactory)
+    {
+
     }
+
 
     /**
      * Creates a clone of a PatternComponent object (deep copy).
