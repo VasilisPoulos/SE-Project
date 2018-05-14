@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.PLViewController">
+<BorderPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.PLViewController">
    <top>
       <MenuBar disable="true" prefHeight="29.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
          <menus>
@@ -135,94 +135,49 @@
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Region HBox.hgrow="ALWAYS" />
-                  <HBox>
-                     <children>
-                        <Region HBox.hgrow="ALWAYS" />
-                      <Button mnemonicParsing="false" onAction="#handleAddPattern" text="Add Pattern">
-                           <graphic>
-                              <ImageView fitHeight="10.0" fitWidth="10.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../assets/img/plus.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                           <font>
-                              <Font name="Lato Bold" size="18.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Button>
-                        <Region layoutX="10.0" layoutY="10.0" HBox.hgrow="ALWAYS" />
-                     </children>
+                  <Button mnemonicParsing="false" onAction="#handleSavePL" text="Save Pattern Language">
+                     <graphic>
+                        <ImageView fitHeight="10.0" fitWidth="10.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/img/plus.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <font>
+                        <Font name="Lato Bold" size="18.0" />
+                     </font>
                      <HBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                        <Insets right="20.0" />
                      </HBox.margin>
-                  </HBox>
-                  <HBox>
-                     <children>
-                        <Region HBox.hgrow="ALWAYS" />
-                        <Button disable="true" mnemonicParsing="false" text="Load Pattern">
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                           <font>
-                              <Font name="Lato Bold" size="18.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="10.0" fitWidth="10.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../assets/img/arrow-thick-top.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Button>
-                        <Region layoutX="10.0" layoutY="10.0" HBox.hgrow="ALWAYS" />
-                     </children>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#handleChangePL" text="Change Pattern Language">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <font>
+                        <Font name="Lato Bold" size="18.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="10.0" fitWidth="10.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/img/reload.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                      <HBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                        <Insets />
                      </HBox.margin>
-                  </HBox>
-                  <HBox>
-                     <children>
-                        <Region HBox.hgrow="ALWAYS" />
-                        <Button mnemonicParsing="false" onAction="#handleChangePL" text="Change Pattern Language">
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                           <font>
-                              <Font name="Lato Bold" size="18.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="10.0" fitWidth="10.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../assets/img/reload.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Button>
-                        <Region layoutX="10.0" layoutY="10.0" HBox.hgrow="ALWAYS" />
-                     </children>
-                     <HBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                     </HBox.margin>
-                  </HBox>
+                  </Button>
                   <Region HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Region HBox.hgrow="ALWAYS" />
-                  <ScrollPane minViewportHeight="300.0" minViewportWidth="500.0" HBox.hgrow="ALWAYS">
+                  <ScrollPane minViewportHeight="300.0" prefViewportHeight="300.0" HBox.hgrow="ALWAYS">
                      <content>
                         <Pane fx:id="patternContainer" />
                      </content>
@@ -236,8 +191,44 @@
    <bottom>
       <HBox BorderPane.alignment="CENTER">
          <children>
+          <Button mnemonicParsing="false" onAction="#handleAddPattern" text="Add Pattern">
+               <graphic>
+                  <ImageView fitHeight="10.0" fitWidth="10.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/img/plus.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <font>
+                  <Font name="DejaVu Sans Bold" size="13.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Button>
+            <Button disable="true" mnemonicParsing="false" text="Load Pattern">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <font>
+                  <Font name="DejaVu Sans Bold" size="13.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="10.0" fitWidth="10.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/img/arrow-thick-top.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Button>
             <Region layoutX="74.0" layoutY="10.0" HBox.hgrow="ALWAYS" />
-            <Button defaultButton="true" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleEditPattern" text="Edit" textAlignment="CENTER">
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#handleEditPattern" text="Edit" textAlignment="CENTER">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
@@ -245,7 +236,10 @@
                   <Font name="DejaVu Sans Bold" size="13.0" />
                </font>
             </Button>
-            <Region maxWidth="-Infinity" prefHeight="36.0" prefWidth="60.0" HBox.hgrow="ALWAYS" />
+            <Region>
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin></Region>
             <Button cancelButton="true" layoutX="10.0" layoutY="10.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDeletePattern" text="Delete" textFill="RED">
                <font>
                   <Font name="Droid Sans" size="13.0" />

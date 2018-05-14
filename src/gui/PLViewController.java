@@ -2,6 +2,7 @@ package gui;
 
 import datamodel.Pattern;
 import datamodel.PatternComponent;
+import datamodel.PatternLanguage;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
@@ -19,6 +20,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -252,6 +254,22 @@ public class PLViewController {
         /* Render the new scene into primaryStage */
         window.setScene(Main.getPlView());
         window.show();
+    }
+
+    /**
+     * Saves the Pattern Language to a text file
+     * @param event the button click
+     * @throws IOException on file error
+     */
+    public void handleSavePL(ActionEvent event) throws IOException {
+        PatternLanguage pl = Main.getPl();
+        if (pl.getComponentsList().isEmpty()) {
+            // TODO: warning dialog
+        }
+        else {
+            pl.saveName();
+            pl.saveContents();
+        }
     }
 
 }
