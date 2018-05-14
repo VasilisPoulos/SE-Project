@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -265,8 +266,8 @@ public class PLViewController {
      */
     public void handleSavePL(ActionEvent event) throws IOException {
         PatternLanguage pl = Main.getPl();
+        // Ask the user whether to save empty Pattern Language
         if (pl.getComponentsList().isEmpty()) {
-            // TODO: notification dialog
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Notification Dialog");
             alert.setHeaderText("Pattern language \"" + pl.getName() + "\" has no patterns.");
@@ -294,7 +295,31 @@ public class PLViewController {
     private void savePL(PatternLanguage pl) throws IOException {
         // TODO: check if already exists and delete or rename or even keep it as a tmp in case we get an IOException?
         Path fp = Paths.get("./" + pl.getName() + ".txt");
-        pl.saveName(fp);
-        pl.saveContents(fp);
+        if (Files.exists(fp)) {
+            //TODO: create backup of file
+            //TODO: delete file or confirmation dialog
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Notification Dialog");
+            alert.setHeaderText("File \"" + fp.toString() + "\" already exists.");
+            alert.setContentText("Overwrite?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                //TODO: overwrite
+                alert.close();
+            }
+            else {
+                alert.close();
+                //TODO: ask for new name
+            }
+        }
+        try {
+            pl.saveName(fp);
+            pl.saveContents(fp);
+        }
+        catch (IOException e) {
+            System.out.println("Error while writing to file: " + e.getMessage());
+            //TODO: Replace erroneous file with backup
+        }
     }
 }

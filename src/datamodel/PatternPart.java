@@ -60,16 +60,12 @@ public class PatternPart extends PatternComponent
         String str = this.contents + "\n\n";
         byte[] bytes = str.getBytes();
         if(fileExists) {
-            try {
-                // Append to the file
-                Files.write(fp, bytes, StandardOpenOption.APPEND);
-            }
-            catch (IOException e) {
-                System.out.println("Error while writing to file: " + e.getMessage());
-            }
+            // Append to the file
+            Files.write(fp, bytes, StandardOpenOption.APPEND);
         }
         else {
-            System.out.println("Error: File Not Found!");
+            System.out.println("Error: File \"" + fp.toString() + "\" not found.");
+            throw new IOException(fp.toString());
         }
     }
 

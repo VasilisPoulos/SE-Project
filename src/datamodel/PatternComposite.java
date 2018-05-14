@@ -39,19 +39,15 @@ public abstract class PatternComposite extends PatternComponent {
 
         boolean fileExists = Files.exists(fp);
         if(fileExists) {
-            try {
-                // Iterate through the list and write the names and contents of each element to the text file
-                for (PatternComponent i: this.componentsList) {
-                    i.saveName(fp);
-                    i.saveContents(fp);
-                }
-            }
-            catch (IOException e) {
-                System.out.println("Error while writing to file: " + e.getMessage());
+            // Iterate through the list and write the names and contents of each element to the text file
+            for (PatternComponent i: this.componentsList) {
+                i.saveName(fp);
+                i.saveContents(fp);
             }
         }
         else {
-                System.out.println("Error: File \"" + fp + "\" not found.");
+                System.out.println("Error: File \"" + fp.toString() + "\" not found.");
+                throw new IOException(fp.toString());
         }
 
     }
