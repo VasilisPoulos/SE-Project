@@ -13,7 +13,7 @@ class PatternPartTest {
     @Test
     void saveContents() throws IOException
     {
-        /* create new patterns */
+        /* create new pattern parts */
         PatternPart first = new PatternPart("First","First Contents");
         PatternPart second = new PatternPart("Second","Second Contents");
 

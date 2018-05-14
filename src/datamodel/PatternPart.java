@@ -41,7 +41,7 @@ public class PatternPart extends PatternComponent
         this.contents = contents;
     }
 
-    /*
+    /**
      * Save Contents in a txt file
      *
      *  Each object has it's own file name.

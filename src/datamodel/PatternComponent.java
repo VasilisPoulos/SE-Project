@@ -34,6 +34,8 @@ public class PatternComponent implements Cloneable
         this.name = name;
     }
 
+    //TODO: implement if needed
+
     public String getContents() {return null;}
 
     public void setContents(String contents) {}
@@ -44,15 +46,17 @@ public class PatternComponent implements Cloneable
     /*
      * Saves PatternComponents name to a txt file
      *
-     * Assumes file's path -> TODO: Make this work even if a folder is missing ?
+     * Assumes file's path
+     * -> TODO: Make this work even if a folder is missing ?
      *
      */
     public void saveName() throws IOException {
-        Files.write(Paths.get("./out/savedFiles/PatternComponent.txt"), getName().getBytes());
+        Files.write(Paths.get("./out/savedFiles/PatternComponent/"+getName()+".txt"), getName().getBytes());
     }
 
-    //TODO: Should write contents to file (V2)
-    public void saveContents() throws IOException {}
+    public void saveContents() throws IOException {
+        return;
+    }
 
 	public void add(PatternComponent component){}
 
