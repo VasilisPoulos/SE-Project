@@ -29,14 +29,14 @@ public class TemplateFactory
         inductive.add(new PatternPart("Name", "What shall this pattern be called by practitioners?"));
         inductive.add(new PatternPart("Template", "Which template is followed for the pattern specification?"));
         inductive.add(new PatternPart("Context", "What are the assumed environment or a priori assumptions for applying this pattern?"));
-        inductive.add(new PatternPart("Forces", "What are the different design motivations that must be balanced??"));
+        inductive.add(new PatternPart("Forces", "What are the different design motivations that must be balanced?"));
         inductive.add(new PatternPart("Solution", "How do we solve the problem?"));
 
         Pattern deductive = new Pattern( "Deductive Mini-Pattern");
         deductive.add(new PatternPart("Name", "What shall this pattern be called by practitioners?"));
         deductive.add(new PatternPart("Template", "Which template is followed for the pattern specification?"));
         deductive.add(new PatternPart("Problem", "What is motivating us to apply this pattern?"));
-        deductive.add(new PatternPart("Solution", ": How do we solve the problem??"));
+        deductive.add(new PatternPart("Solution", "How do we solve the problem?"));
         deductive.add(new PatternPart("Benefits", "What are the potential positive outcomes of applying this pattern?  "));
         deductive.add(new PatternPart("Consequences", "What are potential shortcomings and consequences of applying this pattern? \n"));
 

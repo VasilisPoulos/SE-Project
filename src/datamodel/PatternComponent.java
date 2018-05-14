@@ -46,14 +46,24 @@ public class PatternComponent implements Cloneable
 
 
     /**
-     * Saves PatternComponents name to a txt file
+     * Writes the name of a PatternComponent to a text file
      *
+     * @param fp The filepath
+     *
+     * @throws IOException on failure to write to the file
      */
     public void saveName(Path fp) throws IOException {
         boolean fileExists = Files.exists(fp);
         if(fileExists) {
             try {
-                String str = this.name + '\n';
+                String str;
+                // If this is a pattern name, add dashes so it's easy to parse
+                if (this instanceof Pattern)
+                    str = "\n-- " + this.name + " --\n\n";
+                // this is a pattern part, so no dashes
+                else
+                    str = this.name + "\n";
+
                 byte[] bytes = str.getBytes();
                 // Append to the file
                 Files.write(fp, bytes, StandardOpenOption.APPEND);
@@ -63,7 +73,8 @@ public class PatternComponent implements Cloneable
             }
         }
         else {
-            String str = this.name + "\n\n";
+            // Add dashes to the pattern language name so it's easy to parse
+            String str = "--- " + this.name + " ---\n\n\n";
             byte[] bytes = str.getBytes();
             // We need to create the file
             Files.write(fp, bytes, StandardOpenOption.CREATE);

@@ -40,7 +40,7 @@ public abstract class PatternComposite extends PatternComponent {
         boolean fileExists = Files.exists(fp);
         if(fileExists) {
             try {
-                // Append to the file
+                // Iterate through the list and write the names and contents of each element to the text file
                 for (PatternComponent i: this.componentsList) {
                     i.saveName(fp);
                     i.saveContents(fp);
