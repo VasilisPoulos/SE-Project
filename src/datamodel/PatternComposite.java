@@ -32,6 +32,7 @@ public abstract class PatternComposite extends PatternComponent {
     public void setContents(String contents) {
         super.setContents(contents);
     }
+    */
 
 
     @Override
@@ -81,10 +82,6 @@ public abstract class PatternComposite extends PatternComponent {
 
     }
 
-    public ArrayList<PatternComponent> getComponentsList() {
-        return componentsList;
-    }
-
     /*
      *  Inherited by every subclass
      */
@@ -104,6 +101,11 @@ public abstract class PatternComposite extends PatternComponent {
         return list;
     }
 
-
-
+    /**
+     * For testing purposes.
+     * @return patternComponent's componentsList
+     */
+    public ArrayList<PatternComponent> getComponentsList() {
+        return componentsList;
+    }
 }
