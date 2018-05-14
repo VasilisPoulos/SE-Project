@@ -48,11 +48,15 @@ public class PatternPart extends PatternComponent
      *  Using Java 7 utility class Files.
      *
      *  @see http://www.baeldung.com/java-write-to-file
+     *
+     *  TODO: Maybe check if file exists first.
+     *  for improvements:
+     *  @see https://docs.oracle.com/javase/7/docs/api/java/io/File.html
      */
     public void saveContents() throws IOException {
-        Files.write(Paths.get("./out/savedFiles/PatternPartContents/"+getName()+"-Contents.txt"), getContents().getBytes());
+        Files.write(Paths.get("./out/savedFiles/PatternPartContents/"+getName()+"-Contents.txt"),
+                getContents().getBytes());
     }
-
 
     /** Return string representation of the pattern part. */
     @Override
