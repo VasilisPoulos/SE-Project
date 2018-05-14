@@ -198,7 +198,7 @@ public class PLViewController {
         if (this.selectedPatternId == null || this.selectedPatternId.isEmpty()) {
 
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Information Dialog");
+            alert.setTitle("Error Dialog");
             alert.setHeaderText("You did not select a pattern.");
             alert.setContentText("Please select a pattern to edit.");
             alert.showAndWait();
@@ -259,21 +259,42 @@ public class PLViewController {
     }
 
     /**
-     * Saves the Pattern Language to a text file
+     * Handles events on the Save Pattern Language button
      * @param event the button click
      * @throws IOException on file error
      */
     public void handleSavePL(ActionEvent event) throws IOException {
         PatternLanguage pl = Main.getPl();
         if (pl.getComponentsList().isEmpty()) {
-            // TODO: warning dialog
+            // TODO: notification dialog
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Notification Dialog");
+            alert.setHeaderText("Pattern language \"" + pl.getName() + "\" has no patterns.");
+            alert.setContentText("Save anyway?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                this.savePL(pl);
+                alert.close();
+            }
+            else {
+                alert.close();
+            }
         }
         else {
-            // TODO: check if already exists and delete or rename
-            Path fp = Paths.get("./" + pl.getName() + ".txt");
-            pl.saveName(fp);
-            pl.saveContents(fp);
+            this.savePL(pl);
         }
     }
 
+    /**
+     * Saves the Pattern Language to a text file
+     *
+     * @throws IOException on file error
+     */
+    private void savePL(PatternLanguage pl) throws IOException {
+        // TODO: check if already exists and delete or rename or even keep it as a tmp in case we get an IOException?
+        Path fp = Paths.get("./" + pl.getName() + ".txt");
+        pl.saveName(fp);
+        pl.saveContents(fp);
+    }
 }
