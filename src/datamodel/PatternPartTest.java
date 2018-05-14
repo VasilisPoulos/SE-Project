@@ -11,7 +11,9 @@ class PatternPartTest {
     @Test
     void saveContents() throws IOException
     {
-        PatternPart pt = new PatternPart("New","Contents");
-        pt.saveContents();
+        PatternPart first = new PatternPart("First","First Contents");
+        PatternPart second = new PatternPart("Second","Second Contents");
+        first.saveContents();
+        second.saveContents();
     }
 }

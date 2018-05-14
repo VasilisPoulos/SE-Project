@@ -40,12 +40,17 @@ public class PatternPart extends PatternComponent
     public void setContents(String contents) {
         this.contents = contents;
     }
-    
+
     /*
-     * TODO: Each object should have its own folder ??
+     * Save Contents in a txt file
+     *
+     *  Each object has it's own file name.
+     *  Using Java 7 utility class Files.
+     *
+     *  @see http://www.baeldung.com/java-write-to-file
      */
     public void saveContents() throws IOException {
-        Files.write(Paths.get("./out/savedFiles/PatternPart.txt"), getContents().getBytes());
+        Files.write(Paths.get("./out/savedFiles/PatternPartContents/"+getName()+"-Contents.txt"), getContents().getBytes());
     }
 
 
