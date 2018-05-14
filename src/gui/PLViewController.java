@@ -11,20 +11,19 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Control;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Optional;
 
 import static java.lang.Integer.MAX_VALUE;
@@ -293,11 +292,23 @@ public class PLViewController {
      * @throws IOException on file error
      */
     private void savePL(PatternLanguage pl) throws IOException {
-        // TODO: check if already exists and delete or rename or even keep it as a tmp in case we get an IOException?
         Path fp = Paths.get("./" + pl.getName() + ".txt");
+        Path tmp = Paths.get("./.tmp/");
+
         if (Files.exists(fp)) {
-            //TODO: create backup of file
-            //TODO: delete file or confirmation dialog
+            if (Files.exists(tmp)){
+                Files.walk(tmp)
+                        .sorted(Comparator.reverseOrder())
+                        .map(Path::toFile)
+                        .forEach(File::delete);
+            }
+            Files.deleteIfExists(tmp);
+
+            Files.createDirectory(tmp);
+
+            // create a backup of the file
+            Files.copy(fp, tmp.resolve(fp.getFileName()));
+
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Notification Dialog");
             alert.setHeaderText("File \"" + fp.toString() + "\" already exists.");
@@ -305,12 +316,34 @@ public class PLViewController {
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                //TODO: overwrite
+                // Delete the file
+                Files.deleteIfExists(fp);
                 alert.close();
             }
             else {
                 alert.close();
-                //TODO: ask for new name
+                // Ask user for a new name
+                TextInputDialog dialog = new TextInputDialog(pl.getName() + "-1");
+                dialog.setTitle("Text Input Dialog");
+                dialog.setHeaderText("You need to input a new name for the file.");
+                dialog.setContentText("Please enter a name:");
+
+                Optional<String> name = dialog.showAndWait();
+                if (result.isPresent()){
+                    Path p = Paths.get("./" + name.get() + ".txt");
+                    if (name.get().equals(pl.getName()) || Files.exists(p)) {
+                        dialog.close();
+                        Alert err = new Alert(Alert.AlertType.ERROR);
+                        err.setTitle("Error Dialog");
+                        err.setHeaderText("Patten Language not saved.");
+                        err.setContentText("File \"" + p.toString() + "\" already exists.");
+                        err.showAndWait();
+                    }
+                    else {
+                        fp = p;
+                        dialog.close();
+                    }
+                }
             }
         }
         try {
@@ -319,7 +352,20 @@ public class PLViewController {
         }
         catch (IOException e) {
             System.out.println("Error while writing to file: " + e.getMessage());
-            //TODO: Replace erroneous file with backup
+            // Replace erroneous file with backup
+            Files.deleteIfExists(fp);
+            Path backup = Paths.get(tmp.toString().concat(fp.toString()));
+            Path curDir = Paths.get("./");
+            Files.copy(backup, curDir.resolve(backup.getFileName()));
+
         }
+        // Delete ./.tmp directory and files
+        if (Files.exists(tmp)){
+            Files.walk(tmp)
+                    .sorted(Comparator.reverseOrder())
+                    .map(Path::toFile)
+                    .forEach(File::delete);
+        }
+        Files.deleteIfExists(tmp);
     }
 }

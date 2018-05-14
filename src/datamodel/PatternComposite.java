@@ -32,7 +32,7 @@ public abstract class PatternComposite extends PatternComponent {
     public void setContents(String contents) {
         super.setContents(contents);
     }
-    */
+
 
 
     @Override
