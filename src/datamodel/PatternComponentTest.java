@@ -36,10 +36,4 @@ class PatternComponentTest {
         Files.delete(Paths.get("./out/savedFiles/PatternComponent/First.txt"));
         Files.delete(Paths.get("./out/savedFiles/PatternComponent/Second.txt"));
     }
-
-    @Test
-    void shouldSaveContents() throws IOException {
-
-        PatternComponent first = new PatternComponent("First");
-    }
 }
