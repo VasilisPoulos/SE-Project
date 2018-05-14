@@ -353,10 +353,22 @@ public class PLViewController {
         catch (IOException e) {
             System.out.println("Error while writing to file: " + e.getMessage());
             // Replace erroneous file with backup
-            Files.deleteIfExists(fp);
-            Path backup = Paths.get(tmp.toString().concat(fp.toString()));
-            Path curDir = Paths.get("./");
-            Files.copy(backup, curDir.resolve(backup.getFileName()));
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setHeaderText("There was an error writing \"" + fp.toString() + "\" to disk.");
+            alert.setContentText("Recover previous version of the file?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                Files.deleteIfExists(fp);
+                Path backup = Paths.get(tmp.toString().concat(fp.toString()));
+                Path curDir = Paths.get("./");
+                Files.copy(backup, curDir.resolve(backup.getFileName()));
+                alert.close();
+            }
+            else {
+                alert.close();
+            }
 
         }
         // Delete ./.tmp directory and files
