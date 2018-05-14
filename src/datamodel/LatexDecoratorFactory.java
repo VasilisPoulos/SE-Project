@@ -1,6 +1,6 @@
 package datamodel;
 
-public class LatexDecoratorFactory implements DecoratorAbstractFctory {
+public class LatexDecoratorFactory implements DecoratorAbstractFactory {
     public PatternComponent createLanguageDecorator() {
         return null;
     }
