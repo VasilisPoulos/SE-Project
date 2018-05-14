@@ -2,7 +2,9 @@ package datamodel;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 public class PatternPart extends PatternComponent
 
@@ -49,13 +51,25 @@ public class PatternPart extends PatternComponent
      *
      *  @see http://www.baeldung.com/java-write-to-file
      *
-     *  TODO: Maybe check if file exists first.
      *  for improvements:
      *  @see https://docs.oracle.com/javase/7/docs/api/java/io/File.html
      */
-    public void saveContents() throws IOException {
-        Files.write(Paths.get("./out/savedFiles/PatternPartContents/"+getName()+"-Contents.txt"),
-                getContents().getBytes());
+    public void saveContents(Path fp) throws IOException {
+        boolean fileExists = Files.exists(fp);
+        String str = this.contents + "\n\n";
+        byte[] bytes = str.getBytes();
+        if(fileExists) {
+            try {
+                // Append to the file
+                Files.write(fp, bytes, StandardOpenOption.APPEND);
+            }
+            catch (IOException e) {
+                System.out.println("Error while writing to file: " + e.getMessage());
+            }
+        }
+        else {
+            System.out.println("Error: File Not Found!");
+        }
     }
 
     /** Return string representation of the pattern part. */

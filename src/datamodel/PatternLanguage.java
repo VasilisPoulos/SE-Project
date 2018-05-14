@@ -24,7 +24,7 @@ public class PatternLanguage extends PatternComposite
     }
 
 
-    @java.lang.Override
+    @Override
     public void decorateComponents(DecoratorAbstractFactory decoratorFactory)
     {
         //TODO

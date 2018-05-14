@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,23 +18,25 @@ class PatternPartTest {
         PatternPart first = new PatternPart("First","First Contents");
         PatternPart second = new PatternPart("Second","Second Contents");
 
+        Path firstFp = Paths.get("./first.txt");
+        Path secondFp = Paths.get("./second.txt");
         /* save to .txt */
-        first.saveContents();
-        second.saveContents();
+        first.saveContents(firstFp);
+        second.saveContents(secondFp);
 
         /* read if written correctly */
-        String read = Files.readAllLines(Paths.get("./out/savedFiles/PatternPartContents/First-Contents.txt"))
+        String read = Files.readAllLines(firstFp)
                 .get(0);
 
         assertEquals("First Contents", read);
 
-        read = Files.readAllLines(Paths.get("./out/savedFiles/PatternPartContents/Second-Contents.txt"))
+        read = Files.readAllLines(secondFp)
                 .get(0);
 
         assertEquals("Second Contents", read);
 
         /* delete files created by test */
-        Files.delete(Paths.get("./out/savedFiles/PatternPartContents/First-Contents.txt"));
-        Files.delete(Paths.get("./out/savedFiles/PatternPartContents/Second-Contents.txt"));
+        Files.delete(firstFp);
+        Files.delete(secondFp);
     }
 }

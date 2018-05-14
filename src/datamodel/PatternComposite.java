@@ -1,5 +1,10 @@
 package datamodel;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
 public abstract class PatternComposite extends PatternComponent {
@@ -23,17 +28,33 @@ public abstract class PatternComposite extends PatternComponent {
         this.componentsList = new ArrayList<>();
     }
 
-    @java.lang.Override
+    @Override
     public void setContents(String contents) {
         super.setContents(contents);
     }
 
-    /*
-    @java.lang.Override
-    public void saveContents() {
-        super.saveContents();
+
+    @Override
+    public void saveContents(Path fp) throws IOException {
+
+        boolean fileExists = Files.exists(fp);
+        if(fileExists) {
+            try {
+                // Append to the file
+                for (PatternComponent i: this.componentsList) {
+                    i.saveName(fp);
+                    i.saveContents(fp);
+                }
+            }
+            catch (IOException e) {
+                System.out.println("Error while writing to file: " + e.getMessage());
+            }
+        }
+        else {
+                System.out.println("Error: File \"" + fp + "\" not found.");
+        }
+
     }
-    */
 
     /**
      * Adds a PatternComponent item in ArrayList

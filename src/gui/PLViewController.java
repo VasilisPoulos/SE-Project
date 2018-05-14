@@ -21,6 +21,8 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -267,8 +269,10 @@ public class PLViewController {
             // TODO: warning dialog
         }
         else {
-            pl.saveName();
-            pl.saveContents();
+            // TODO: check if already exists and delete or rename
+            Path fp = Paths.get("./" + pl.getName() + ".txt");
+            pl.saveName(fp);
+            pl.saveContents(fp);
         }
     }
 

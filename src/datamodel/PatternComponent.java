@@ -12,7 +12,9 @@ package datamodel;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 public class PatternComponent implements Cloneable
 {
@@ -43,18 +45,33 @@ public class PatternComponent implements Cloneable
     public void setContents(String contents, int x){}
 
 
-    /*
+    /**
      * Saves PatternComponents name to a txt file
      *
-     * Assumes file's path
-     * -> TODO: Make this work even if a folder is missing ?
-     *
      */
-    public void saveName() throws IOException {
-        Files.write(Paths.get("./out/savedFiles/PatternComponent/"+getName()+".txt"), getName().getBytes());
+    public void saveName(Path fp) throws IOException {
+        boolean fileExists = Files.exists(fp);
+        if(fileExists) {
+            try {
+                String str = this.name + '\n';
+                byte[] bytes = str.getBytes();
+                // Append to the file
+                Files.write(fp, bytes, StandardOpenOption.APPEND);
+            }
+            catch (IOException e) {
+                System.out.println("Error while writing to file: " + e.getMessage());
+            }
+        }
+        else {
+            String str = this.name + "\n\n";
+            byte[] bytes = str.getBytes();
+            // We need to create the file
+            Files.write(fp, bytes, StandardOpenOption.CREATE);
+        }
+
     }
 
-    public void saveContents() throws IOException {
+    public void saveContents(Path fp) throws IOException {
         return;
     }
 
