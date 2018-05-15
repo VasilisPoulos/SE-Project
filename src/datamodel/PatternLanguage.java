@@ -39,10 +39,10 @@ public class PatternLanguage extends PatternComposite
     }
 
     /**
-     * TODO
-     * @param filename
-     * @return
-     * @throws Exception
+     * @param filename the file containing the pattern language
+     * @return the pattern language loaded from the file
+     * @throws Exception if a non-valid pattern language is detected in the file
+     * @throws IOException on file read error
      */
     public static PatternLanguage LoadPatternLanguage(Path filename) throws Exception {
         List<String> data = new ArrayList<String>();
@@ -59,21 +59,18 @@ public class PatternLanguage extends PatternComposite
      * Parse the Pattern Language from its text file
      * @param data the lines of the file.
      * @return new Pattern Language object parsed from List of String objects
+     * @throws Exception if a non-valid pattern language is detected in the file
+     * @throws IOException on file read error
      */
     private static PatternLanguage parsePL(List<String> data) throws Exception {
 
-        // TODO: create structure checks (consider the following automaton)
-        // TODO:  >PLName -> (Pattern Name -> (Pattern Part Name -> (Pattern Part Contents U e))*)*
         // Placeholder variables
         PatternLanguage newPl = new PatternLanguage();
         Pattern currentPattern = new Pattern("");
         PatternPart currentPart = new PatternPart("");
 
+        // Flag to hold information about what we might parse next
         ParseType flag = ParseType.PL_NAME;
-
-        // Variable to hold string up to now
-        String currentStr = "";
-
 
         for (String i: data) {
 
