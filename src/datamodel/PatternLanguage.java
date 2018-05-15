@@ -34,15 +34,16 @@ public class PatternLanguage extends PatternComposite
      * TODO
      * @param filename
      * @return
-     * @throws IOException
+     * @throws Exception
      */
-    public static PatternLanguage LoadPatternLanguage(Path filename) throws IOException {
+    public static PatternLanguage LoadPatternLanguage(Path filename) throws Exception {
         List<String> data = new ArrayList<String>();
         Stream<String> lines = Files.lines(filename);
         lines
                 .filter(line -> !line.isEmpty())
                 .forEach(line -> data.add(line));
         lines.close();
+
 
         return parsePL(data);
     }
@@ -52,10 +53,10 @@ public class PatternLanguage extends PatternComposite
      * @param data the lines of the file.
      * @return new Pattern Language object parsed from List of String objects
      */
-    private static PatternLanguage parsePL(List<String> data) {
+    private static PatternLanguage parsePL(List<String> data) throws Exception {
 
         // TODO: create structure checks (consider the following automaton)
-        // TODO:  >PLName -> (Pattern Name -> (Pattern Part Name -> Pattern Part Contents)*)*
+        // TODO:  >PLName -> (Pattern Name -> (Pattern Part Name -> (Pattern Part Contents U e))*)*
         // Placeholder variables
         PatternLanguage newPl = new PatternLanguage();
         Pattern currentPattern = new Pattern("");
@@ -75,9 +76,9 @@ public class PatternLanguage extends PatternComposite
         for (String i: data) {
 
             if (i.substring(0,4).equals("--- ")) {
-                // Set contents of Pattern Part
-                currentPart.setContents(currentStr);
-                currentStr = "";
+                if (!currentStr.equals("")) {
+                    throw new Exception("File does not contain a valid Pattern Language.");
+                }
 
                 // Pattern Language name
                 if (i.endsWith(" ---")) {

@@ -138,10 +138,19 @@ public class MainViewController {
 
         Path selectedFilePath = this.getFiles().get(this.selectedFileId);
 
-        PatternLanguage newPL = PatternLanguage.LoadPatternLanguage(selectedFilePath);
-        // Switch to PLView
-        Main.setPl(newPL);
-        this.viewNewPL(Main.getWindow());
+        try {
+            PatternLanguage newPL = PatternLanguage.LoadPatternLanguage(selectedFilePath);
+            // Switch to PLView
+            Main.setPl(newPL);
+            this.viewNewPL(Main.getWindow());
+        }
+        catch (Exception e) {
+            Alert err = new Alert(Alert.AlertType.ERROR);
+            err.setTitle("Error Dialog");
+            err.setHeaderText("There was an error reading from file " + selectedFilePath.toString());
+            err.setContentText("Exception encountered: " + e.getMessage());
+            err.showAndWait();
+        }
     }
 
     /**
