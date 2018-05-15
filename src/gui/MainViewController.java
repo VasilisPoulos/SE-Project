@@ -3,22 +3,36 @@ import datamodel.PatternLanguage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.lang.Integer.MAX_VALUE;
 
 
 public class MainViewController {
 
 
     @FXML private TextField titleInput;
+    @FXML private VBox fileContainer;
+    private int selectedFileId;
 
 
     /**
@@ -78,7 +92,7 @@ public class MainViewController {
      * @throws Exception on failure of viewNewPL, called within
      */
     @FXML
-    void handleCreatePL(ActionEvent event) throws Exception {
+    public void handleCreatePL(ActionEvent event) throws Exception {
 
         /* Get the current window into a variable */
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -112,6 +126,120 @@ public class MainViewController {
         }
 
 
+    }
+
+    public void handleLoadPL() throws IOException {
+
+        Path selectedFilePath = this.getFiles().get(this.selectedFileId);
+
+        StringBuilder data = new StringBuilder();
+        Stream<String> lines = Files.lines(selectedFilePath);
+        lines.forEach(line -> data.append(line).append("\n"));
+        lines.close();
+
+        System.out.println(data);
+        //TODO: Call a (not yet existing) parsePL method and switch to PLView!
+    }
+
+    /**
+     * @return the list of Paths of all files in current dir and subdirs
+     * @throws IOException
+     */
+    private List<Path> getFiles() throws IOException {
+        // walk current directory and subdirs up to 2nd level and get files in list
+        List<Path> files = Files.walk(Paths.get("./"), 2)
+                .filter(Files::isRegularFile)
+                .collect(Collectors.toList());
+
+        return files;
+    }
+
+    /**
+     * Returns to the starting scene, so we can change the pattern language
+     * @param event the button click
+     */
+    @FXML
+    public void handleCancelLoadPL(ActionEvent event) {
+
+        /* Get the current window into a variable */
+        Stage window = Main.getWindow();
+
+        window.setScene(Main.getStart());
+    }
+
+
+    /**
+     * Populate the file selection scene with buttons corresponding pattern language files
+     *
+     * @throws IOException on error to read files
+     */
+    @FXML
+    public void populateFiles() throws IOException {
+
+        /* List holding the files in current dir */
+        List<Path> files = this.getFiles();
+        /* Dictate the number of columns there should be in the GridPane */
+        List<Button> buttonList = new ArrayList<>();              // Collection to hold created Button objects
+
+        for (Path p: files) {
+
+            String filename = p.toString().substring(2);
+            if (!filename.endsWith(".txt")) {
+                continue;
+            }
+            System.out.println(filename);
+            Button btn = new Button(filename);              // Create the Button
+            btn.setId(Integer.toString(files.indexOf(p)));  // Set button id to its title
+            btn.setOnAction((e) -> this.handlePickFile(e)); // Set button handler to handlePickTemplate
+
+            /* Make buttons the same size */
+            btn.setMaxWidth(MAX_VALUE);
+            HBox.setHgrow(btn, Priority.ALWAYS);
+            btn.setPadding(new Insets(10));
+
+            /* Finally, add the button to the list */
+            buttonList.add(btn);
+        }
+
+
+        /* Add buttons to gui */
+        fileContainer.setSpacing(20);
+        fileContainer.getChildren().clear(); //remove all Buttons that are currently in the container
+        fileContainer.getChildren().addAll(buttonList); // add new Buttons from the list
+
+    }
+
+
+    /**
+     * Handles the click on a button representing a Pattern Language file, setting an instance variable
+     * @param event the button click
+     */
+    private void handlePickFile(ActionEvent event){
+        Control src = (Control)event.getSource();
+        this.selectedFileId = Integer.parseInt(src.getId());
+    }
+
+    /**
+     * Switch to file selection scene
+     * @param event the button click
+     * @throws Exception on failure to load the fxml file
+     */
+    @FXML
+    void renderLoadPL(ActionEvent event) throws Exception {
+        /* Get the current window into a variable */
+        Stage window = Main.getWindow();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("fileView.fxml"));
+        Parent fileViewRoot = loader.load();
+        MainViewController c = loader.getController();
+        c.populateFiles();
+
+        Scene fileView = new Scene(fileViewRoot, 800, 600);
+
+//        window.close();
+//        window.setTitle("Rocking Machines - Patterns Editor");
+        window.setScene(fileView);
+//        window.show();
     }
 
 }
