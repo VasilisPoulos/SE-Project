@@ -11,6 +11,14 @@ public class PatternLanguage extends PatternComposite
 {
     private static Integer plCount = 0;
 
+    private enum ParseType {
+        PL_NAME,
+        PATTERN_NAME,
+        PART_NAME,
+        PART_CONTENTS,
+        EOF
+    }
+
     public PatternLanguage()
     {
         super("Default");
@@ -40,7 +48,6 @@ public class PatternLanguage extends PatternComposite
         List<String> data = new ArrayList<String>();
         Stream<String> lines = Files.lines(filename);
         lines
-                .filter(line -> !line.isEmpty())
                 .forEach(line -> data.add(line));
         lines.close();
 
@@ -62,140 +69,66 @@ public class PatternLanguage extends PatternComposite
         Pattern currentPattern = new Pattern("");
         PatternPart currentPart = new PatternPart("");
 
-        // Flags for whether we are still parsing a name
-        boolean plNameFlag = false;
-        boolean patternNameFlag = false;
-        boolean partNameFlag = false;
-        boolean iterationFlag = false;
+        ParseType flag = ParseType.PL_NAME;
 
         // Variable to hold string up to now
         String currentStr = "";
-        // Temporary variable
-        String tempStr;
+
 
         for (String i: data) {
 
-            if (i.substring(0,4).equals("--- ")) {
-                if (!currentStr.equals("")) {
-                    throw new Exception("File does not contain a valid Pattern Language.");
-                }
+            if (i.isEmpty())
+                continue;
 
-                // Pattern Language name
-                if (i.endsWith(" ---")) {
-                    currentStr += i.substring(4, i.length() - 4);
-                    //  Create new Pattern Language
-                    newPl.setName(currentStr);
-
-                    currentStr = "";
-                    plNameFlag = false;
-                }
-                else {
-                    currentStr += i.substring(4);
-                    plNameFlag = true;
-                    iterationFlag = true;
-                }
-
-            }
-            else if (i.substring(0, 3).equals("-- ")) {
-                // Set contents of Pattern Part
-                currentPart.setContents(currentStr);
-                currentStr = "";
-                // Pattern name
-                if (i.endsWith(" --")) {
-                    currentStr += i.substring(3, i.length() - 3);
-                    // Create Pattern and add to PL
-                    Pattern pattern = new Pattern(currentStr);
-                    newPl.add(pattern);
-                    currentPattern = pattern;
-                    currentStr = "";
-                    patternNameFlag = false;
-                }
-                else {
-                    currentStr += i.substring(3);
-                    patternNameFlag = true;
-                    iterationFlag = true;
-                }
-            }
-            else if (i.substring(0, 2).equals("- ")) {
-                // Set contents of Pattern Part
-                currentPart.setContents(currentStr);
-                currentStr = "";
-                // Pattern Part name
-                if (i.endsWith(" -")) {
-                    currentStr += i.substring(2, i.length() - 2);
-                    // Create Pattern Part and add to current Pattern
-                    PatternPart part = new PatternPart(currentStr);
+            switch (flag) {
+                case PL_NAME:
+                    newPl.setName(i);
+                    flag = ParseType.PATTERN_NAME;
+                    break;
+                case PATTERN_NAME:
+                    currentPattern = new Pattern(i);
+                    newPl.add(currentPattern);
+                    flag = ParseType.PART_NAME;
+                    break;
+                case PART_NAME:
+                    PatternPart part = new PatternPart(i);
                     currentPattern.add(part);
                     currentPart = part;
-
-                    currentStr = "";
-                    partNameFlag = false;
-                }
-                else {
-                    currentStr += i.substring(2);
-                    partNameFlag = true;
-                    iterationFlag = true;
-                }
+                    flag = ParseType.PART_CONTENTS;
+                    break;
+                case PART_CONTENTS:
+                    currentPart.setContents(i);
+                    String line1;
+                    String line2;
+                    // Check for EOF
+                    if (data.indexOf(i) + 1 >= data.size()) {
+                        flag = ParseType.EOF;
+                        break;
+                    }
+                    else if (data.indexOf(i) + 2 >= data.size()) {
+                        line1 = data.get(data.indexOf(i) + 1);
+                        line2 = "";
+                        flag = ParseType.EOF;
+                    }
+                    else {
+                    line1 = data.get(data.indexOf(i) + 1);
+                    line2 = data.get(data.indexOf(i) + 2);
+                    }
+                    if (line1.isEmpty()) {
+                        if (line2.isEmpty())
+                            flag = ParseType.PATTERN_NAME;
+                        else
+                            flag = ParseType.PART_NAME;
+                    }
+                    else {
+                        throw new Exception("ERROR: File does not contain a valid Pattern Language.");
+                    }
+                    break;
+                case EOF:
+                    return newPl;
             }
-            else {
-                // Pattern Part contents
-                currentStr += i;
-            }
-
-            /* Check if we aren't done reading this string */
-            if (plNameFlag) {
-                if (i.endsWith(" ---"))
-                    currentStr += i.substring(0, i.length() - 4);
-                else {
-                    if (iterationFlag)
-                        iterationFlag = false;
-                    else
-                        currentStr += i;
-                }
-                //  Create new Pattern Language
-                newPl.setName(currentStr);
-
-                currentStr = "";
-                plNameFlag = false;
-            }
-            else if (patternNameFlag) {
-                if (i.endsWith(" --"))
-                    currentStr += i.substring(0, i.length() - 3);
-                else {
-                    if (iterationFlag)
-                        iterationFlag = false;
-                    else
-                        currentStr += i;
-                }
-                // Create Pattern and add to PL
-                Pattern pattern = new Pattern(currentStr);
-                newPl.add(pattern);
-                currentPattern = pattern;
-                currentStr = "";
-                patternNameFlag = false;
-            }
-            else if (partNameFlag) {
-                if (i.endsWith(" -"))
-                    currentStr += i.substring(0, i.length() - 2);
-                else {
-                    if (iterationFlag)
-                        iterationFlag = false;
-                    else
-                        currentStr += i;
-                }
-                // Create Pattern Part and add to current Pattern
-                PatternPart part = new PatternPart(currentStr);
-                currentPattern.add(part);
-                currentPart = part;
-
-                currentStr = "";
-                partNameFlag = false;
-            }
-
+            System.out.println(newPl.toString());
         }
-        // Set contents of Pattern Part
-        currentPart.setContents(currentStr);
-
         return newPl;
     }
 

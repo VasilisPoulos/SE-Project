@@ -57,12 +57,10 @@ public class PatternComponent implements Cloneable
 
         if(fileExists) {
             String str;
-            // If this is a pattern name, add dashes so it's easy to parse
             if (this instanceof Pattern)
-                str = "\n-- " + this.name + " --\n\n";
-            // this is a pattern part, so no dashes
+                str = "\n" + this.name + "\n\n";
             else
-                str = "- " + this.name + " -\n";
+                str = this.name + "\n";
 
             byte[] bytes = str.getBytes();
             // Append to the file
@@ -71,8 +69,7 @@ public class PatternComponent implements Cloneable
         }
         // We need to create the file
         else {
-            // Add dashes to the pattern language name so it's easy to parse
-            String str = "--- " + this.name + " ---\n\n\n";
+            String str = this.name + "\n\n";
             byte[] bytes = str.getBytes();
             Files.write(fp, bytes, StandardOpenOption.CREATE);
         }
