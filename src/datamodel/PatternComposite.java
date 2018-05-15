@@ -96,7 +96,7 @@ public abstract class PatternComposite extends PatternComponent {
     public String toString() {
         String list="";
         for(int i=0;i<componentsList.size();i++){
-            list=componentsList.get(i).toString();
+            list += componentsList.get(i).toString() + '\n';
         }
         return list;
     }
