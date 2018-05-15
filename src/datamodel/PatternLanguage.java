@@ -30,6 +30,12 @@ public class PatternLanguage extends PatternComposite
         this.name = name;
     }
 
+    /**
+     * TODO
+     * @param filename
+     * @return
+     * @throws IOException
+     */
     public static PatternLanguage LoadPatternLanguage(Path filename) throws IOException {
         List<String> data = new ArrayList<String>();
         Stream<String> lines = Files.lines(filename);
@@ -42,12 +48,14 @@ public class PatternLanguage extends PatternComposite
     }
 
     /**
-     * TODO: Move to datamodel
      * Parse the Pattern Language from its text file
      * @param data the lines of the file.
      * @return new Pattern Language object parsed from List of String objects
      */
     private static PatternLanguage parsePL(List<String> data) {
+
+        // TODO: create structure checks (consider the following automaton)
+        // TODO:  >PLName -> (Pattern Name -> (Pattern Part Name -> Pattern Part Contents)*)*
         // Placeholder variables
         PatternLanguage newPl = new PatternLanguage();
         Pattern currentPattern = new Pattern("");
