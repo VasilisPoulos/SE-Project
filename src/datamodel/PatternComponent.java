@@ -62,7 +62,7 @@ public class PatternComponent implements Cloneable
                 str = "\n-- " + this.name + " --\n\n";
             // this is a pattern part, so no dashes
             else
-                str = this.name + "\n";
+                str = "- " + this.name + " -\n";
 
             byte[] bytes = str.getBytes();
             // Append to the file

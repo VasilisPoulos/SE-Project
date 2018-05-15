@@ -134,11 +134,13 @@ public class MainViewController {
 
         StringBuilder data = new StringBuilder();
         Stream<String> lines = Files.lines(selectedFilePath);
-        lines.forEach(line -> data.append(line).append("\n"));
+        lines
+                .filter(line -> !line.isEmpty())
+                .forEach(line -> data.append(line).append("\n"));
         lines.close();
 
         System.out.println(data);
-        //TODO: Call a (not yet existing) parsePL method and switch to PLView!
+        //TODO: Call parsePL method and switch to PLView!
     }
 
     /**
@@ -167,6 +169,22 @@ public class MainViewController {
         window.setScene(Main.getStart());
     }
 
+    /**
+     * Parse the Pattern Language from its text file
+     * @param data the lines of the file.
+     */
+    private void parsePL(String[] data) {
+        // TODO: If data[i].substring(0,3) == "---" && data[i].endsWith(" ---\n") -> we have the PL name
+        // TODO: If data[i].substring(0,3) == "-- " && data[i].endsWith(" --\n") -> we have a Pattern name
+        // TODO: If data[i].substring(0,2) == "- " && data[i].endsWith(" -\n") -> we have a Part name
+        // TODO: Blank lines have been removed. From now on, Each line not contained in the above is Part contents.
+        // (which means it is in the else statement) is considered the contents for the previous encountered Part name.
+
+        // TODO: What happens if a name is multi-line?? Check for ending with "---\n" etc
+
+        //TODO: switch to PLView!
+    }
+
 
     /**
      * Populate the file selection scene with buttons corresponding pattern language files
@@ -187,7 +205,6 @@ public class MainViewController {
             if (!filename.endsWith(".txt")) {
                 continue;
             }
-            System.out.println(filename);
             Button btn = new Button(filename);              // Create the Button
             btn.setId(Integer.toString(files.indexOf(p)));  // Set button id to its title
             btn.setOnAction((e) -> this.handlePickFile(e)); // Set button handler to handlePickTemplate
