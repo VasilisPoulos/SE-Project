@@ -1,7 +1,5 @@
 package gui;
-import datamodel.Pattern;
 import datamodel.PatternLanguage;
-import datamodel.PatternPart;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static java.lang.Integer.MAX_VALUE;
 
@@ -139,7 +136,7 @@ public class MainViewController {
         Path selectedFilePath = this.getFiles().get(this.selectedFileId);
 
         try {
-            PatternLanguage newPL = PatternLanguage.LoadPatternLanguage(selectedFilePath);
+            PatternLanguage newPL = PatternLanguage.loadPatternLanguage(selectedFilePath);
             // Switch to PLView
             Main.setPl(newPL);
             this.viewNewPL(Main.getWindow());

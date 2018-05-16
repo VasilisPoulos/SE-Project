@@ -44,7 +44,7 @@ public class PatternLanguage extends PatternComposite
      * @throws Exception if a non-valid pattern language is detected in the file
      * @throws IOException on file read error
      */
-    public static PatternLanguage LoadPatternLanguage(Path filename) throws Exception {
+    public static PatternLanguage loadPatternLanguage(Path filename) throws Exception {
         List<String> data = new ArrayList<String>();
         Stream<String> lines = Files.lines(filename);
         lines
@@ -124,7 +124,6 @@ public class PatternLanguage extends PatternComposite
                 case EOF:
                     return newPl;
             }
-            System.out.println(newPl.toString());
         }
         return newPl;
     }

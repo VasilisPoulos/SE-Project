@@ -20,6 +20,10 @@ class PatternPartTest {
 
         Path firstFp = Paths.get("./first.txt");
         Path secondFp = Paths.get("./second.txt");
+
+        Files.createFile(firstFp);
+        Files.createFile(secondFp);
+
         /* save to .txt */
         first.saveContents(firstFp);
         second.saveContents(secondFp);
