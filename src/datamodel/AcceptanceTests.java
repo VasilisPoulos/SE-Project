@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class AcceptanceTests{
@@ -209,7 +210,10 @@ class AcceptanceTests{
 
         PatternLanguage newPL = PatternLanguage.loadPatternLanguage(filename);
 
+        // Should have the same name, patterns, parts and contents...
         assertEquals(pl.toString(), newPL.toString());
+        // ...but not be the same object!
+        assertNotEquals(pl, newPL);
 
         if (Files.exists(tmp)){
             Files.walk(tmp)

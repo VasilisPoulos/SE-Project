@@ -105,7 +105,6 @@ public class PatternLanguage extends PatternComposite
                     else if (data.indexOf(i) + 2 >= data.size()) {
                         line1 = data.get(data.indexOf(i) + 1);
                         line2 = "";
-                        flag = ParseType.EOF;
                     }
                     else {
                     line1 = data.get(data.indexOf(i) + 1);
