@@ -71,14 +71,18 @@ public class PatternLanguage extends PatternComposite
 
         // Flag to hold information about what we might parse next
         ParseType flag = ParseType.PL_NAME;
+        // Flag to hold whether the PL being parsed is decorated
+        boolean isDecorated = false;
 
         for (String i: data) {
 
             if (i.isEmpty())
                 continue;
             if (i.contains("\\documentclass{article}") || i.contains("\\begin{document}")
-                    || i.contains("\\maketitle") || i.contains("\\end{document}"))
+                    || i.contains("\\maketitle") || i.contains("\\end{document}")) {
+                isDecorated = true;
                 continue;
+            }
 
             switch (flag) {
                 case PL_NAME:
@@ -94,6 +98,8 @@ public class PatternLanguage extends PatternComposite
                     if (i.contains("\\section{")) {
                         i = i.substring(9, i.length()-1);
                     }
+                    i = i.replace("\\#", "#");
+                    i = i.replace("\\%", "%");
                     currentPattern = new Pattern(i);
                     newPl.add(currentPattern);
                     flag = ParseType.PART_NAME;
@@ -102,6 +108,8 @@ public class PatternLanguage extends PatternComposite
                     if (i.contains("\\subsection{")) {
                         i = i.substring(12, i.length()-1);
                     }
+                    i = i.replace("\\#", "#");
+                    i = i.replace("\\%", "%");
                     PatternPart part = new PatternPart(i);
                     currentPattern.add(part);
                     currentPart = part;
@@ -135,8 +143,14 @@ public class PatternLanguage extends PatternComposite
                     }
                     break;
                 case EOF:
-                    return newPl;
+                    break;
             }
+        }
+        if (isDecorated) {
+            LatexDecoratorFactory ldf =  new LatexDecoratorFactory();
+            Decorator decoratedPL = ldf.createLanguageDecorator(newPl);
+            decoratedPL.decorateComponents(ldf);
+            return decoratedPL;
         }
         return newPl;
     }
