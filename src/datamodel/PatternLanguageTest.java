@@ -28,6 +28,7 @@ class PatternLanguageTest
         pattern.add(part_4);
 
         pattern.decorateComponents(fc);
+
         decoratedObject = (Decorator) pattern.componentsList.get(0);
         assertEquals("\\subsection{1}",decoratedObject.getBeginTag());
         assertEquals("",decoratedObject.getEndTag());

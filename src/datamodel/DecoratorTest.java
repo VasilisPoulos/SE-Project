@@ -20,7 +20,7 @@ class DecoratorTest
         PatternLanguage patternLanguage = new PatternLanguage("PatternLanguage Name");
 
         decorated = fc.createLanguageDecorator(patternLanguage);
-        
+
         assertEquals("\\title{PatternLanguage Name}", decorated.getBeginTag());
         assertEquals("\\maketitle", decorated.getEndTag());
     }

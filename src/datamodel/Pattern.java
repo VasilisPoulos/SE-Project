@@ -28,7 +28,7 @@ public class Pattern extends PatternComposite
     {
         for (int i=0; i<componentsList.size(); i++)
         {
-            PatternComponent  part = componentsList.get(i);
+            PatternPart  part = (PatternPart) componentsList.get(i);
             Decorator decoratedPart = latexDecoratorFactory.createPartDecorator(part);
             componentsList.set(i, decoratedPart);
         }

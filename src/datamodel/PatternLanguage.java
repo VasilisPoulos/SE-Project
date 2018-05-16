@@ -143,7 +143,7 @@ public class PatternLanguage extends PatternComposite
         {
             pattern = (Pattern) componentsList.get(i);
             pattern.decorateComponents(latexDecoratorFactory);
-            componentsList.set(i, latexDecoratorFactory.createPatternDecorator(componentsList.get(i)));
+            componentsList.set(i, latexDecoratorFactory.createPatternDecorator(pattern));
         }
     }
 

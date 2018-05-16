@@ -20,7 +20,7 @@ public class LatexDecoratorFactory implements DecoratorAbstractFactory {
     /**
      * @return decorated Pattern object
      */
-    public  Decorator createPatternDecorator(PatternComponent pattern)
+    public Decorator createPatternDecorator(Pattern pattern)
     {
         Decorator decoratedPattern = new Decorator(
                 pattern.getName(),
@@ -34,7 +34,7 @@ public class LatexDecoratorFactory implements DecoratorAbstractFactory {
     /**
      * @return decorated Pattern Part object
      */
-    public  Decorator createPartDecorator(PatternComponent part)
+    public Decorator createPartDecorator(PatternPart part)
     {
         Decorator decoratedPart = new Decorator(
                 part.getName(),
