@@ -129,8 +129,9 @@ public class MainViewController {
     }
 
     /**
-     *
-     * @throws Exception
+     * Handles the Load button for loading a Pattern Language
+     * @throws Exception on incorrect file structure
+     * @throws IOException on failure to read from files
      */
     public void handleLoadPL() throws Exception {
 

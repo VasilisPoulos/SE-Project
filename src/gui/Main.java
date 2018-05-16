@@ -54,7 +54,6 @@ public class Main extends Application {
      *************************/
 
     /**
-     *
      * @return window
      */
     public static Stage getWindow() {

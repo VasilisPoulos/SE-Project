@@ -58,7 +58,7 @@ public class PatternLanguage extends PatternComposite
     /**
      * Parse the Pattern Language from its text file
      * @param data the lines of the file.
-     * @return new Pattern Language object parsed from List of String objects
+     * @return new Pattern Language parsed from List of String objects
      * @throws Exception if a non-valid pattern language is detected in the file
      * @throws IOException on file read error
      */
@@ -71,18 +71,14 @@ public class PatternLanguage extends PatternComposite
 
         // Flag to hold information about what we might parse next
         ParseType flag = ParseType.PL_NAME;
-        // Flag to hold whether PL is decorated
-        boolean isDecorated = false;
 
         for (String i: data) {
 
             if (i.isEmpty())
                 continue;
             if (i.contains("\\documentclass{article}") || i.contains("\\begin{document}")
-                    || i.contains("\\maketitle") || i.contains("\\end{document}")) {
-                isDecorated = true;
+                    || i.contains("\\maketitle") || i.contains("\\end{document}"))
                 continue;
-            }
 
             switch (flag) {
                 case PL_NAME:

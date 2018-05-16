@@ -312,7 +312,7 @@ public class PLViewController {
     /**
      * Saves the Pattern Language to a text file
      *
-     * @throws IOException on file error
+     * @throws IOException on file write or open error
      */
     private void savePL() throws IOException {
         PatternLanguage pl = Main.getPl();
@@ -388,6 +388,7 @@ public class PLViewController {
                 return;
             }
         }
+        /* The saving happens here */
         try {
             if (Main.getPlDecorator() == null) {
                 pl.saveName(fp);
@@ -429,6 +430,10 @@ public class PLViewController {
         Files.deleteIfExists(tmp);
     }
 
+    /**
+     * Decorates the Pattern Language with LaTeX commands
+     * @param event the button click
+     */
     public void decoratePL(ActionEvent event) {
         LatexDecoratorFactory ldf =  new LatexDecoratorFactory();
         Main.setPl(ldf.createLanguageDecorator(Main.getPl()));
