@@ -43,6 +43,5 @@ public class Decorator extends PatternComposite {
     @Override
     public void decorateComponents(LatexDecoratorFactory latexDecoratorFactory)
     {
-
     }
 }

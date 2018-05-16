@@ -131,8 +131,11 @@ public class PatternLanguage extends PatternComposite
     @Override
     public void decorateComponents(LatexDecoratorFactory latexDecoratorFactory)
     {
+        Pattern pattern;
         for (int i=0; i<componentsList.size(); i++)
         {
+            pattern = (Pattern) componentsList.get(i);
+            pattern.decorateComponents(latexDecoratorFactory);
             componentsList.set(i, latexDecoratorFactory.createPatternDecorator(componentsList.get(i)));
         }
     }
