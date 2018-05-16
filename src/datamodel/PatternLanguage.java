@@ -44,7 +44,7 @@ public class PatternLanguage extends PatternComposite
      * @throws Exception if a non-valid pattern language is detected in the file
      * @throws IOException on file read error
      */
-    public static PatternLanguage loadPatternLanguage(Path filename) throws Exception {
+    public static PatternComposite loadPatternLanguage(Path filename) throws Exception {
         List<String> data = new ArrayList<String>();
         Stream<String> lines = Files.lines(filename);
         lines
@@ -62,7 +62,7 @@ public class PatternLanguage extends PatternComposite
      * @throws Exception if a non-valid pattern language is detected in the file
      * @throws IOException on file read error
      */
-    private static PatternLanguage parsePL(List<String> data) throws Exception {
+    private static PatternComposite parsePL(List<String> data) throws Exception {
 
         // Placeholder variables
         PatternLanguage newPl = new PatternLanguage();
@@ -71,14 +71,18 @@ public class PatternLanguage extends PatternComposite
 
         // Flag to hold information about what we might parse next
         ParseType flag = ParseType.PL_NAME;
+        // Flag to hold whether PL is decorated
+        boolean isDecorated = false;
 
         for (String i: data) {
 
             if (i.isEmpty())
                 continue;
             if (i.contains("\\documentclass{article}") || i.contains("\\begin{document}")
-                    || i.contains("\\maketitle") || i.contains("\\end{document}"))
+                    || i.contains("\\maketitle") || i.contains("\\end{document}")) {
+                isDecorated = true;
                 continue;
+            }
 
             switch (flag) {
                 case PL_NAME:

@@ -208,7 +208,7 @@ class AcceptanceTests{
         pl.saveName(filename);
         pl.saveContents(filename);
 
-        PatternLanguage newPL = PatternLanguage.loadPatternLanguage(filename);
+        PatternLanguage newPL = (PatternLanguage) PatternLanguage.loadPatternLanguage(filename);
 
         // Should have the same name, patterns, parts and contents...
         assertEquals(pl.toString(), newPL.toString());

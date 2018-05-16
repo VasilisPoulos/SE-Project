@@ -431,7 +431,7 @@ public class PLViewController {
 
     public void decoratePL(ActionEvent event) {
         LatexDecoratorFactory ldf =  new LatexDecoratorFactory();
-        Main.setPl(ldf.createLanguageDecorator((PatternLanguage) Main.getPl()));
+        Main.setPl(ldf.createLanguageDecorator(Main.getPl()));
         Main.getPl().decorateComponents(ldf);
         this.renderPLView(Main.getWindow());
     }

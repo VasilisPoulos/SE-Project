@@ -1,4 +1,5 @@
 package gui;
+import datamodel.PatternComposite;
 import datamodel.PatternLanguage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -136,9 +137,8 @@ public class MainViewController {
         Path selectedFilePath = this.getFiles().get(this.selectedFileId);
 
         try {
-            PatternLanguage newPL = PatternLanguage.loadPatternLanguage(selectedFilePath);
+            Main.setPl(PatternLanguage.loadPatternLanguage(selectedFilePath));
             // Switch to PLView
-            Main.setPl(newPL);
             this.viewNewPL(Main.getWindow());
         }
         catch (Exception e) {
