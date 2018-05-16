@@ -1,6 +1,8 @@
 package gui;
 
 import datamodel.*;
+import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
@@ -12,6 +14,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
@@ -83,11 +87,11 @@ public class PLViewController {
     private void populatePatterns() {
 
         /* ArrayList holding the patterns in the pattern language */
-        PatternComponent realPL;
-        if (Main.getPl() instanceof Decorator)
-            realPL = Main.getPl().getComponentsList().get(0);
-        else
-            realPL = Main.getPl();
+        PatternComponent realPL = Main.getPl();
+//        if (Main.getPl() instanceof Decorator)
+//            realPL = Main.getPl().getComponentsList().get(0);
+//        else
+//            realPL = Main.getPl();
         ArrayList<PatternComponent> patternsList = ((PatternLanguage) realPL).getComponentsList();
 
         /* Dictate the number of columns there should be in the GridPane */
@@ -208,22 +212,32 @@ public class PLViewController {
             /* hold the pattern the user wants to edit in local variable and set it in the static variable
              * if the pattern is not found (unexpected behaviour), throw an exception
              */
-            Boolean flag = true;
-            for (PatternComponent i: Main.getPl().getComponentsList()) {
-                if (Main.getPl().getComponentsList().indexOf(i) == this.selectedPatternId) {
-                    PatternComponent realPattern;
-                    if (i instanceof Decorator) {
-                        realPattern = ((PatternComposite) i).getComponentsList().get(0);
-//                        realPattern = ((PatternComposite) realPattern).getComponentsList().get(0);
-                    }
-                    else
-                        realPattern = i;
-                    Main.setCurrentPattern((PatternComposite) realPattern);
-                    flag = false;
-                }
-            }
-            if (flag) {
-                throw new Exception("Could not find pattern. Please report this issue on https://github.com/VasilisPoulos/SE-Project/issues/new");
+            boolean flag = true;
+
+            try {
+                Main.setCurrentPattern((PatternComposite) Main.getPl().getComponentsList().get(this.selectedPatternId));
+            } catch (IndexOutOfBoundsException e) {
+
+                final WebView browser = new WebView();
+                final WebEngine webEngine = browser.getEngine();
+
+                HostServices hostServices;
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Dialog");
+                alert.setHeaderText("Could not find pattern.");
+                alert.setContentText("Please report this issue on GitHub");
+
+                FlowPane fp = new FlowPane();
+                Label lbl = new Label("Report issue in ");
+                Hyperlink link = new Hyperlink("https://github.com/VasilisPoulos/SE-Project/issues/new");
+                fp.getChildren().addAll( lbl, link);
+
+                link.setOnAction( (evt) -> {
+                    alert.close();
+                    webEngine.load(link.toString());
+                });
+
+                alert.getDialogPane().contentProperty().set( fp );
             }
 
             /* Get the current window into a variable */
@@ -343,7 +357,7 @@ public class PLViewController {
                         dialog.close();
                         Alert err = new Alert(Alert.AlertType.ERROR);
                         err.setTitle("Error Dialog");
-                        err.setHeaderText("Patten Language not saved.");
+                        err.setHeaderText("Pattern Language not saved.");
                         err.setContentText("File \"" + p.toString() + "\" already exists.");
                         err.showAndWait();
                     }

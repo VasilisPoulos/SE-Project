@@ -136,11 +136,11 @@ public class PatternViewController {
      */
     public void populatePatternParts() {
         /* Holds the individual parts/sections of the pattern we're currently editing */
-        PatternComponent realPattern;
-        if (Main.getCurrentPattern() instanceof Decorator)
-             realPattern = Main.getCurrentPattern().getComponentsList().get(0);
-        else
-            realPattern = Main.getCurrentPattern();
+        PatternComponent realPattern = Main.getCurrentPattern();
+//        if (Main.getCurrentPattern() instanceof Decorator)
+//             realPattern = Main.getCurrentPattern().getComponentsList().get(0);
+//        else
+//            realPattern = Main.getCurrentPattern();
 
         ArrayList<PatternComponent> partsList = ((Pattern)realPattern).getComponentsList();
 

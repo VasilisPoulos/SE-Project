@@ -85,16 +85,26 @@ public class Main extends Application {
         return templateFactory;
     }
 
-    public static PatternComposite getPl() {
-        return pl;
+    public static PatternLanguage getPl() {
+        PatternComponent realPL;
+        if (pl instanceof Decorator)
+            realPL = pl.getComponentsList().get(0);
+        else
+            realPL = pl;
+        return (PatternLanguage) realPL;
     }
 
     public static void setPl(PatternComposite pl) {
         Main.pl = pl;
     }
 
-    public static PatternComposite getCurrentPattern() {
-        return currentPattern;
+    public static Pattern getCurrentPattern() {
+        PatternComponent realPattern;
+        if (currentPattern instanceof Decorator)
+            realPattern = currentPattern.getComponentsList().get(0);
+        else
+            realPattern = currentPattern;
+        return (Pattern) realPattern;
     }
 
     public static void setCurrentPattern(PatternComposite currentPattern) {
