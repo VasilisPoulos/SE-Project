@@ -135,14 +135,9 @@ public class PatternViewController {
      * they see fit.
      */
     public void populatePatternParts() {
-        /* Holds the individual parts/sections of the pattern we're currently editing */
-        PatternComponent realPattern = Main.getCurrentPattern();
-//        if (Main.getCurrentPattern() instanceof Decorator)
-//             realPattern = Main.getCurrentPattern().getComponentsList().get(0);
-//        else
-//            realPattern = Main.getCurrentPattern();
 
-        ArrayList<PatternComponent> partsList = ((Pattern)realPattern).getComponentsList();
+        /* Holds the individual parts/sections of the pattern we're currently editing */
+        ArrayList<PatternComponent> partsList = Main.getCurrentPattern().getComponentsList();
 
         /* Dictate the column number of the GridPane */
         int size = partsList.size();
@@ -192,7 +187,14 @@ public class PatternViewController {
 
 
         /* Iterate through the list of pattern parts/sections */
-        for (PatternComponent part: partsList) {
+        for (PatternComponent partUnchecked: partsList) {
+
+            PatternComponent part;
+            if (partUnchecked instanceof Decorator)
+                part = ((PatternComposite) partUnchecked).getComponentsList().get(0);
+            else
+                part = partUnchecked;
+
             if (col >= gpCols) {
                 col = 0;
                 row++;

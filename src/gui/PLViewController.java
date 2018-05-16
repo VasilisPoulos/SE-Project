@@ -87,12 +87,8 @@ public class PLViewController {
     private void populatePatterns() {
 
         /* ArrayList holding the patterns in the pattern language */
-        PatternComponent realPL = Main.getPl();
-//        if (Main.getPl() instanceof Decorator)
-//            realPL = Main.getPl().getComponentsList().get(0);
-//        else
-//            realPL = Main.getPl();
-        ArrayList<PatternComponent> patternsList = ((PatternLanguage) realPL).getComponentsList();
+
+        ArrayList<PatternComponent> patternsList = Main.getPl().getComponentsList();
 
         /* Dictate the number of columns there should be in the GridPane */
         int size = patternsList.size();
@@ -221,7 +217,6 @@ public class PLViewController {
                 final WebView browser = new WebView();
                 final WebEngine webEngine = browser.getEngine();
 
-                HostServices hostServices;
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Dialog");
                 alert.setHeaderText("Could not find pattern.");
