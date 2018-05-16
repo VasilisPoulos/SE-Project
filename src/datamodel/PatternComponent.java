@@ -64,7 +64,7 @@ public class PatternComponent implements Cloneable
             }
             else {
                 if (this.getClass() == Decorator.class)
-                    str = ((Decorator) this).getBeginTag() + "\n";
+                    str = "\t" + ((Decorator) this).getBeginTag() + "\n";
                 else str = this.name + "\n";
             }
             byte[] bytes = str.getBytes();
@@ -78,6 +78,7 @@ public class PatternComponent implements Cloneable
             if (this.getClass() == Decorator.class)
                 str = ((Decorator) this).getBeginTag() + "\n\n";
             else str = this.name + "\n\n";
+            System.out.println(str);
             byte[] bytes = str.getBytes();
             Files.write(fp, bytes, StandardOpenOption.CREATE);
         }

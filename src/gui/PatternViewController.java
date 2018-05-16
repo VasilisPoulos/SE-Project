@@ -142,8 +142,6 @@ public class PatternViewController {
         else
             realPattern = Main.getCurrentPattern();
 
-        System.out.println(realPattern.getClass().toString());
-
         ArrayList<PatternComponent> partsList = ((Pattern)realPattern).getComponentsList();
 
         /* Dictate the column number of the GridPane */

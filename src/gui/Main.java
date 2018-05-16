@@ -15,7 +15,7 @@ public class Main extends Application {
     private static Scene plView;                        // Pattern Language view
     private static Scene patternView;                   // Pattern Edit view
     private static TemplateFactory templateFactory;     // TemplateFactory object used for initialization
-    private static PatternLanguage pl;                  // The Pattern Language we're working on
+    private static PatternComposite pl;                 // The Pattern Language we're working on
     private static PatternComposite currentPattern;     // The Pattern we're currently editing
 
 
@@ -85,11 +85,11 @@ public class Main extends Application {
         return templateFactory;
     }
 
-    public static PatternLanguage getPl() {
+    public static PatternComposite getPl() {
         return pl;
     }
 
-    public static void setPl(PatternLanguage pl) {
+    public static void setPl(PatternComposite pl) {
         Main.pl = pl;
     }
 

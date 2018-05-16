@@ -27,7 +27,7 @@ public class PLViewController {
 
     @FXML private Text plTitle;
     @FXML private Pane patternContainer;
-    private String selectedPatternId = null;
+    private Integer selectedPatternId = null;
 
 
     /**
@@ -83,7 +83,12 @@ public class PLViewController {
     private void populatePatterns() {
 
         /* ArrayList holding the patterns in the pattern language */
-        ArrayList<PatternComponent> patternsList = Main.getPl().getComponentsList();
+        PatternComponent realPL;
+        if (Main.getPl() instanceof Decorator)
+            realPL = Main.getPl().getComponentsList().get(0);
+        else
+            realPL = Main.getPl();
+        ArrayList<PatternComponent> patternsList = ((PatternLanguage) realPL).getComponentsList();
 
         /* Dictate the number of columns there should be in the GridPane */
         int size = patternsList.size();
@@ -115,7 +120,7 @@ public class PLViewController {
             /* Pattern name is used as the Button name & id */
             String name = pattern.getName();
             Button btn = new Button(name);                      // Create the Button
-            btn.setId(name);                                    // Set button id to its title
+            btn.setId(Integer.toString(Main.getPl().getComponentsList().indexOf(pattern)));                                    // Set button id to its title
             btn.setOnAction((e) -> this.handlePickPattern(e));  // Set button handler to handlePickTemplate
 
             /* Set the buttons to be the same size */
@@ -142,7 +147,7 @@ public class PLViewController {
      */
     private void handlePickPattern(ActionEvent event) {
         Control src = (Control)event.getSource();
-        this.selectedPatternId = src.getId();
+        this.selectedPatternId = Integer.parseInt(src.getId());
     }
 
     /**
@@ -153,7 +158,7 @@ public class PLViewController {
      */
     public void handleDeletePattern(ActionEvent event) {
         /* Show error dialog if no pattern is picked for removal */
-        if (this.selectedPatternId == null || this.selectedPatternId.isEmpty()) {
+        if (this.selectedPatternId == null) {
 
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
@@ -165,12 +170,13 @@ public class PLViewController {
         else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning Dialog");
-            alert.setHeaderText("Are you sure you want to delete " + this.selectedPatternId + "?");
-            alert.setContentText("All patterns named " + this.selectedPatternId + " will be deleted!");
+            alert.setHeaderText("Are you sure you want to delete this pattern?");
+            alert.setContentText("Pattern \"" + Main.getPl().getComponentsList().get(this.selectedPatternId).getName() + "\" will be deleted!");
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                Main.getPl().remove(this.selectedPatternId);
+                PatternComponent p = Main.getPl().getComponentsList().get(this.selectedPatternId);
+                Main.getPl().remove(p.getName());
                 this.selectedPatternId = null;
                 this.renderPLView((Stage) ((Node)event.getSource()).getScene().getWindow());
             }
@@ -190,7 +196,7 @@ public class PLViewController {
     public void handleEditPattern(ActionEvent event) throws Exception {
 
         /* Show an error dialog if no pattern was chosen for editing */
-        if (this.selectedPatternId == null || this.selectedPatternId.isEmpty()) {
+        if (this.selectedPatternId == null) {
 
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
@@ -204,13 +210,20 @@ public class PLViewController {
              */
             Boolean flag = true;
             for (PatternComponent i: Main.getPl().getComponentsList()) {
-                if (i.getName().equals(this.selectedPatternId)) {
-                    Main.setCurrentPattern((PatternComposite) i);
+                if (Main.getPl().getComponentsList().indexOf(i) == this.selectedPatternId) {
+                    PatternComponent realPattern;
+                    if (i instanceof Decorator) {
+                        realPattern = ((PatternComposite) i).getComponentsList().get(0);
+//                        realPattern = ((PatternComposite) realPattern).getComponentsList().get(0);
+                    }
+                    else
+                        realPattern = i;
+                    Main.setCurrentPattern((PatternComposite) realPattern);
                     flag = false;
                 }
             }
             if (flag) {
-                throw new Exception("Could not find pattern. Unexpected behaviour. Please report this issue on https://github.com/VasilisPoulos/SE-Project/issues/new");
+                throw new Exception("Could not find pattern. Please report this issue on https://github.com/VasilisPoulos/SE-Project/issues/new");
             }
 
             /* Get the current window into a variable */
@@ -259,7 +272,7 @@ public class PLViewController {
      * @throws IOException on file error
      */
     public void handleSavePL(ActionEvent event) throws IOException {
-        PatternLanguage pl = Main.getPl();
+        PatternComposite pl = Main.getPl();
         // Ask the user whether to save empty Pattern Language
         if (pl.getComponentsList().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -269,7 +282,7 @@ public class PLViewController {
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                this.savePL(pl);
+                this.savePL((PatternLanguage) pl);
                 alert.close();
             }
             else {
@@ -277,7 +290,7 @@ public class PLViewController {
             }
         }
         else {
-            this.savePL(pl);
+            this.savePL((PatternLanguage) pl);
         }
     }
 
@@ -378,10 +391,9 @@ public class PLViewController {
 
     public void decoratePL(ActionEvent event) {
         LatexDecoratorFactory ldf =  new LatexDecoratorFactory();
-        ldf.createLanguageDecorator(Main.getPl());
+        Main.setPl(ldf.createLanguageDecorator((PatternLanguage) Main.getPl()));
         Main.getPl().decorateComponents(ldf);
-        this.populatePatterns();
-//        System.out.println(Main.getPl().toString());
+        this.renderPLView(Main.getWindow());
     }
 
 

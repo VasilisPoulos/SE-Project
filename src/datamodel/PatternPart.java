@@ -57,7 +57,11 @@ public class PatternPart extends PatternComponent
     public void saveContents(Path fp) throws IOException {
         boolean fileExists = Files.exists(fp);
         // Add 2 newlines, one to escape from the current line and another for readability
-        String str = this.contents + "\n\n";
+        String str;
+        if (this.getChild().getClass() == Decorator.class) {
+            str = "\t" + this.contents + "\n\n";
+        }
+        else str = this.contents + "\n\n";
         byte[] bytes = str.getBytes();
         if(fileExists) {
             // Append to the file
