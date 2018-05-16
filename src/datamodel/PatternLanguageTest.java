@@ -39,5 +39,37 @@ class PatternLanguageTest
         assertEquals("",decoratedObject.getEndTag());
     }
 
+    @Test
+    void shouldDecorateAllParts()
+    {
+        LatexDecoratorFactory fc = new LatexDecoratorFactory();
+        Decorator decoratedObject;
+        Pattern pattern = new Pattern("Pattern Name");
+        PatternPart part_1 = new PatternPart("1");
+        PatternPart part_2 = new PatternPart("2");
+        PatternPart part_3 = new PatternPart("3");
+        PatternPart part_4 = new PatternPart("4");
+        pattern.add(part_1);
+        pattern.add(part_2);
+        pattern.add(part_3);
+        pattern.add(part_4);
+
+        pattern.decorateComponents(fc);
+        decoratedObject = (Decorator) pattern.componentsList.get(0);
+        assertEquals("\\subsection{1}",decoratedObject.getBeginTag());
+        assertEquals("",decoratedObject.getEndTag());
+
+        decoratedObject = (Decorator) pattern.componentsList.get(1);
+        assertEquals("\\subsection{2}",decoratedObject.getBeginTag());
+        assertEquals("",decoratedObject.getEndTag());
+
+        decoratedObject = (Decorator) pattern.componentsList.get(2);
+        assertEquals("\\subsection{3}",decoratedObject.getBeginTag());
+        assertEquals("",decoratedObject.getEndTag());
+
+        decoratedObject = (Decorator) pattern.componentsList.get(3);
+        assertEquals("\\subsection{4}",decoratedObject.getBeginTag());
+        assertEquals("",decoratedObject.getEndTag());
+    }
 
 }

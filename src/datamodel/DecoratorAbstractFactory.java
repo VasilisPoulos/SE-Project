@@ -6,5 +6,5 @@ public interface DecoratorAbstractFactory {
 
     public PatternComponent createPatternDecorator(PatternComponent pattern);
 
-    public PatternComponent createPartDecorator(PatternPart part);
+    public PatternComponent createPartDecorator(PatternComponent part);
 }

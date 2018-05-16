@@ -34,7 +34,7 @@ public class LatexDecoratorFactory implements DecoratorAbstractFactory {
     /**
      * @return decorated Pattern Part object
      */
-    public  Decorator createPartDecorator(PatternPart part)
+    public  Decorator createPartDecorator(PatternComponent part)
     {
         Decorator decoratedPart = new Decorator(
                 "",

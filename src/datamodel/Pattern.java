@@ -20,6 +20,10 @@ public class Pattern extends PatternComposite
     @Override
     public void decorateComponents(LatexDecoratorFactory latexDecoratorFactory)
     {
+        for (int i=0; i<componentsList.size(); i++)
+        {
+            componentsList.set(i, latexDecoratorFactory.createPartDecorator(componentsList.get(i)));
+        }
     }
 
 
