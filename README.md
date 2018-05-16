@@ -21,3 +21,7 @@ You can either:
 For Intellij, there is an option to run all tests in datamodel.
 If you are using the .jar file, run the tests manually.
 
+```sh
+shell commands here
+ls -l
+```
