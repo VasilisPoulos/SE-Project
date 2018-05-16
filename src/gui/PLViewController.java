@@ -31,6 +31,7 @@ public class PLViewController {
 
     @FXML private Text plTitle;
     @FXML private Pane patternContainer;
+    @FXML private Button decorateBtn;
     private Integer selectedPatternId = null;
 
 
@@ -264,6 +265,9 @@ public class PLViewController {
 
         this.setTitle(Main.getPl().getName());
         this.populatePatterns();
+
+        if (Main.getPlDecorator() != null)
+            decorateBtn.setDisable(true);
 
         this.selectedPatternId = null;
         /* Close pop-up window and change the window variable to the primaryStage */

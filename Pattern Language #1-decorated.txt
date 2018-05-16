@@ -1,0 +1,25 @@
+\documentclass{article}
+
+\title{Pattern Language #1}
+
+\begin{document}
+
+\maketitle
+
+
+\section{Micro-Pattern}
+
+\subsection{Name}
+What shall this pattern be called by practitioners?
+
+\subsection{Template}
+Which template is followed for the pattern specification?
+
+\subsection{Problem}
+What is motivating us to apply this pattern?
+
+\subsection{Solution}
+How do we solve the problem?
+
+\end{document}
+

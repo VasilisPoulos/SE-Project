@@ -54,7 +54,6 @@ public class PatternComponent implements Cloneable
      */
     public void saveName(Path fp) throws IOException {
         boolean fileExists = Files.exists(fp);
-
         String str;
         if(fileExists) {
             if (this.getClass() == Decorator.class) {
@@ -64,7 +63,7 @@ public class PatternComponent implements Cloneable
                 else if (((PatternComposite) this).getComponentsList().get(0) instanceof PatternLanguage)
                     str = ((Decorator) this).getBeginTag() + "\n\n";
                 else
-                    str = "\t" + ((Decorator) this).getBeginTag() + "\n";
+                    str = ((Decorator) this).getBeginTag() + "\n";
             }
             else {
                 if (this instanceof Pattern) {

@@ -15,18 +15,3 @@ What is motivating us to apply this pattern?
 Solution
 How do we solve the problem?
 
-
-Micro-Pattern-1
-
-Name
-What shall this pattern be called by practitioners?
-
-Template
-Which template is followed for the pattern specification?
-
-Problem
-What is motivating us to apply this pattern?
-
-Solution
-How do we solve the problem?
-

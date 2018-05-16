@@ -37,6 +37,12 @@ public class Decorator extends PatternComposite {
         bytes = str.getBytes();
         Files.write(fp, bytes, StandardOpenOption.APPEND);
 
+        // Add \maketitle to show title and date
+        str = "\\maketitle\n\n";
+        bytes = str.getBytes();
+        Files.write(fp, bytes, StandardOpenOption.APPEND);
+
+
         // Add contents
         this.saveContents(fp);
 

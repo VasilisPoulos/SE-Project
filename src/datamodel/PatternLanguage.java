@@ -76,18 +76,30 @@ public class PatternLanguage extends PatternComposite
 
             if (i.isEmpty())
                 continue;
+            if (i.contains("\\documentclass{article}") || i.contains("\\begin{document}")
+                    || i.contains("\\maketitle") || i.contains("\\end{document}"))
+                continue;
 
             switch (flag) {
                 case PL_NAME:
+                    if (i.contains("\\title{")) {
+                        i = i.substring(7, i.length()-1);
+                    }
                     newPl.setName(i);
                     flag = ParseType.PATTERN_NAME;
                     break;
                 case PATTERN_NAME:
+                    if (i.contains("\\section{")) {
+                        i = i.substring(9, i.length()-1);
+                    }
                     currentPattern = new Pattern(i);
                     newPl.add(currentPattern);
                     flag = ParseType.PART_NAME;
                     break;
                 case PART_NAME:
+                    if (i.contains("\\subsection{")) {
+                        i = i.substring(12, i.length()-1);
+                    }
                     PatternPart part = new PatternPart(i);
                     currentPattern.add(part);
                     currentPart = part;

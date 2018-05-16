@@ -42,10 +42,12 @@ public abstract class PatternComposite extends PatternComponent {
         if(fileExists) {
             // Iterate through the list and write the names and contents of each element to the text file
             for (PatternComponent i: this.componentsList) {
-                if (i instanceof Decorator) {
-                    System.out.println(i.toString());
+                if (this instanceof Decorator) {
+                    if (i instanceof Decorator)
+                        i.saveName(fp);
                 }
-                i.saveName(fp);
+                else
+                    i.saveName(fp);
                 i.saveContents(fp);
             }
         }
