@@ -12,7 +12,22 @@ public class Decorator extends PatternComposite {
         this.endTag = endTag;
     }
 
+    /**
+     * Saves the decorated document
+     *
+     *  Save begin tag
+     *  call save on decorated object
+     *  then save end tag
+     */
     public void saveName()
+    {
+
+    }
+
+    /**
+     * Delegate calls to saveContents methods of objects
+     */
+    public void saveContents()
     {
 
     }

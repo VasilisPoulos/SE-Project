@@ -20,7 +20,7 @@ public class LatexDecoratorFactory implements DecoratorAbstractFactory {
     /**
      * @return decorated Pattern object
      */
-    public  Decorator createPatternDecorator(Pattern pattern)
+    public  Decorator createPatternDecorator(PatternComponent pattern)
     {
         Decorator decoratedPattern = new Decorator(
                 "",
