@@ -6,6 +6,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DecoratorTest
 {
+
+    /**
+     * Tests on LatexDecoratorFactory's methods.
+     *
+     * TODO: probably should be renamed to LatexDecoratorFactoryTest.
+     */
     @Test
     void shouldDecoratePatternLanguage()
     {

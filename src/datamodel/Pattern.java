@@ -17,6 +17,12 @@ public class Pattern extends PatternComposite
         super(name);
     }
 
+    /**
+     * Iterates through a patterns componentList and replaces each object with
+     * a decorated one.
+     *
+     * @param latexDecoratorFactory object to use createPartDecorator()
+     */
     @Override
     public void decorateComponents(LatexDecoratorFactory latexDecoratorFactory)
     {

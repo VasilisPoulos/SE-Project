@@ -127,7 +127,14 @@ public class PatternLanguage extends PatternComposite
         return newPl;
     }
 
-
+    /**
+     * Iterates through a Pattern Languages componentList and replaces each Pattern object with
+     * a decorated one.
+     *
+     *      for each pattern decoratedComponents is called.
+     *
+     * @param latexDecoratorFactory Object to use createPatterDecorator()
+     */
     @Override
     public void decorateComponents(LatexDecoratorFactory latexDecoratorFactory)
     {
