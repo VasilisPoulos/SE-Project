@@ -1,9 +1,6 @@
 package gui;
 
-import datamodel.LatexDecoratorFactory;
-import datamodel.Pattern;
-import datamodel.PatternComponent;
-import datamodel.PatternLanguage;
+import datamodel.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
@@ -24,9 +21,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import static java.lang.Integer.MAX_VALUE;
 
 public class PLViewController {
@@ -211,7 +205,7 @@ public class PLViewController {
             Boolean flag = true;
             for (PatternComponent i: Main.getPl().getComponentsList()) {
                 if (i.getName().equals(this.selectedPatternId)) {
-                    Main.setCurrentPattern((Pattern) i);
+                    Main.setCurrentPattern((PatternComposite) i);
                     flag = false;
                 }
             }
@@ -386,6 +380,8 @@ public class PLViewController {
         LatexDecoratorFactory ldf =  new LatexDecoratorFactory();
         ldf.createLanguageDecorator(Main.getPl());
         Main.getPl().decorateComponents(ldf);
+        this.populatePatterns();
+//        System.out.println(Main.getPl().toString());
     }
 
 

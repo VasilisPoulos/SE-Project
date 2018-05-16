@@ -1,6 +1,6 @@
 package gui;
 
-import datamodel.PatternComponent;
+import datamodel.*;
 import javafx.fxml.FXML;
 
 import javafx.event.ActionEvent;
@@ -187,19 +187,27 @@ public class PatternViewController {
 
         /* Iterate through the list of pattern parts/sections */
         for (PatternComponent part: partsList) {
-
             if (col >= gpCols) {
                 col = 0;
                 row++;
             }
-
             /* Hold the pattern part name for mapping the user input to the respective fields */
             String title = part.getName();
 
             /* Create the VBox holding the input fields */
             VBox vbox = new VBox();
             TextField name = new TextField(title);
-            TextArea contents = new TextArea(part.getContents());
+            TextArea contents;
+            // If decorated, we need to get the contents from the original object
+            if (part.getContents() == null) {
+                Decorator decoratedPart = (Decorator) part;
+                String contentStr = decoratedPart.getComponentsList().get(0).getContents();
+                System.out.println(contentStr);
+                contents = new TextArea(contentStr);
+            }
+            else {
+                contents = new TextArea(part.getContents());
+            }
             contents.setFont(Font.font("DejaVu Sans Mono", 12));
 
             /* Format textArea size so it's nice and big */

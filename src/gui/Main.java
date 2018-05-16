@@ -1,8 +1,6 @@
 package gui;
 
-import datamodel.Pattern;
-import datamodel.PatternLanguage;
-import datamodel.TemplateFactory;
+import datamodel.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,7 +16,7 @@ public class Main extends Application {
     private static Scene patternView;                   // Pattern Edit view
     private static TemplateFactory templateFactory;     // TemplateFactory object used for initialization
     private static PatternLanguage pl;                  // The Pattern Language we're working on
-    private static Pattern currentPattern;              // The Pattern we're currently editing
+    private static PatternComposite currentPattern;     // The Pattern we're currently editing
 
 
     /**
@@ -95,11 +93,11 @@ public class Main extends Application {
         Main.pl = pl;
     }
 
-    public static Pattern getCurrentPattern() {
+    public static PatternComposite getCurrentPattern() {
         return currentPattern;
     }
 
-    public static void setCurrentPattern(Pattern currentPattern) {
+    public static void setCurrentPattern(PatternComposite currentPattern) {
         Main.currentPattern = currentPattern;
     }
 }
