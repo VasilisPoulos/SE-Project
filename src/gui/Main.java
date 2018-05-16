@@ -94,6 +94,13 @@ public class Main extends Application {
         return (PatternLanguage) realPL;
     }
 
+    public static Decorator getPlDecorator() {
+        if (pl instanceof Decorator)
+            return (Decorator) pl;
+        else
+            return null;
+    }
+
     public static void setPl(PatternComposite pl) {
         Main.pl = pl;
     }

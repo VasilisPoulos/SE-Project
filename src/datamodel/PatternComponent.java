@@ -55,30 +55,35 @@ public class PatternComponent implements Cloneable
     public void saveName(Path fp) throws IOException {
         boolean fileExists = Files.exists(fp);
 
+        String str;
         if(fileExists) {
-            String str;
-            if (this instanceof Pattern) {
-                if (this.getClass() == Decorator.class)
+            if (this.getClass() == Decorator.class) {
+
+                if (((PatternComposite) this).getComponentsList().get(0) instanceof Pattern)
                     str = "\n" + ((Decorator) this).getBeginTag() + "\n\n";
-                else str = "\n" + this.name + "\n\n";
+                else if (((PatternComposite) this).getComponentsList().get(0) instanceof PatternLanguage)
+                    str = ((Decorator) this).getBeginTag() + "\n\n";
+                else
+                    str = "\t" + ((Decorator) this).getBeginTag() + "\n";
             }
             else {
-                if (this.getClass() == Decorator.class)
-                    str = "\t" + ((Decorator) this).getBeginTag() + "\n";
-                else str = this.name + "\n";
+                if (this instanceof Pattern) {
+                    str = "\n" + this.name + "\n\n";
+                }
+                else if (this instanceof PatternLanguage) {
+                    str = this.name + "\n\n";
+                }
+                else {
+                    str = this.name + "\n";
+                }
             }
-            byte[] bytes = str.getBytes();
             // Append to the file
+            byte[] bytes = str.getBytes();
             Files.write(fp, bytes, StandardOpenOption.APPEND);
-
         }
         // We need to create the file
         else {
-            String str;
-            if (this.getClass() == Decorator.class)
-                str = ((Decorator) this).getBeginTag() + "\n\n";
-            else str = this.name + "\n\n";
-            System.out.println(str);
+            str = this.name + "\n\n";
             byte[] bytes = str.getBytes();
             Files.write(fp, bytes, StandardOpenOption.CREATE);
         }

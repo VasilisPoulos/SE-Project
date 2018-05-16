@@ -1,5 +1,10 @@
 package datamodel;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+
 public class Decorator extends PatternComposite {
 
     private String beginTag;
@@ -12,24 +17,33 @@ public class Decorator extends PatternComposite {
         this.endTag = endTag;
     }
 
-    /**
-     * Saves the decorated document
-     *
-     *  Save begin tag
-     *  call save on decorated object
-     *  then save end tag
-     */
-    public void saveName()
-    {
+    public void saveDecorated(Path fp) throws IOException {
 
-    }
+        String str;
+        // Add \documentclass{article}, create or append depending on whether file exists
+        str = "\\documentclass{article}\n\n";
+        byte[] bytes = str.getBytes();
+        if (Files.exists(fp)) {
+            Files.write(fp, bytes, StandardOpenOption.APPEND);
+        }
+        else {
+            Files.write(fp, bytes, StandardOpenOption.CREATE);
+        }
+        // Add title
+        this.saveName(fp);
 
-    /**
-     * Delegate calls to saveContents methods of objects
-     */
-    public void saveContents()
-    {
+        // Add \begin{document}
+        str = "\\begin{document}\n\n";
+        bytes = str.getBytes();
+        Files.write(fp, bytes, StandardOpenOption.APPEND);
 
+        // Add contents
+        this.saveContents(fp);
+
+        //Add \end{document}
+        str = "\\end{document}\n\n";
+        bytes = str.getBytes();
+        Files.write(fp, bytes, StandardOpenOption.APPEND);
     }
 
     public String getBeginTag() {

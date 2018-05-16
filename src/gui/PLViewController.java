@@ -281,6 +281,7 @@ public class PLViewController {
      * @throws IOException on file error
      */
     public void handleSavePL(ActionEvent event) throws IOException {
+
         PatternComposite pl = Main.getPl();
         // Ask the user whether to save empty Pattern Language
         if (pl.getComponentsList().isEmpty()) {
@@ -291,7 +292,7 @@ public class PLViewController {
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                this.savePL((PatternLanguage) pl);
+                this.savePL();
                 alert.close();
             }
             else {
@@ -299,8 +300,9 @@ public class PLViewController {
             }
         }
         else {
-            this.savePL((PatternLanguage) pl);
+            this.savePL();
         }
+
     }
 
     /**
@@ -308,7 +310,8 @@ public class PLViewController {
      *
      * @throws IOException on file error
      */
-    private void savePL(PatternLanguage pl) throws IOException {
+    private void savePL() throws IOException {
+        PatternLanguage pl = Main.getPl();
         Path fp = Paths.get("./" + pl.getName() + ".txt");
         Path tmp = Paths.get("./.tmp/");
 
@@ -326,18 +329,24 @@ public class PLViewController {
             // create a backup of the file
             Files.copy(fp, tmp.resolve(fp.getFileName()));
 
+            ButtonType overwriteBtn = new ButtonType("Overwrite");
+            ButtonType renameBtn = new ButtonType("Rename");
+            ButtonType cancelBtn = new ButtonType("Cancel");
+
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Notification Dialog");
             alert.setHeaderText("File \"" + fp.toString() + "\" already exists.");
             alert.setContentText("Overwrite?");
 
+            alert.getButtonTypes().setAll(overwriteBtn, renameBtn, cancelBtn);
+
             Optional<ButtonType> result = alert.showAndWait();
-            if (result.isPresent() && result.get() == ButtonType.OK) {
+            if (result.isPresent() && result.get() == overwriteBtn) {
                 // Delete the file
                 Files.deleteIfExists(fp);
                 alert.close();
             }
-            else {
+            else if (result.isPresent() && result.get() == renameBtn) {
                 alert.close();
                 // Ask user for a new name
                 TextInputDialog dialog = new TextInputDialog(pl.getName() + "-1");
@@ -346,9 +355,17 @@ public class PLViewController {
                 dialog.setContentText("Please enter a name:");
 
                 Optional<String> name = dialog.showAndWait();
-                if (result.isPresent()){
-                    Path p = Paths.get("./" + name.get() + ".txt");
-                    if (name.get().equals(pl.getName()) || Files.exists(p)) {
+                if (result.isPresent()) {
+                    Path p;
+                    String newName;
+                    try {
+                        p = Paths.get("./" + name.get() + ".txt");
+                        newName = name.get();
+                    } catch (NoSuchElementException e) {
+                        p = Paths.get("./" + pl.getName() + ".txt");
+                        newName = pl.getName();
+                    }
+                    if (newName.equals(pl.getName()) || Files.exists(p)) {
                         dialog.close();
                         Alert err = new Alert(Alert.AlertType.ERROR);
                         err.setTitle("Error Dialog");
@@ -362,10 +379,20 @@ public class PLViewController {
                     }
                 }
             }
+            else {
+                this.renderPLView(Main.getWindow());
+                return;
+            }
         }
         try {
-            pl.saveName(fp);
-            pl.saveContents(fp);
+            if (Main.getPlDecorator() == null) {
+                pl.saveName(fp);
+                pl.saveContents(fp);
+            }
+            else {
+                Decorator plDecorator = Main.getPlDecorator();
+                plDecorator.saveDecorated(fp);
+            }
         }
         catch (IOException e) {
             System.out.println("Error while writing to file: " + e.getMessage());

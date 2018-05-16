@@ -58,7 +58,7 @@ public class PatternPart extends PatternComponent
         boolean fileExists = Files.exists(fp);
         // Add 2 newlines, one to escape from the current line and another for readability
         String str;
-        if (this.getChild().getClass() == Decorator.class) {
+        if (this.getChild() instanceof Decorator) {
             str = "\t" + this.contents + "\n\n";
         }
         else str = this.contents + "\n\n";

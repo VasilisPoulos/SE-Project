@@ -16,7 +16,7 @@ Solution
 How do we solve the problem?
 
 
-Inductive Mini-Pattern
+Micro-Pattern-1
 
 Name
 What shall this pattern be called by practitioners?
@@ -24,11 +24,8 @@ What shall this pattern be called by practitioners?
 Template
 Which template is followed for the pattern specification?
 
-Context
-What are the assumed environment or a priori assumptions for applying this pattern?
-
-Forces
-What are the different design motivations that must be balanced?
+Problem
+What is motivating us to apply this pattern?
 
 Solution
 How do we solve the problem?
