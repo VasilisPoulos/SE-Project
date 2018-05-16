@@ -136,7 +136,15 @@ public class PatternViewController {
      */
     public void populatePatternParts() {
         /* Holds the individual parts/sections of the pattern we're currently editing */
-        ArrayList<PatternComponent> partsList = Main.getCurrentPattern().getComponentsList();
+        PatternComponent realPattern;
+        if (Main.getCurrentPattern() instanceof Decorator)
+             realPattern = Main.getCurrentPattern().getComponentsList().get(0);
+        else
+            realPattern = Main.getCurrentPattern();
+
+        System.out.println(realPattern.getClass().toString());
+
+        ArrayList<PatternComponent> partsList = ((Pattern)realPattern).getComponentsList();
 
         /* Dictate the column number of the GridPane */
         int size = partsList.size();
@@ -197,17 +205,8 @@ public class PatternViewController {
             /* Create the VBox holding the input fields */
             VBox vbox = new VBox();
             TextField name = new TextField(title);
-            TextArea contents;
-            // If decorated, we need to get the contents from the original object
-            if (part.getContents() == null) {
-                Decorator decoratedPart = (Decorator) part;
-                String contentStr = decoratedPart.getComponentsList().get(0).getContents();
-                System.out.println(contentStr);
-                contents = new TextArea(contentStr);
-            }
-            else {
-                contents = new TextArea(part.getContents());
-            }
+            TextArea contents = new TextArea(part.getContents());
+
             contents.setFont(Font.font("DejaVu Sans Mono", 12));
 
             /* Format textArea size so it's nice and big */

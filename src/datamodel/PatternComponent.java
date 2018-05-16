@@ -57,11 +57,16 @@ public class PatternComponent implements Cloneable
 
         if(fileExists) {
             String str;
-            if (this instanceof Pattern)
-                str = "\n" + this.name + "\n\n";
-            else
-                str = this.name + "\n";
-
+            if (this instanceof Pattern) {
+                if (this.getClass() == Decorator.class)
+                    str = "\n" + ((Decorator) this).getBeginTag() + "\n\n";
+                else str = "\n" + this.name + "\n\n";
+            }
+            else {
+                if (this.getClass() == Decorator.class)
+                    str = ((Decorator) this).getBeginTag() + "\n";
+                else str = this.name + "\n";
+            }
             byte[] bytes = str.getBytes();
             // Append to the file
             Files.write(fp, bytes, StandardOpenOption.APPEND);
@@ -69,7 +74,10 @@ public class PatternComponent implements Cloneable
         }
         // We need to create the file
         else {
-            String str = this.name + "\n\n";
+            String str;
+            if (this.getClass() == Decorator.class)
+                str = ((Decorator) this).getBeginTag() + "\n\n";
+            else str = this.name + "\n\n";
             byte[] bytes = str.getBytes();
             Files.write(fp, bytes, StandardOpenOption.CREATE);
         }
