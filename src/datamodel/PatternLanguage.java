@@ -130,9 +130,9 @@ public class PatternLanguage extends PatternComposite
 
 
     @Override
-    public void decorateComponents(DecoratorAbstractFactory decoratorFactory)
+    public void decorateComponents(LatexDecoratorFactory latexDecoratorFactory)
     {
-        //TODO
+
     }
 
 

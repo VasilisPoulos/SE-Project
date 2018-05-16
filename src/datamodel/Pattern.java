@@ -18,9 +18,8 @@ public class Pattern extends PatternComposite
     }
 
     @Override
-    public void decorateComponents(DecoratorAbstractFactory decoratorFactory)
+    public void decorateComponents(LatexDecoratorFactory latexDecoratorFactory)
     {
-
     }
 
 

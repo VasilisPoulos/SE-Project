@@ -85,7 +85,7 @@ public abstract class PatternComposite extends PatternComponent {
     /*
      *  Inherited by every subclass
      */
-    public abstract void decorateComponents(DecoratorAbstractFactory decoratorFactory);
+    public abstract void decorateComponents(LatexDecoratorFactory latexDecoratorFactory);
 
     @Override
     public PatternComponent getChild() {

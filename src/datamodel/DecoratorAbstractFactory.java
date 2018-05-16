@@ -1,9 +1,10 @@
 package datamodel;
 
 public interface DecoratorAbstractFactory {
-    public PatternComponent createLanguageDecorator();
 
-    public PatternComponent createPatternDecorator();
+    public Decorator createLanguageDecorator(PatternLanguage patternLanguage);
 
-    public PatternComponent createPartDecorator();
+    public PatternComponent createPatternDecorator(Pattern pattern);
+
+    public PatternComponent createPartDecorator(PatternPart part);
 }
