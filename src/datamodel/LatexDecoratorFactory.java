@@ -9,7 +9,7 @@ public class LatexDecoratorFactory implements DecoratorAbstractFactory {
     public Decorator createLanguageDecorator(PatternLanguage patternLanguage)
     {
         Decorator decoratedPatternLanguage = new Decorator(
-                "",
+                patternLanguage.getName(),
                 "\\title{"+patternLanguage.getName()+"}",
                 "\\maketitle");
         decoratedPatternLanguage.componentsList.add(patternLanguage);
@@ -23,7 +23,7 @@ public class LatexDecoratorFactory implements DecoratorAbstractFactory {
     public  Decorator createPatternDecorator(PatternComponent pattern)
     {
         Decorator decoratedPattern = new Decorator(
-                "",
+                pattern.getName(),
                 "\\section{"+pattern.getName()+"}",
                 "");
         decoratedPattern.componentsList.add(pattern);
@@ -37,7 +37,7 @@ public class LatexDecoratorFactory implements DecoratorAbstractFactory {
     public  Decorator createPartDecorator(PatternComponent part)
     {
         Decorator decoratedPart = new Decorator(
-                "",
+                part.getName(),
                 "\\subsection{"+part.getName()+"}",
                 "");
         decoratedPart.componentsList.add(part);

@@ -8,3 +8,9 @@ src/META-INF/
 \.idea/artifacts/
 
 \.idea/misc\.xml
+
+\.classpath
+
+\.project
+
+SE-Project\.eml
