@@ -135,14 +135,7 @@
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" onAction="#handleSavePL" text="Save Pattern Language">
-                     <graphic>
-                        <ImageView fitHeight="10.0" fitWidth="10.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/img/plus.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
+                  <Button mnemonicParsing="false" onAction="#handleSavePL" text="Save">
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
@@ -153,23 +146,24 @@
                         <Insets right="20.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#handleChangePL" text="Change Pattern Language">
+                  <Button mnemonicParsing="false" onAction="#handleChangePL" text="Change">
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                      <font>
                         <Font name="Lato Bold" size="18.0" />
                      </font>
-                     <graphic>
-                        <ImageView fitHeight="10.0" fitWidth="10.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/img/reload.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
                      <HBox.margin>
-                        <Insets />
+                        <Insets right="20.0" />
                      </HBox.margin>
+                  </Button>
+                  <Button layoutX="649.0" layoutY="10.0" mnemonicParsing="false" onAction="#decoratePL" text="Decorate">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <font>
+                        <Font name="Lato Bold" size="18.0" />
+                     </font>
                   </Button>
                   <Region HBox.hgrow="ALWAYS" />
                </children>

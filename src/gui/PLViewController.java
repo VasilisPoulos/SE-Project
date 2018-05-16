@@ -1,5 +1,6 @@
 package gui;
 
+import datamodel.LatexDecoratorFactory;
 import datamodel.Pattern;
 import datamodel.PatternComponent;
 import datamodel.PatternLanguage;
@@ -215,7 +216,7 @@ public class PLViewController {
                 }
             }
             if (flag) {
-                throw new Exception("Could not find pattern. Unexpected behaviour. Please report this issue.");
+                throw new Exception("Could not find pattern. Unexpected behaviour. Please report this issue on https://github.com/VasilisPoulos/SE-Project/issues/new");
             }
 
             /* Get the current window into a variable */
@@ -379,6 +380,12 @@ public class PLViewController {
                     .forEach(File::delete);
         }
         Files.deleteIfExists(tmp);
+    }
+
+    public void decoratePL(ActionEvent event) {
+        LatexDecoratorFactory ldf =  new LatexDecoratorFactory();
+        ldf.createLanguageDecorator(Main.getPl());
+        Main.getPl().decorateComponents(ldf);
     }
 
 
