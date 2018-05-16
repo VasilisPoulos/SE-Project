@@ -85,6 +85,8 @@ public class PatternLanguage extends PatternComposite
                     if (i.contains("\\title{")) {
                         i = i.substring(7, i.length()-1);
                     }
+                    i = i.replace("\\#", "#");
+                    i = i.replace("\\%", "%");
                     newPl.setName(i);
                     flag = ParseType.PATTERN_NAME;
                     break;

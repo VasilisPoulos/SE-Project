@@ -15,3 +15,114 @@ What is motivating us to apply this pattern?
 Solution
 How do we solve the problem?
 
+
+System Of Patterns Template
+
+Name
+What is the pattern called?
+
+Template
+Which template is followed for the pattern specification?
+
+Also Known As
+What are other names for this pattern?
+
+Example
+What is an example of the need for this pattern?
+
+Context
+When does this pattern apply?
+
+Problem
+What is the problem solved by this pattern?
+
+Solution
+What is the underlying principal underlying this pattern?
+
+Structure
+What objects are involved and related?
+
+Dynamics
+How do these objects collaborate?
+
+Implementation
+What are some guidelines for implementing this pattern?
+
+Example Resolved
+Show how the previous example is resolved using the pattern
+
+Variants
+What are important variations of this pattern?
+
+Known Uses
+What are real-world systems using this pattern?
+
+Consequences
+What are the benefits and liabilities of using this pattern?
+
+
+Inductive Mini-Pattern
+
+Name
+What shall this pattern be called by practitioners?
+
+Template
+Which template is followed for the pattern specification?
+
+Context
+What are the assumed environment or a priori assumptions for applying this pattern?
+
+Forces
+What are the different design motivations that must be balanced?
+
+Solution
+How do we solve the problem?
+
+
+Gang-Of-Four Pattern
+
+Name
+What is the pattern called?
+
+Template
+Which template is followed for the pattern specification ?  
+
+Pattern Classification
+Is the pattern creational, structural, or behavioral?
+
+Intent
+What problem does this pattern solve?
+
+Also Known As
+What are other names for this pattern?
+
+Motivation
+What is an example scenario for applying this pattern?
+
+Applicability
+When does this pattern apply?
+
+Structure
+Which are the classes of the objects in this pattern?
+
+Participants
+What are the objects that participate in this pattern?
+
+Collaborations
+How do these objects interoperate?
+
+Consequences
+What are the trade-offs of using this pattern?
+
+Implementation
+Which techniques or issues arise in applying this pattern?
+
+Sample Code
+What is an example of the pattern in source code?
+
+Known Uses
+What are some examples of real systems using this pattern?
+
+Related Patterns
+What other patterns from this pattern collection are related to this pattern?
+

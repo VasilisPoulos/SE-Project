@@ -64,6 +64,9 @@ public class PatternComponent implements Cloneable
                     str = ((Decorator) this).getBeginTag() + "\n\n";
                 else
                     str = ((Decorator) this).getBeginTag() + "\n";
+                str = str.replace("#", "\\#");
+                str = str.replace("%", "\\%");
+
             }
             else {
                 if (this instanceof Pattern) {
