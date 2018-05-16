@@ -10,6 +10,12 @@ public class Decorator extends PatternComposite {
     private String beginTag;
     private String endTag;
 
+    /**
+     * Constructor
+     * @param name name of the Decorator
+     * @param beginTag the begin tag for the corresponding element
+     * @param endTag the end tag for the corresponding element
+     */
     public Decorator(String name, String beginTag, String endTag)
     {
         super(name);
@@ -17,6 +23,11 @@ public class Decorator extends PatternComposite {
         this.endTag = endTag;
     }
 
+    /**
+     * Saves a decorated Pattern Language to the disk
+     * @param fp the file path we want to save to
+     * @throws IOException on file write error
+     */
     public void saveDecorated(Path fp) throws IOException {
 
         String str;
@@ -52,10 +63,16 @@ public class Decorator extends PatternComposite {
         Files.write(fp, bytes, StandardOpenOption.APPEND);
     }
 
+    /**
+     * @return the begin tag of the decorated component
+     */
     public String getBeginTag() {
         return beginTag;
     }
 
+    /**
+     * @return the end tag of the decorated component
+     */
     public String getEndTag() {
         return endTag;
     }
