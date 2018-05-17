@@ -3,6 +3,8 @@ package Test;
 import datamodel.*;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class DecoratorTest
@@ -48,8 +50,14 @@ class DecoratorTest
 
         decorated = fc.createPartDecorator(part);
 
-
         assertEquals("\\subsection{Part Name}", decorated.getBeginTag());
         assertEquals("", decorated.getEndTag());
     }
+
+    @Test
+    void shouldDetectOS() throws IOException {
+        Decorator dc = new Decorator("","","");
+        dc.initPdfExport();
+    }
+
 }

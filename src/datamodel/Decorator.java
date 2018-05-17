@@ -1,6 +1,8 @@
 package datamodel;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -75,6 +77,32 @@ public class Decorator extends PatternComposite {
      */
     public String getEndTag() {
         return endTag;
+    }
+
+    public void initPdfExport() throws IOException {
+
+
+        String line;
+        String os = System.getProperty("os.name");
+
+        if (os.startsWith("Windows"))
+        {
+            ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", "dir");
+            builder.redirectErrorStream(true);
+
+            Process p = builder.start();
+            BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
+
+            while (true) {
+                line = r.readLine();
+                if (line == null) { break; }
+                System.out.println(line);
+            }
+        }
+        else
+        {
+            //linux  , exec ect.
+        }
     }
 
     @Override
