@@ -1,6 +1,7 @@
 package gui;
 
 import datamodel.*;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 
 import javafx.event.ActionEvent;
@@ -11,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -243,6 +245,67 @@ public class PatternViewController {
         pane.getChildren().clear(); //remove previous GridPane
         pane.getChildren().add(gp); // add the GridPane
 
+
+    }
+
+    @FXML
+    public void handleAddPatternPart(ActionEvent event) {
+        PatternPart part = new PatternPart("");
+        // Create the custom dialog.
+        Dialog<Pair<String, String>> dialog = new Dialog<>();
+        dialog.setTitle("Add Pattern Part");
+
+        // Set the button types.
+        ButtonType okBtn = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(okBtn, ButtonType.CANCEL);
+
+        // Create the GridPane to hold the input fields
+        GridPane gridPane = new GridPane();
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
+        gridPane.setPadding(new Insets(20, 150, 10, 10));
+
+        // Create the input fields
+        TextField nameTF = new TextField();
+        nameTF.setPromptText("Pattern Part Name");
+        TextField contentsTF = new TextField();
+        contentsTF.setPromptText("Pattern Part Contents");
+
+        // Add input fields to GridPane
+        gridPane.add(new Label("Name:"), 0, 0);
+        gridPane.add(nameTF, 1, 0);
+        gridPane.add(new Label("Contents"), 0, 1);
+        gridPane.add(contentsTF, 1, 1);
+
+        dialog.getDialogPane().setContent(gridPane);
+
+        // Request focus on the name field by default.
+        Platform.runLater(() -> nameTF.requestFocus());
+
+        // Convert the result to a username-password-pair when the login button is clicked.
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == okBtn) {
+                return new Pair<>(nameTF.getText(), contentsTF.getText());
+            }
+            return null;
+        });
+
+        Optional<Pair<String, String>> result = dialog.showAndWait();
+
+        result.ifPresent(pair -> {
+            part.setName(pair.getKey());
+            part.setContents(pair.getValue());
+
+            if (Main.getPlDecorator() != null) {
+                LatexDecoratorFactory ldf = new LatexDecoratorFactory();
+                Decorator newPart = ldf.createPartDecorator(part);
+                Main.getCurrentPattern().add(newPart);
+            }
+            else {
+                Main.getCurrentPattern().add(part);
+            }
+        });
+        this.populatePatternParts();
 
     }
 

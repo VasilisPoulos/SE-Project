@@ -161,13 +161,6 @@
                            <font>
                               <Font name="Droid Sans" size="18.0" />
                            </font>
-                           <graphic>
-                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" smooth="false">
-                                 <image>
-                                    <Image url="@../assets/img/plus.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
                         </Button>
                         <Region HBox.hgrow="ALWAYS" />
                      </children>
@@ -185,13 +178,6 @@
                            <font>
                               <Font name="Droid Sans" size="18.0" />
                            </font>
-                           <graphic>
-                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../assets/img/reload.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
                         </Button>
                         <Region HBox.hgrow="ALWAYS" />
                      </children>

@@ -1,13 +1,13 @@
 package gui;
 
+import datamodel.Decorator;
+import datamodel.LatexDecoratorFactory;
+import datamodel.Pattern;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Control;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -94,6 +94,7 @@ public class TemplateViewController {
             this.notifyDefault(window);
         }
         else {
+            Main.getPl().add(Main.getTemplateFactory().createTemplate(this.templateId));
             this.switchToPatternView(window);
         }
     }
@@ -104,7 +105,6 @@ public class TemplateViewController {
      */
     private void switchToPatternView(Stage window) {
 
-        Main.getPl().add(Main.getTemplateFactory().createTemplate(templateId));
         PLViewController c = (PLViewController) Main.getPlView().getUserData();
         c.renderPLView(window);
     }
@@ -125,11 +125,41 @@ public class TemplateViewController {
         if (result.isPresent() && result.get() == ButtonType.OK){
             alert.close();
             this.templateId = "Micro-Pattern";
+            Main.getPl().add(Main.getTemplateFactory().createTemplate(this.templateId));
             switchToPatternView(window);
         }
         else {
             alert.close();
         }
     }
+
+    @FXML
+    public void handleCreatePattern(ActionEvent event) {
+        Pattern pattern = new Pattern("");
+        TextInputDialog dialog = new TextInputDialog("Pattern Name");
+        dialog.setTitle("Add New Pattern");
+        dialog.setHeaderText("Pattern Name:");
+
+        Optional<String> result = dialog.showAndWait();
+
+        result.ifPresent(name -> {
+            pattern.setName(name);
+            if (Main.getPlDecorator() != null) {
+                LatexDecoratorFactory ldf = new LatexDecoratorFactory();
+                Decorator newPattern = ldf.createPatternDecorator(pattern);
+                Main.getPlDecorator().add(newPattern);
+                Main.setCurrentPattern(newPattern);
+            }
+            else {
+                Main.getPl().add(pattern);
+                Main.setCurrentPattern(pattern);
+            }
+            dialog.close();
+        });
+        this.switchToPatternView(Main.getWindow());
+
+    }
+
+
 
 }

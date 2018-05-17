@@ -60,7 +60,7 @@ public class Decorator extends PatternComposite {
         this.saveContents(fp);
 
         //Add \end{document}
-        str = "\\end{document}\n\n";
+        str = "\n\\end{document}\n\n";
         bytes = str.getBytes();
         Files.write(fp, bytes, StandardOpenOption.APPEND);
     }
@@ -79,15 +79,15 @@ public class Decorator extends PatternComposite {
         return endTag;
     }
 
-    public void initPdfExport() throws IOException {
+    public void initPdfExport(Path filename) throws IOException {
 
 
         String line;
         String os = System.getProperty("os.name");
 
-        if (os.startsWith("Windows"))
-        {
-            ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", "dir");
+        if (os.startsWith("Windows")) {
+
+            ProcessBuilder builder = new ProcessBuilder("cmd.exe", "pdflatex", filename.toString());
             builder.redirectErrorStream(true);
 
             Process p = builder.start();
@@ -99,9 +99,18 @@ public class Decorator extends PatternComposite {
                 System.out.println(line);
             }
         }
-        else
-        {
-            //linux  , exec ect.
+        else {
+            ProcessBuilder builder = new ProcessBuilder("/usr/bin/bash", "pdflatex", filename.toString());
+            builder.redirectErrorStream(true);
+
+            Process p = builder.start();
+            BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
+
+            while (true) {
+                line = r.readLine();
+                if (line == null) { break; }
+                System.out.println(line);
+            }
         }
     }
 

@@ -79,8 +79,8 @@ class AcceptanceTests{
         deductiveList.add(new PatternPart("Template", "Which template is followed for the pattern specification?"));
         deductiveList.add(new PatternPart("Problem", "What is motivating us to apply this pattern?"));
         deductiveList.add(new PatternPart("Solution", "How do we solve the problem?"));
-        deductiveList.add(new PatternPart("Benefits", "What are the potential positive outcomes of applying this pattern?  "));
-        deductiveList.add(new PatternPart("Consequences", "What are potential shortcomings and consequences of applying this pattern? \n"));
+        deductiveList.add(new PatternPart("Benefits", "What are the potential positive outcomes of applying this pattern?"));
+        deductiveList.add(new PatternPart("Consequences", "What are potential shortcomings and consequences of applying this pattern?"));
 
         Pattern deductive = tf.createTemplate("Deductive Mini-Pattern");
         assertEquals("Deductive Mini-Pattern",deductive.getName());
@@ -93,7 +93,7 @@ class AcceptanceTests{
         /*Gang-Of-Four Pattern Test*/
         ArrayList<PatternComponent> gofList = new ArrayList<>();
         gofList.add(new PatternPart("Name", "What is the pattern called?"));
-        gofList.add(new PatternPart("Template", "Which template is followed for the pattern specification ?  "));
+        gofList.add(new PatternPart("Template", "Which template is followed for the pattern specification?"));
         gofList.add(new PatternPart("Pattern Classification", "Is the pattern creational, structural, or behavioral?"));
         gofList.add(new PatternPart("Intent", "What problem does this pattern solve?"));
         gofList.add(new PatternPart("Also Known As", "What are other names for this pattern?"));

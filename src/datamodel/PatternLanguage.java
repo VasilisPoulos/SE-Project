@@ -76,6 +76,9 @@ public class PatternLanguage extends PatternComposite
 
         for (String i: data) {
 
+            if (i.equals("Benefits") || i.equals("\\subsection{Benefits}"))
+                flag = ParseType.PART_NAME;
+
             if (i.isEmpty())
                 continue;
             if (i.contains("\\documentclass{article}") || i.contains("\\begin{document}")
@@ -129,8 +132,8 @@ public class PatternLanguage extends PatternComposite
                         line2 = "";
                     }
                     else {
-                    line1 = data.get(data.indexOf(i) + 1);
-                    line2 = data.get(data.indexOf(i) + 2);
+                        line1 = data.get(data.indexOf(i) + 1);
+                        line2 = data.get(data.indexOf(i) + 2);
                     }
                     if (line1.isEmpty()) {
                         if (line2.isEmpty())

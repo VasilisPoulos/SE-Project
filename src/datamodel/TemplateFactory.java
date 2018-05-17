@@ -37,12 +37,12 @@ public class TemplateFactory
         deductive.add(new PatternPart("Template", "Which template is followed for the pattern specification?"));
         deductive.add(new PatternPart("Problem", "What is motivating us to apply this pattern?"));
         deductive.add(new PatternPart("Solution", "How do we solve the problem?"));
-        deductive.add(new PatternPart("Benefits", "What are the potential positive outcomes of applying this pattern?  "));
-        deductive.add(new PatternPart("Consequences", "What are potential shortcomings and consequences of applying this pattern? \n"));
+        deductive.add(new PatternPart("Benefits", "What are the potential positive outcomes of applying this pattern?"));
+        deductive.add(new PatternPart("Consequences", "What are potential shortcomings and consequences of applying this pattern?"));
 
         Pattern gof = new Pattern( "Gang-Of-Four Pattern");
         gof.add(new PatternPart("Name", "What is the pattern called?"));
-        gof.add(new PatternPart("Template", "Which template is followed for the pattern specification ?  "));
+        gof.add(new PatternPart("Template", "Which template is followed for the pattern specification?"));
         gof.add(new PatternPart("Pattern Classification", "Is the pattern creational, structural, or behavioral?"));
         gof.add(new PatternPart("Intent", "What problem does this pattern solve?"));
         gof.add(new PatternPart("Also Known As", "What are other names for this pattern?"));

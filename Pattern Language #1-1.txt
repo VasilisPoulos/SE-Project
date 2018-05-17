@@ -1,170 +1,179 @@
-Pattern Language #1
+\documentclass{article}
+
+\title{Pattern Language \#1}
+
+\begin{document}
+
+\maketitle
 
 
-Micro-Pattern
+\section{Micro-Pattern}
 
-Name
+\subsection{Name}
 What shall this pattern be called by practitioners?
 
-Template
+\subsection{Template}
 Which template is followed for the pattern specification?
 
-Problem
+\subsection{Problem}
 What is motivating us to apply this pattern?
 
-Solution
+\subsection{Solution}
 How do we solve the problem?
 
 
-Gang-Of-Four Pattern
+\section{Gang-Of-Four Pattern}
 
-Name
+\subsection{Name}
 What is the pattern called?
 
-Template
+\subsection{Template}
 Which template is followed for the pattern specification?
 
-Pattern Classification
+\subsection{Pattern Classification}
 Is the pattern creational, structural, or behavioral?
 
-Intent
+\subsection{Intent}
 What problem does this pattern solve?
 
-Also Known As
+\subsection{Also Known As}
 What are other names for this pattern?
 
-Motivation
+\subsection{Motivation}
 What is an example scenario for applying this pattern?
 
-Applicability
+\subsection{Applicability}
 When does this pattern apply?
 
-Structure
+\subsection{Structure}
 Which are the classes of the objects in this pattern?
 
-Participants
+\subsection{Participants}
 What are the objects that participate in this pattern?
 
-Collaborations
+\subsection{Collaborations}
 How do these objects interoperate?
 
-Consequences
+\subsection{Consequences}
 What are the trade-offs of using this pattern?
 
-Implementation
+\subsection{Implementation}
 Which techniques or issues arise in applying this pattern?
 
-Sample Code
+\subsection{Sample Code}
 What is an example of the pattern in source code?
 
-Known Uses
+\subsection{Known Uses}
 What are some examples of real systems using this pattern?
 
-Related Patterns
+\subsection{Related Patterns}
 What other patterns from this pattern collection are related to this pattern?
 
 
-Deductive Mini-Pattern
+\section{Deductive Mini-Pattern}
 
-Name
+\subsection{Name}
 What shall this pattern be called by practitioners?
 
-Template
+\subsection{Template}
 Which template is followed for the pattern specification?
 
-Problem
+\subsection{Problem}
 What is motivating us to apply this pattern?
 
-Solution
+\subsection{Solution}
 How do we solve the problem?
 
-Benefits
+\subsection{Benefits}
 What are the potential positive outcomes of applying this pattern?
 
-Consequences
+\subsection{Consequences}
 What are potential shortcomings and consequences of applying this pattern?
 
 
-Inductive Mini-Pattern
+\section{Inductive Mini-Pattern}
 
-Name
+\subsection{Name}
 What shall this pattern be called by practitioners?
 
-Template
+\subsection{Template}
 Which template is followed for the pattern specification?
 
-Context
+\subsection{Context}
 What are the assumed environment or a priori assumptions for applying this pattern?
 
-Forces
+\subsection{Forces}
 What are the different design motivations that must be balanced?
 
-Solution
+\subsection{Solution}
 How do we solve the problem?
 
 
-Micro-Pattern-1
+\section{Micro-Pattern-1}
 
-Name
+\subsection{Name}
 What shall this pattern be called by practitioners?
 
-Template
+\subsection{Template}
 Which template is followed for the pattern specification?
 
-Problem
+\subsection{Problem}
 What is motivating us to apply this pattern?
 
-Solution
+\subsection{Solution}
 How do we solve the problem?
 
 
-System Of Patterns Template
+\section{System Of Patterns Template}
 
-Name
+\subsection{Name}
 What is the pattern called?
 
-Template
+\subsection{Template}
 Which template is followed for the pattern specification?
 
-Also Known As
+\subsection{Also Known As}
 What are other names for this pattern?
 
-Example
+\subsection{Example}
 What is an example of the need for this pattern?
 
-Context
+\subsection{Context}
 When does this pattern apply?
 
-Problem
+\subsection{Problem}
 What is the problem solved by this pattern?
 
-Solution
+\subsection{Solution}
 What is the underlying principal underlying this pattern?
 
-Structure
+\subsection{Structure}
 What objects are involved and related?
 
-Dynamics
+\subsection{Dynamics}
 How do these objects collaborate?
 
-Implementation
+\subsection{Implementation}
 What are some guidelines for implementing this pattern?
 
-Example Resolved
+\subsection{Example Resolved}
 Show how the previous example is resolved using the pattern
 
-Variants
+\subsection{Variants}
 What are important variations of this pattern?
 
-Known Uses
+\subsection{Known Uses}
 What are real-world systems using this pattern?
 
-Consequences
+\subsection{Consequences}
 What are the benefits and liabilities of using this pattern?
 
 
-asdf
+\section{asdf}
 
-asdf
+\subsection{asdf}
 sdf
+
+
+\end{document}
 

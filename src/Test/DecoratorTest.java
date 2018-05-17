@@ -57,7 +57,7 @@ class DecoratorTest
     @Test
     void shouldDetectOS() throws IOException {
         Decorator dc = new Decorator("","","");
-        dc.initPdfExport();
+//        dc.initPdfExport();
     }
 
 }
