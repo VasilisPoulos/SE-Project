@@ -25,6 +25,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+
 import static java.lang.Integer.MAX_VALUE;
 
 public class PLViewController {
@@ -257,6 +258,32 @@ public class PLViewController {
         }
     }
 
+    public void handleExportToPDF(ActionEvent event) {
+        Decorator plDecorator = Main.getPlDecorator();
+        Path fp = Paths.get("./" + Main.getPl().getName() + ".tex");
+        Path aux = Paths.get("./" + Main.getPl().getName() + ".aux");
+        Path log = Paths.get("./" + Main.getPl().getName() + ".log");
+
+        try {
+            // Delete previous files
+            Files.deleteIfExists(aux);
+            Files.deleteIfExists(log);
+            Files.deleteIfExists(fp);
+
+            // Export to PDF
+            plDecorator.saveDecorated(fp);
+            plDecorator.initPdfExport(fp);
+
+            // Delete non-tex and non-pdf files
+            Files.deleteIfExists(aux);
+            Files.deleteIfExists(log);
+
+        }
+        catch (Exception exception) {
+            //TODO: error message
+        }
+    }
+
     /**
      * Renders the Pattern Language scene
      * @param window the window we want to change into the PLView scene
@@ -266,8 +293,11 @@ public class PLViewController {
         this.setTitle(Main.getPl().getName());
         this.populatePatterns();
 
-        if (Main.getPlDecorator() != null)
-            decorateBtn.setDisable(true);
+        if (Main.getPlDecorator() != null) {
+            decorateBtn.setText("Export to PDF");
+            decorateBtn.setOnAction((e) -> handleExportToPDF(e));
+//            decorateBtn.setDisable(true);
+        }
 
         this.selectedPatternId = null;
         /* Close pop-up window and change the window variable to the primaryStage */

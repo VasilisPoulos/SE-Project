@@ -100,7 +100,7 @@ public class Decorator extends PatternComposite {
             }
         }
         else {
-            ProcessBuilder builder = new ProcessBuilder("/usr/bin/bash", "pdflatex", filename.toString());
+            ProcessBuilder builder = new ProcessBuilder("pdflatex", filename.toString());
             builder.redirectErrorStream(true);
 
             Process p = builder.start();
