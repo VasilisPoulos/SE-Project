@@ -64,8 +64,9 @@ public class TemplateViewController {
     @FXML
     public void handleCancel(ActionEvent event) throws Exception {
         Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        PLViewController c = new PLViewController();
-        c.renderPLView(currentStage);
+
+        MainViewController c = new MainViewController();
+        c.viewNewPL(currentStage);
     }
 
     /**
