@@ -150,9 +150,8 @@ public class PatternLanguage extends PatternComposite
             }
         }
         if (isDecorated) {
-            LatexDecoratorFactory ldf =  new LatexDecoratorFactory();
+            LatexDecoratorFactory ldf = new LatexDecoratorFactory();
             Decorator decoratedPL = ldf.createLanguageDecorator(newPl);
-            decoratedPL.decorateComponents(ldf);
             return decoratedPL;
         }
         return newPl;

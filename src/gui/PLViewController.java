@@ -258,8 +258,13 @@ public class PLViewController {
         }
     }
 
+    /**
+     * Handles the click on the export to pdf button
+     *
+     * @param event the button click
+     */
     public void handleExportToPDF(ActionEvent event) {
-        Decorator plDecorator = Main.getPlDecorator();
+
         Path fp = Paths.get("./" + Main.getPl().getName() + ".tex");
         Path aux = Paths.get("./" + Main.getPl().getName() + ".aux");
         Path log = Paths.get("./" + Main.getPl().getName() + ".log");
@@ -271,8 +276,8 @@ public class PLViewController {
             Files.deleteIfExists(fp);
 
             // Export to PDF
-            plDecorator.saveDecorated(fp);
-            plDecorator.initPdfExport(fp);
+            Main.getPlDecorator().saveDecorated(fp);
+            Main.getPlDecorator().initPdfExport(fp);
 
             // Delete non-tex and non-pdf files
             Files.deleteIfExists(aux);
@@ -280,7 +285,10 @@ public class PLViewController {
 
         }
         catch (Exception exception) {
-            //TODO: error message
+            Alert err = new Alert(Alert.AlertType.ERROR);
+            err.setTitle("Error Dialog");
+            err.setHeaderText("Could not export pdf.");
+            err.showAndWait();
         }
     }
 

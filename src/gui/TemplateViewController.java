@@ -136,6 +136,11 @@ public class TemplateViewController {
         }
     }
 
+    /**
+     * Handles the click on the create pattern button
+     * @param event the button click
+     * @throws Exception on failure to load FXML file
+     */
     @FXML
     public void handleCreatePattern(ActionEvent event) throws Exception {
         Pattern pattern = new Pattern("");
@@ -145,6 +150,7 @@ public class TemplateViewController {
 
         Optional<String> result = dialog.showAndWait();
 
+        // Get the name from the input field, and check whether the language is decorated
         result.ifPresent(name -> {
             pattern.setName(name);
             if (Main.getPlDecorator() != null) {

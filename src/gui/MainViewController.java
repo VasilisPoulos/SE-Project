@@ -1,4 +1,6 @@
 package gui;
+import datamodel.Decorator;
+import datamodel.LatexDecoratorFactory;
 import datamodel.PatternComposite;
 import datamodel.PatternLanguage;
 import javafx.event.ActionEvent;
@@ -138,7 +140,14 @@ public class MainViewController {
         Path selectedFilePath = this.getFiles().get(this.selectedFileId);
 
         try {
-            Main.setPl(PatternLanguage.loadPatternLanguage(selectedFilePath));
+            PatternComposite newPl = PatternLanguage.loadPatternLanguage(selectedFilePath);
+            if (newPl instanceof Decorator) {
+                LatexDecoratorFactory ldf = new LatexDecoratorFactory();
+                Main.setPl(newPl);
+                Main.getPl().decorateComponents(ldf);
+            }
+            else
+                Main.setPl(newPl);
             // Switch to PLView
             this.viewNewPL(Main.getWindow());
         }

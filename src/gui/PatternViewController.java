@@ -86,8 +86,8 @@ public class PatternViewController {
             Stage window = Main.getWindow();
 
             /* Go back to Pattern Language View scene */
-            PLViewController c = (PLViewController) Main.getPatternView().getUserData();
-            c.renderPLView(window);
+            MainViewController c = new MainViewController();
+            c.viewNewPL(window);
         }
         else {
             /* Show error dialog if pattern name already exists */
@@ -248,6 +248,10 @@ public class PatternViewController {
 
     }
 
+    /**
+     * Handles the Add Pattern Part button
+     * @param event the button click
+     */
     @FXML
     public void handleAddPatternPart(ActionEvent event) {
         PatternPart part = new PatternPart("");
@@ -282,7 +286,7 @@ public class PatternViewController {
         // Request focus on the name field by default.
         Platform.runLater(() -> nameTF.requestFocus());
 
-        // Convert the result to a username-password-pair when the login button is clicked.
+        // Convert the text from the input fields to a Pair object
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == okBtn) {
                 return new Pair<>(nameTF.getText(), contentsTF.getText());
@@ -292,6 +296,7 @@ public class PatternViewController {
 
         Optional<Pair<String, String>> result = dialog.showAndWait();
 
+        // If the user clicked OK, create a pattern part and add it to the pattern
         result.ifPresent(pair -> {
             part.setName(pair.getKey());
             part.setContents(pair.getValue());
