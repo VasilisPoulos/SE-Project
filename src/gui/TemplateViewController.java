@@ -156,7 +156,7 @@ public class TemplateViewController {
             if (Main.getPlDecorator() != null) {
                 LatexDecoratorFactory ldf = new LatexDecoratorFactory();
                 Decorator newPattern = ldf.createPatternDecorator(pattern);
-                Main.getPlDecorator().add(newPattern);
+                Main.getPl().add(newPattern);
                 Main.setCurrentPattern(newPattern);
             }
             else {
