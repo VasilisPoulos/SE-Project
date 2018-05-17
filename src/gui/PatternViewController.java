@@ -120,13 +120,13 @@ public class PatternViewController {
      * Handles the click on the Cancel button, leaving the Pattern Edit scene
      * @param event the click on the cancel button
      */
-    public void handleCancelPattern(ActionEvent event) {
+    public void handleCancelPattern(ActionEvent event) throws Exception {
         /* Get the current window into a variable */
         Stage window = Main.getWindow();
 
         /* Go back to the Pattern Language View scene */
-        PLViewController c = (PLViewController) Main.getPatternView().getUserData();
-        c.renderPLView(window);
+        MainViewController c = new MainViewController();
+        c.viewNewPL(window);
     }
 
     /**

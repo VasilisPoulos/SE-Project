@@ -5,8 +5,11 @@ import datamodel.LatexDecoratorFactory;
 import datamodel.Pattern;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -134,7 +137,7 @@ public class TemplateViewController {
     }
 
     @FXML
-    public void handleCreatePattern(ActionEvent event) {
+    public void handleCreatePattern(ActionEvent event) throws Exception {
         Pattern pattern = new Pattern("");
         TextInputDialog dialog = new TextInputDialog("Pattern Name");
         dialog.setTitle("Add New Pattern");
@@ -156,7 +159,22 @@ public class TemplateViewController {
             }
             dialog.close();
         });
-        this.switchToPatternView(Main.getWindow());
+        PLViewController c = new PLViewController();
+
+        /* Get the current window into a variable */
+        Stage window = Main.getWindow();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("patternView.fxml"));
+        Parent patternViewRoot = loader.load();
+        PatternViewController pvc = loader.getController();
+        pvc.populatePatternParts();
+
+
+        Scene patternView = new Scene(patternViewRoot, 800, 600);
+        patternView.setUserData(c);
+        Main.setPatternView(patternView);
+
+        window.setScene(patternView);
 
     }
 
